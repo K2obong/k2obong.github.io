@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조기행 | 공공데이터 분석 · 정책정보 도출 · 대시보드 서비스</title>
+<meta name="description" content="전국 시군구·읍면동 단위 공공데이터를 지방정부의 정책 판단 근거로 바꾸는 일을 합니다. 인구·건강·가족·재정·주거 영역의 분석 설계와 대시보드.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f172a'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' text-anchor='middle' fill='%2338bdf8' font-family='sans-serif'%3E%EC%A1%B0%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="조기행 | 공공데이터 분석 · 정책정보 도출 · 대시보드 서비스">
+<meta property="og:description" content="전국 시군구·읍면동 단위 공공데이터를 지방정부의 정책 판단 근거로 바꾸는 일을 합니다.">
+<meta property="og:locale" content="ko_KR">
+<style>
+  :root{
+    --bg:#0f172a; --bg2:#131f37; --surface:#1e293b; --surface2:#172033;
+    --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.05);
+    --ink:#f1f5f9; --ink2:#cbd5e1; --ink3:#94a3b8;
+    --sky:#38bdf8; --lime:#bef264; --orange:#f97316;
+    --maxw:860px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.7; font-size:16px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  a{color:var(--sky)}
+
+  /* ── 머리 ── */
+  header{
+    padding:72px 0 52px;
+    background:radial-gradient(1100px 420px at 50% -8%, rgba(56,189,248,.13), transparent 70%);
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:1.4px;color:var(--sky);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:clamp(34px,6.4vw,50px);font-weight:800;letter-spacing:-1.4px;line-height:1.12;margin-bottom:16px}
+  .lede{font-size:clamp(16px,2.4vw,19px);color:var(--ink2);max-width:36em}
+  .lede strong{color:var(--ink);font-weight:700}
+  .role{
+    display:inline-block;margin-top:22px;font-size:13px;font-weight:600;line-height:1.5;
+    color:var(--lime);background:rgba(163,230,53,.13);border:1px solid rgba(163,230,53,.36);
+    padding:7px 15px;border-radius:9999px;
+  }
+
+  /* ── 수상 ── */
+  .award{
+    display:flex;gap:16px;align-items:flex-start;
+    margin:34px 0 0;padding:18px 20px;
+    background:linear-gradient(120deg,rgba(190,242,100,.09),rgba(56,189,248,.05));
+    border:1px solid rgba(190,242,100,.28);border-radius:14px;
+  }
+  .award .medal{font-size:22px;line-height:1.3;flex-shrink:0}
+  .award-label{font-size:11.5px;font-weight:700;letter-spacing:.6px;color:var(--lime);text-transform:uppercase;margin-bottom:5px}
+  .award-title{font-size:15.5px;font-weight:700;line-height:1.5;margin-bottom:4px}
+  .award-meta{font-size:13px;color:var(--ink3)}
+
+  /* ── 구획 ── */
+  section{padding:64px 0}
+  section + section{border-top:1px solid var(--line2)}
+  .sec-label{font-size:12px;font-weight:700;letter-spacing:1.3px;color:var(--ink3);text-transform:uppercase;margin-bottom:10px}
+  h2{font-size:clamp(23px,4vw,30px);font-weight:800;letter-spacing:-.7px;line-height:1.25;margin-bottom:14px}
+  .sec-intro{color:var(--ink2);max-width:38em;margin-bottom:34px}
+
+  /* ── 프로젝트 ── */
+  .proj{
+    background:var(--surface2);border:1px solid var(--line);border-radius:20px;
+    padding:28px 26px;margin-bottom:26px;
+  }
+  .proj-tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.5px;padding:4px 10px;border-radius:7px;margin-bottom:12px}
+  .tag-health{color:#fda4af;background:rgba(253,164,175,.13);border:1px solid rgba(253,164,175,.32)}
+  .tag-pop{color:#7dd3fc;background:rgba(125,211,252,.13);border:1px solid rgba(125,211,252,.32)}
+  .tag-home{color:#c4b5fd;background:rgba(196,181,253,.13);border:1px solid rgba(196,181,253,.32)}
+  h3{font-size:clamp(19px,3.2vw,23px);font-weight:800;letter-spacing:-.5px;line-height:1.35;margin-bottom:12px}
+  .proj p{color:var(--ink2);margin-bottom:14px}
+  .proj p:last-child{margin-bottom:0}
+  .quote{
+    border-left:3px solid var(--sky);padding:4px 0 4px 16px;margin:18px 0;
+    color:var(--ink2);font-size:15px;line-height:1.75;
+  }
+  .quote em{color:var(--ink);font-style:normal;font-weight:600}
+  .finding{
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;margin:18px 0;
+  }
+  .finding-h{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--sky);text-transform:uppercase;margin-bottom:7px}
+  .finding p{font-size:14.5px;margin:0;color:var(--ink2)}
+  .more{
+    display:inline-flex;align-items:center;gap:7px;margin-top:6px;
+    font-size:14px;font-weight:700;color:var(--sky);text-decoration:none;
+    padding:9px 16px;border-radius:10px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);
+  }
+  .more:hover{background:rgba(56,189,248,.18)}
+
+  /* 수치 */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:12px;margin:20px 0}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
+  .stat-v{font-size:22px;font-weight:800;letter-spacing:-.6px;line-height:1.2;font-variant-numeric:tabular-nums}
+  .stat-l{font-size:11.5px;color:var(--ink3);margin-top:4px;line-height:1.45}
+
+  /* 그림 */
+  figure{margin:22px 0}
+  .fig-frame{background:#fff;border-radius:14px;padding:14px;border:1px solid var(--line)}
+  .fig-frame img{width:100%;height:auto;display:block}
+  figcaption{font-size:12.5px;color:var(--ink3);margin-top:10px;line-height:1.6}
+
+  /* 차트 */
+  .chart-frame{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 16px 12px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px;font-size:12.5px;color:var(--ink2)}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  .chart-scroll{overflow-x:auto}
+  #migChart{display:block;min-width:520px;width:100%;height:auto}
+  .bar{transition:opacity .15s}
+  .chart-frame:hover .bar{opacity:.55}
+  .chart-frame .bar:hover{opacity:1}
+  #tip{
+    position:fixed;pointer-events:none;opacity:0;transition:opacity .12s;
+    background:#0b1220;border:1px solid var(--line);border-radius:9px;
+    padding:8px 11px;font-size:12.5px;line-height:1.55;color:var(--ink);
+    box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:50;white-space:nowrap;
+  }
+  #tip b{font-variant-numeric:tabular-nums}
+  details.tbl{margin-top:14px}
+  details.tbl summary{font-size:12.5px;color:var(--ink3);cursor:pointer;padding:6px 0}
+  details.tbl table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  details.tbl th,details.tbl td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line2);color:var(--ink2)}
+  details.tbl td:last-child,details.tbl th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+
+  /* 도메인 */
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:13px;font-weight:600;padding:7px 13px;border-radius:9px;
+       background:rgba(var(--c),.13);border:1px solid rgba(var(--c),.33);color:rgb(var(--c))}
+  .t1{--c:125,211,252}.t2{--c:134,239,172}.t3{--c:253,164,175}.t4{--c:252,211,77}
+  .t5{--c:253,186,116}.t6{--c:103,232,249}.t7{--c:196,181,253}.t8{--c:240,171,252}
+
+  /* 연락 */
+  .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
+  .cbtn{
+    display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);
+    background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:15px 17px;
+  }
+  .cbtn:hover{border-color:rgba(56,189,248,.45)}
+  .cbtn .k{font-size:11px;color:var(--ink3);display:block;font-weight:600}
+  .cbtn .v{font-size:14.5px;font-weight:600;overflow-wrap:anywhere}
+  footer{padding:40px 0 60px;color:var(--ink3);font-size:12.5px;border-top:1px solid var(--line2)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Public Data · Policy · Dashboard</p>
+    <h1>조기행</h1>
+    <p class="lede">전국 시군구·읍면동 단위의 <strong>공공데이터를 지방정부가 실제로 쓸 수 있는 판단 근거</strong>로 바꾸는 일을 합니다. 인구·건강·가족·재정·주거 영역의 분석 설계와, 담당자가 열어보는 대시보드까지.</p>
+    <p class="role">공공데이터 분석 · 정책정보 도출 · 대시보드 서비스</p>
+
+    <div class="award">
+      <span class="medal" aria-hidden="true">🏅</span>
+      <div>
+        <p class="award-label">수상</p>
+        <p class="award-title">「시군구 건강격차의 사회적 결정요인 분석」</p>
+        <p class="award-meta">2026년 지역사회건강조사 결과 활용 우수논문 공모전 · 장려상</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="sec-label">Projects</p>
+    <h2>최근에 한 일</h2>
+    <p class="sec-intro">세 가지를 골랐습니다. 다루는 자료도 방법도 다르지만, 하는 일은 같습니다 — <strong>흩어진 공공데이터를 묶어서, 담당자가 다음에 무엇을 할지 정할 수 있는 형태로 만드는 것</strong>입니다.</p>
+
+    <!-- 1. CHS -->
+    <article class="proj">
+      <span class="proj-tag tag-health">건강 · 측정 신뢰성</span>
+      <h3>지역 건강지표는 어디까지 비교할 수 있는가</h3>
+
+      <p>지역사회건강조사 결과표에는 시군구 순위가 붙어 나옵니다. 담당자는 그 순위로 사업을 설명해야 합니다. 그런데 그 순위를 믿어도 되는지는 아무도 확인해 준 적이 없습니다.</p>
+
+      <div class="quote">
+        <p>○○시 보건소 김 주무관이 월요일 아침에 표를 받습니다. <em>우울감 경험률 6.2% — 250개 시군구 중 193위(작년 205위).</em> 과장님이 묻습니다. "작년보다 나아진 거네? 뭐가 효과가 있었나?"</p>
+      </div>
+
+      <p>이 질문에 답하려고 시작한 연구입니다. 4개년 자료의 250개 시군구 × 9개 지표를 복합표본 설계대로 다시 추정하고, 일반화가능도이론으로 <strong>지역 간 진짜 차이와 조사 오차를 분리</strong>했습니다.</p>
+
+      <div class="finding">
+        <p class="finding-h">예상 밖의 결과</p>
+        <p>신뢰도가 높은 지표라도 <strong>순위는 확정되지 않았습니다.</strong> 가운데 순위 지역의 95% 구간이 250개 중 100개 넘게 걸쳤습니다. 세운 가설 어디에도 없던 발견이라, 결론과 권고를 다시 썼습니다.</p>
+      </div>
+
+      <p>그래서 <strong>기준점을 바꿨습니다.</strong> "다른 249개 지역과 견주어 몇 등인가" 대신 "전국 평균과 다른가"를 묻자, 같은 자료·같은 오차인데도 판정 가능한 지역이 크게 늘었습니다. 달라진 것은 질문의 형태뿐입니다.</p>
+
+      <a class="more" href="story/">이 연구가 어떻게 진행됐는지 읽기 →</a>
+    </article>
+
+    <!-- 2. 인구 이동 -->
+    <article class="proj">
+      <span class="proj-tag tag-pop">인구 · 이동</span>
+      <h3>인구가 줄었다는 말로는 아무것도 못 정한다</h3>
+
+      <p>인구 감소 대책을 세울 때 가장 먼저 갈라야 할 것은 <strong>사람이 어디로 갔는가</strong>입니다. 멀리 떠난 것과 옆 동네로 옮긴 것은 완전히 다른 문제이고, 써야 할 처방도 다릅니다.</p>
+
+      <p>주민등록 전출입 자료로 전국 252개 시군구의 2018~2024년 순이동을 누적해 봤습니다.</p>
+
+      <div class="chart-frame">
+        <div class="legend">
+          <span><i style="background:#38bdf8"></i>순유입 (들어온 사람이 더 많음)</span>
+          <span><i style="background:#f97316"></i>순유출 (나간 사람이 더 많음)</span>
+        </div>
+        <div class="chart-scroll"><svg id="migChart" role="img" aria-label="2018~2024년 누적 순이동 상위·하위 시군구"></svg></div>
+        <details class="tbl">
+          <summary>표로 보기</summary>
+          <table><thead><tr><th>시군구</th><th>누적 순이동(명)</th></tr></thead><tbody id="migTable"></tbody></table>
+        </details>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink3);margin-top:10px">자료: 통계청 국내인구이동통계(주민등록 기준) 2018.01~2024.12 · 시군구 252곳</p>
+
+      <div class="finding">
+        <p class="finding-h">눈에 띄는 것</p>
+        <p>양쪽 끝이 <strong>같은 경기도</strong>입니다. 가장 많이 들어온 8곳 중 6곳, 가장 많이 빠져나간 8곳 중 4곳이 경기도 시군입니다. 부천·안산·광명·성남에서 빠진 사람이 화성·평택·하남·김포로 갔습니다. <strong>지방소멸이 아니라 같은 생활권 안의 자리바꿈</strong>이고, 그렇다면 필요한 것은 인구 유치 홍보가 아니라 주택·교통·정주여건 쪽 대응입니다.</p>
+      </div>
+
+      <p>같은 방식으로 읍면동까지 내려가면, 시군구 평균에 가려진 동네별 차이가 드러납니다. 5세 단위 연령 구조를 붙이면 "누가 떠났는가"까지 볼 수 있습니다.</p>
+    </article>
+
+    <!-- 3. 스마트홈 -->
+    <article class="proj">
+      <span class="proj-tag tag-home">주거 · 스마트홈</span>
+      <h3>전국 아파트 2만 1천 단지의 홈네트워크 지도</h3>
+
+      <p>공동주택관리정보·주민등록인구·행정구역경계·도로명주소 건물DB를 하나로 묶어, 전국 아파트의 홈네트워크 보급 실태를 <strong>읍면동 단위</strong>까지 내렸습니다. 단지 위치는 도로명주소 건물DB 1,072만 건에 조인해 얻은 실제 좌표입니다.</p>
+
+      <div class="stats">
+        <div class="stat"><div class="stat-v">21,687</div><div class="stat-l">전국 아파트 단지</div></div>
+        <div class="stat"><div class="stat-v">1,236만</div><div class="stat-l">대상 세대수</div></div>
+        <div class="stat"><div class="stat-v">45.9%</div><div class="stat-l">홈네트워크 도입 가구 비중</div></div>
+        <div class="stat"><div class="stat-v">3,559</div><div class="stat-l">집계한 읍면동</div></div>
+      </div>
+
+      <figure>
+        <div class="fig-frame"><img src="smarthome-eupmyeondong.png" alt="전국 읍면동별 홈네트워크 도입 가구비중 지도. 수도권과 광역시 주변에 도입률이 높은 읍면동이 몰려 있다." loading="lazy"></div>
+        <figcaption>읍면동별 홈네트워크 도입 가구비중. 진할수록 높음 · 회색은 아파트가 없는 읍면동. 시군구 평균으로 보면 안 보이던 <strong>같은 시 안의 격차</strong>가 드러납니다.</figcaption>
+      </figure>
+
+      <div class="finding">
+        <p class="finding-h">이 지도로 답이 되는 질문</p>
+        <p>도입률이 낮으면서 고령가구 비중이 높은 읍면동은 어디인가 — 돌봄·안전 서비스를 얹을 때 <strong>우선순위가 가장 높은 곳</strong>입니다. 두 지표를 곱해 우선순위 지수를 만들고 읍면동별로 정렬했습니다. 사업 대상지를 감으로 고르지 않아도 됩니다.</p>
+      </div>
+
+      <p style="font-size:12.5px;color:var(--ink3)">자료: 공동주택관리정보, 주민등록인구(읍면동 5세단위), 행정구역경계(시군구·행정동), 도로명주소 건물DB · 2026년 5월 기준 · 모두 공개된 공공데이터</p>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="sec-label">Domains</p>
+    <h2>다루는 영역</h2>
+    <p class="sec-intro">공통점은 <strong>시군구·읍면동 단위</strong>라는 것입니다. 전국 평균으로는 보이지 않는 것을 봅니다.</p>
+    <div class="tags">
+      <span class="tag t1">시군구단위 데이터분석</span>
+      <span class="tag t2">인구·이동 분석</span>
+      <span class="tag t3">건강·정신건강</span>
+      <span class="tag t4">가족·이주여성</span>
+      <span class="tag t5">세입세출·가용재원</span>
+      <span class="tag t6">스마트홈 분석</span>
+      <span class="tag t7">정책정보 대시보드</span>
+      <span class="tag t8">컨설팅 + 자문 (프로젝트 기획 및 분석설계)</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="sec-label">Contact</p>
+    <h2>연락</h2>
+    <p class="sec-intro">분석 설계나 대시보드가 필요한 일이 있으시면 편하게 연락 주세요.</p>
+    <div class="contact">
+      <a class="cbtn" href="mailto:key@loyalty.co.kr">
+        <div><span class="k">Email</span><span class="v">key@loyalty.co.kr</span></div>
+      </a>
+      <a class="cbtn" href="card/">
+        <div><span class="k">디지털 명함</span><span class="v">연락처 QR 보기</span></div>
+      </a>
+      <a class="cbtn" href="https://github.com/K2obong" target="_blank" rel="noopener noreferrer">
+        <div><span class="k">GitHub</span><span class="v">github.com/K2obong</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">© 2026 조기행 · 이 페이지의 모든 수치는 공개된 공공데이터에서 산출했습니다.</div></footer>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+  var DATA = {
+    top:[{r:"경기 화성시",v:250738},{r:"경기 평택시",v:113161},{r:"인천 서구",v:109176},{r:"경기 하남시",v:91360},
+         {r:"경기 시흥시",v:89161},{r:"경기 김포시",v:86886},{r:"경기 양주시",v:78818},{r:"경기 용인시",v:76465}],
+    bottom:[{r:"경기 부천시",v:-79510},{r:"경기 안산시",v:-59051},{r:"서울 노원구",v:-56504},{r:"경기 광명시",v:-55074},
+            {r:"경기 성남시",v:-54583},{r:"경남 창원시",v:-51578},{r:"대구 달서구",v:-50834},{r:"인천 남동구",v:-48104}]
+  };
+  var IN='#38bdf8', OUT='#f97316';
+  var rows = DATA.top.concat(DATA.bottom.slice().reverse());
+  var fmt = function(n){ return (n>0?'+':'') + n.toLocaleString('ko-KR'); };
+
+  var svg = document.getElementById('migChart');
+  var W=760, padL=104, padR=76, rowH=26, gap=6, padT=8, padB=26;
+  var H = padT + rows.length*(rowH+gap) - gap + padB;
+  var plotW = W - padL - padR;
+  var max = Math.max.apply(null, rows.map(function(d){return Math.abs(d.v)}));
+  var zero = padL + plotW * (max / (max*2));           // 발산 축 중앙
+  var scale = function(v){ return (Math.abs(v)/max) * (plotW/2); };
+
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a){ var e=document.createElementNS(NS,n); for(var k in a) e.setAttribute(k,a[k]); return e; }
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+
+  // 0 기준선 (중립 회색)
+  svg.appendChild(el('line',{x1:zero,x2:zero,y1:padT-2,y2:H-padB+4,stroke:'rgba(255,255,255,.28)','stroke-width':1}));
+  var zl = el('text',{x:zero,y:H-padB+18,fill:'#94a3b8','font-size':11,'text-anchor':'middle'});
+  zl.textContent='0'; svg.appendChild(zl);
+
+  var tip = document.getElementById('tip');
+  rows.forEach(function(d,i){
+    var y = padT + i*(rowH+gap);
+    var w = Math.max(scale(d.v), 2);
+    var x = d.v>0 ? zero : zero - w;
+    var g = el('g',{class:'bar',tabindex:0,role:'listitem'});
+    g.appendChild(el('rect',{x:x,y:y,width:w,height:rowH,rx:4,fill:d.v>0?IN:OUT}));
+    var lab = el('text',{x:padL-12,y:y+rowH/2+4,fill:'#cbd5e1','font-size':12.5,'text-anchor':'end'});
+    lab.textContent=d.r; g.appendChild(lab);
+    var val = el('text',{x:(d.v>0? x+w+8 : x-8), y:y+rowH/2+4, fill:'#94a3b8','font-size':12,
+                         'text-anchor': d.v>0?'start':'end'});
+    val.textContent=fmt(d.v); g.appendChild(val);
+    function show(ev){
+      tip.innerHTML = d.r + '<br><b>' + fmt(d.v) + '명</b> · 2018~2024 누적';
+      tip.style.opacity=1;
+      var px = (ev.clientX||W/2)+14, py=(ev.clientY||0)-12;
+      tip.style.left = Math.min(px, innerWidth-tip.offsetWidth-12)+'px';
+      tip.style.top = py+'px';
+    }
+    g.addEventListener('mousemove',show);
+    g.addEventListener('focus',function(){ var b=g.getBoundingClientRect(); show({clientX:b.right,clientY:b.top}); });
+    g.addEventListener('mouseleave',function(){tip.style.opacity=0});
+    g.addEventListener('blur',function(){tip.style.opacity=0});
+    svg.appendChild(g);
+  });
+
+  var tb=document.getElementById('migTable');
+  rows.forEach(function(d){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+d.r+'</td><td>'+fmt(d.v)+'</td>';
+    tb.appendChild(tr);
+  });
+})();
+</script>
+</body>
+</html>
