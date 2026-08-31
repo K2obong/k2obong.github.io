@@ -281,17 +281,20 @@
     .info-label { font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 2px; font-weight: 600; }
     .reveal-inline { color: var(--text-main); text-decoration: none; }
     .info-content a { color: var(--text-main); text-decoration: none; overflow-wrap: anywhere; }
-    .tags-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+    .tags-cloud { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 24px; }
     .tag {
-      background: rgba(var(--c), 0.14); border: 1px solid rgba(var(--c), 0.34);
-      color: rgb(var(--c)); font-size: 12px; font-weight: 600;
-      padding: 5px 10px; border-radius: 8px; line-height: 1.3;
+      display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+      background: rgba(var(--c), 0.15); border: 1px solid rgba(var(--c), 0.38);
+      color: rgb(var(--c)); font-size: 14.5px; font-weight: 700; letter-spacing: -0.2px;
+      padding: 10px 15px; border-radius: 11px; line-height: 1.35;
     }
+    .tag .go { font-size: 0.82em; opacity: 0.75; }
+    .tag:active { transform: scale(0.97); }
     .t-sky { --c: 125,211,252; } .t-green { --c: 134,239,172; }
     .t-rose { --c: 253,164,175; } .t-amber { --c: 252,211,77; }
     .t-orange { --c: 253,186,116; } .t-cyan { --c: 103,232,249; }
     .t-violet { --c: 196,181,253; } .t-fuchsia { --c: 240,171,252; }
-    .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-wide { width: 100%; font-size: 15px; padding: 16px; }
     .btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       font: inherit; font-weight: 700; font-size: 13.5px;
@@ -385,10 +388,6 @@
       <h3 class="section-title">Contact &amp; Links</h3>
       <div class="info-list">
         <div class="info-item">
-          <svg class="info-icon" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>
-          <div class="info-content"><span class="info-label">Mobile</span><span id="telSlot2"><button type="button" class="link-btn" id="telReveal2">탭하여 표시</button></span></div>
-        </div>
-        <div class="info-item">
           <svg class="info-icon" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg>
           <div class="info-content"><span class="info-label">Email</span><a href="mailto:key@loyalty.co.kr">key@loyalty.co.kr</a></div>
         </div>
@@ -399,26 +398,22 @@
       </div>
 
       <h3 class="section-title">Domains, Projects recent</h3>
+      <p style="font-size:12.5px;color:var(--text-muted);margin:-4px 0 12px">눌러보면 해당 사례로 바로 갑니다.</p>
       <div class="tags-cloud">
-        <span class="tag t-sky">시군구단위 데이터분석</span>
-        <span class="tag t-green">인구·이동 분석</span>
-        <span class="tag t-rose">건강·정신건강</span>
-        <span class="tag t-amber">가족·이주여성</span>
-        <span class="tag t-orange">세입세출·가용재원</span>
-        <span class="tag t-cyan">스마트홈 분석</span>
-        <span class="tag t-violet">정책정보 대시보드</span>
-        <span class="tag t-fuchsia">컨설팅 + 자문 (프로젝트 기획 및 분석설계)</span>
+        <a class="tag t-sky" href="../#projects" target="_blank" rel="noopener">시군구단위 데이터분석<span class="go" aria-hidden="true">↗</span></a>
+        <a class="tag t-green" href="../#proj-pop" target="_blank" rel="noopener">인구·이동 분석<span class="go" aria-hidden="true">↗</span></a>
+        <a class="tag t-rose" href="../#proj-chs" target="_blank" rel="noopener">건강·정신건강<span class="go" aria-hidden="true">↗</span></a>
+        <a class="tag t-amber" href="../#proj-chs" target="_blank" rel="noopener">가족·이주여성<span class="go" aria-hidden="true">↗</span></a>
+        <a class="tag t-orange" href="../#projects" target="_blank" rel="noopener">세입세출·가용재원<span class="go" aria-hidden="true">↗</span></a>
+        <a class="tag t-cyan" href="../#proj-home" target="_blank" rel="noopener">스마트홈 분석<span class="go" aria-hidden="true">↗</span></a>
+        <a class="tag t-violet" href="../#proj-home" target="_blank" rel="noopener">정책정보 대시보드<span class="go" aria-hidden="true">↗</span></a>
+        <a class="tag t-fuchsia" href="../#projects" target="_blank" rel="noopener">컨설팅 + 자문 (프로젝트 기획 및 분석설계)<span class="go" aria-hidden="true">↗</span></a>
       </div>
 
-      <div class="btn-row">
-        <button type="button" class="btn btn-primary" id="vcardBtn">
-          <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-save"/></svg>vCard 저장
-        </button>
-        <a class="btn btn-ghost" href="https://k2obong.github.io" target="_blank" rel="noopener noreferrer">
-          <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-github"/></svg>소개 페이지
-        </a>
-      </div>
-      <p class="footer-note" id="footerNote">파일을 열면 주소록 저장 화면이 나타납니다.</p>
+      <a class="btn btn-primary btn-wide" href="https://k2obong.github.io" target="_blank" rel="noopener noreferrer">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-github"/></svg>소개 페이지 열기
+      </a>
+      <p class="footer-note">프로젝트 사례와 연구 이야기가 여기 있습니다.</p>
     </div>
   </section>
 
@@ -498,9 +493,6 @@
       document.getElementById('telReveal').addEventListener('click', function () {
         revealTel(document.getElementById('telSlot'), 'p-tel');
       });
-      document.getElementById('telReveal2').addEventListener('click', function () {
-        revealTel(document.getElementById('telSlot2'), 'reveal-inline');
-      });
 
       /* ── 화면 전환 ── */
       var present = document.getElementById('present');
@@ -538,17 +530,6 @@
       /* ── vCard 내려받기 ── */
       var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) ||
                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      if (isIOS) {
-        document.getElementById('footerNote').innerHTML =
-          '저장이 안 되면 명함 화면의 <strong>QR</strong>을 쓰세요.';
-      }
-      document.getElementById('vcardBtn').addEventListener('click', function () {
-        var url = URL.createObjectURL(new Blob([buildVCard()], { type: 'text/vcard;charset=utf-8' }));
-        var a = document.createElement('a');
-        a.href = url; a.download = 'KiHaeng_Cho.vcf'; a.rel = 'noopener';
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
-      });
 
       /* ── 링크·연락처 보내기 ── */
       var SHEET = document.getElementById('sendSheet');
@@ -560,9 +541,7 @@
       var mode = 'intro';   // 'intro' = 소개 링크 · 'card' = 연락처
       var LINK = { intro: PROFILE.site, card: PROFILE.site + '/card/' };
       function payloadText() {
-        return mode === 'intro'
-          ? PROFILE.full + ' · ' + PROFILE.title + '\n' + LINK.intro
-          : PROFILE.full + ' 연락처입니다. 아래 링크에서 주소록에 저장하실 수 있습니다.\n' + LINK.card;
+        return PROFILE.full + ' (디지털명함)\n' + LINK[mode];
       }
       function setMode(m) {
         mode = m;
@@ -596,14 +575,14 @@
         shareBtn.addEventListener('click', function () {
           if (mode === 'card' && navigator.canShare) {
             try {
-              var f = new File([buildVCard()], 'KiHaeng_Cho.vcf', { type: 'text/vcard' });
+              var f = new File([buildVCard()], 'KiHaing_Cho.vcf', { type: 'text/vcard' });
               if (navigator.canShare({ files: [f] })) {
                 navigator.share({ files: [f], title: PROFILE.full }).catch(function(){});
                 return;
               }
             } catch (e) { /* 파일 공유 미지원 — 링크로 넘어간다 */ }
           }
-          navigator.share({ title: PROFILE.full, text: PROFILE.full + ' · ' + PROFILE.title, url: LINK[mode] })
+          navigator.share({ title: PROFILE.full, text: PROFILE.full + ' (디지털명함)', url: LINK[mode] })
                    .catch(function(){});
         });
       }
