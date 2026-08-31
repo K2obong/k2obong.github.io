@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHS 문항 신뢰도 연구 — 이야기로 읽기 | 조기행</title>
+<meta name="description" content="지역사회건강조사 시군구 지표를 어디까지 비교할 수 있는가 — 일반화가능도이론으로 지역 신뢰도를 추정하고 표시 규칙을 다시 설계한 연구를, 줄거리 순서로 읽는 글.">
+<meta property="og:title" content="지역 건강지표는 어디까지 비교할 수 있는가 | 조기행">
+<meta property="og:description" content="순위표 옆에 '여기까지만 믿으십시오'라는 선을 긋는 일 — 연구 과정을 이야기로 읽습니다.">
+<meta property="og:locale" content="ko_KR">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<script>
+/* 화면 테마 — 저장된 선택이 있으면 그것을, 없으면 기기 설정을 따른다.
+   그리기 전에 실행되어야 화면이 번쩍이지 않는다. */
+(function(){
+  var K='chs-doc-theme', t=null;
+  try{ t=localStorage.getItem(K); }catch(e){}
+  if(t!=='dark' && t!=='light'){
+    t=(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
+  }
+  document.documentElement.setAttribute('data-theme',t);
+})();
+</script>
+
+<style>
+:root{
+  --ink:#221f1d; --ink2:#4a4440; --mut:#7a716b; --line:#ded7cf;
+  --bg:#fbfaf8; --card:#ffffff; --blue:#155e9c; --blue-l:#eaf1f8;
+  --amber:#b45309; --amber-l:#fdf4e7; --brown:#7c6244;
+  /* 막(Act) 제목 — 명조 / 절(Section) 제목 — 고운돋움 */
+  --mak:'Nanum Myeongjo','나눔명조','Batang','바탕',serif;
+  --sec:'Gowun Dodum','Malgun Gothic','맑은 고딕',sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  font-family:'Pretendard','Malgun Gothic','맑은 고딕',-apple-system,sans-serif;
+  font-size:16.5px; line-height:1.92; color:var(--ink);
+  max-width:860px; margin:0 auto; padding:8px 22px 90px; background:var(--bg);
+  word-break:keep-all; overflow-wrap:break-word;
+  -webkit-font-smoothing:antialiased;
+}
+h1{
+  font-family:var(--mak);
+  font-size:35px; line-height:1.34; font-weight:800; letter-spacing:-.012em;
+  margin:34px 0 10px; padding-bottom:16px; border-bottom:4px solid var(--blue);
+}
+h2{
+  font-family:var(--sec);
+  font-size:25px; line-height:1.45; font-weight:400; letter-spacing:-.01em;
+  color:var(--blue); margin:56px 0 14px; padding:0 0 10px 0;
+  border-bottom:1px solid var(--line);
+}
+/* 막(Act) 성격의 제목은 명조로 */
+h2.mak{
+  font-family:var(--mak); font-weight:800; letter-spacing:-.012em;
+  font-size:26px; color:var(--ink); border-bottom:2px solid var(--blue);
+}
+h3{
+  font-family:var(--sec);
+  font-size:20px; line-height:1.55; font-weight:400; letter-spacing:-.005em;
+  color:var(--ink); margin:36px 0 8px; padding-left:13px;
+  border-left:4px solid var(--blue);
+}
+h4{
+  font-family:var(--sec);
+  font-size:17.5px; font-weight:400; color:var(--amber);
+  margin:26px 0 6px; letter-spacing:-.004em;
+}
+p{margin:14px 0}
+strong,b{font-weight:700;color:#131110}
+ul,ol{padding-left:24px;margin:14px 0}
+li{margin:8px 0}
+li::marker{color:var(--blue);font-weight:700}
+
+/* 표 */
+table{
+  border-collapse:separate; border-spacing:0; width:100%;
+  margin:22px 0; font-size:14.5px; line-height:1.68;
+  background:var(--card); border:1px solid var(--line); border-radius:9px;
+  overflow:hidden; font-variant-numeric:tabular-nums;
+}
+th{
+  background:#f2eee9; padding:11px 13px; text-align:left;
+  font-weight:700; font-size:13.5px; letter-spacing:.01em; color:var(--ink2);
+  border-bottom:2px solid var(--line);
+}
+td{padding:11px 13px; border-bottom:1px solid #ece7e1; vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even) td, table tr:nth-child(even) td{background:#fdfcfa}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+
+/* 강조 블록 */
+.q{background:var(--blue-l); border-left:5px solid var(--blue);
+   padding:18px 24px; margin:24px 0; border-radius:0 10px 10px 0; font-size:16px}
+.q b{color:#0f4d82}
+.key{background:var(--amber-l); border-left:5px solid #d97706;
+   padding:18px 24px; margin:24px 0; border-radius:0 10px 10px 0; font-size:16px}
+.aside{background:#f4f2ef; border-left:4px solid var(--mut);
+   padding:13px 22px; margin:18px 0; font-size:15px; color:var(--ink2); border-radius:0 8px 8px 0}
+.calc{background:#f7f5f2; border:1px solid var(--line); border-left:4px solid var(--brown);
+   padding:16px 22px; margin:18px 0; border-radius:0 8px 8px 0;
+   font-family:'D2Coding','Consolas',monospace; font-size:14px; line-height:1.85; white-space:pre-wrap}
+.scene{background:#fdfaf5; border:1px solid #e9dfd0; border-left:5px solid var(--brown);
+   padding:22px 26px; margin:28px 0; border-radius:0 10px 10px 0; font-size:16px}
+.scene .who{font-family:var(--sec);font-size:25px;line-height:1.45;color:var(--brown);
+   letter-spacing:-.01em;margin:0 0 14px;font-weight:400;
+   padding-bottom:10px;border-bottom:1px solid #e5d9c8}
+.scene table{font-size:13.5px;margin:14px 0}
+.meta{font-size:14.5px;color:var(--mut)}
+.term{display:inline-block;background:#eef2f6;border:1px solid var(--line);
+   border-radius:4px;padding:1px 7px;font-size:13px;color:var(--ink2);
+   vertical-align:middle;margin:0 2px;font-weight:600}
+.yes{color:#15803d;font-weight:700}
+.no{color:#b91c1c;font-weight:700}
+.toc b{font-family:var(--sec);font-size:17px;color:var(--blue)}
+.toc{background:var(--card);border:1px solid var(--line);border-radius:10px;
+   padding:20px 26px;margin:26px 0;font-size:15.5px}
+.toc a{color:var(--blue);text-decoration:none;font-weight:600}
+.toc a:hover{text-decoration:underline}
+.act{background:linear-gradient(100deg,#155e9c,#1a76c4);color:#fff;
+   padding:22px 28px;border-radius:12px;margin:62px 0 12px;
+   box-shadow:0 3px 14px rgba(21,94,156,.22)}
+.act .n{font-family:var(--sec);font-size:13.5px;opacity:.86;letter-spacing:.16em}
+.act .t{font-family:var(--mak);font-size:29px;font-weight:800;margin-top:5px;letter-spacing:-.012em;line-height:1.34}
+.act .s{font-size:15px;opacity:.93;margin-top:7px;font-weight:400}
+
+/* 분기 */
+.fork{display:flex;gap:18px;margin:30px 0;flex-wrap:wrap}
+.fork button{flex:1;min-width:280px;text-align:left;cursor:pointer;
+  border:2px solid var(--line);background:var(--card);border-radius:12px;
+  padding:24px 26px;font-family:inherit;font-size:15.5px;color:var(--ink);
+  line-height:1.8;transition:.16s}
+.fork button:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(21,94,156,.16);transform:translateY(-2px)}
+.fork button .t{font-family:var(--mak);display:block;font-size:22px;font-weight:800;color:var(--blue);margin-bottom:10px;letter-spacing:-.01em}
+.fork button.b .t{color:var(--amber)}
+.fork button.b:hover{border-color:#d97706;box-shadow:0 4px 16px rgba(217,119,6,.16)}
+.fork button .s{display:block;font-size:14.5px;color:var(--ink2)}
+.track{display:none}
+.track.on{display:block}
+.switch{position:sticky;top:0;z-index:9;background:rgba(251,250,248,.96);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+  padding:12px 0;margin-bottom:8px;display:none}
+.switch.on{display:block}
+.switch button{cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;
+  border:1px solid var(--line);background:var(--card);border-radius:22px;
+  padding:8px 18px;margin-right:7px;color:var(--ink2);transition:.14s}
+.switch button:hover{border-color:var(--blue)}
+.switch button.cur{background:var(--blue);color:#fff;border-color:var(--blue)}
+.switch button.cur.b{background:#d97706;border-color:#d97706}
+.hdA{background:var(--blue-l);border-left:6px solid var(--blue);
+  padding:20px 26px;margin:0 0 10px;border-radius:0 10px 10px 0}
+.hdB{background:var(--amber-l);border-left:6px solid #d97706;
+  padding:20px 26px;margin:0 0 10px;border-radius:0 10px 10px 0}
+.hdA .lab,.hdB .lab{font-size:12.5px;color:var(--mut);letter-spacing:.1em;font-weight:700}
+.hdA h2,.hdB h2{font-family:var(--mak);font-weight:800;border:none;margin:3px 0 0;padding:0;font-size:27px;letter-spacing:-.012em}
+.hdB h2{color:var(--amber)}
+
+/* 용어 팝업 */
+.g{border-bottom:2px dotted var(--blue);cursor:pointer;color:var(--blue);font-weight:700;
+   transition:background .12s}
+.g:hover{background:#dceaf6}
+.g::after{content:'?';font-size:10px;vertical-align:super;color:#7aa5c8;margin-left:1px;font-weight:700}
+#ov{display:none;position:fixed;inset:0;background:rgba(34,31,29,.5);
+   z-index:100;padding:16px;overflow:auto}
+#ov.on{display:block}
+#pop{background:#fff;max-width:670px;margin:26px auto;border-radius:16px;
+   box-shadow:0 18px 60px rgba(0,0,0,.34);padding:32px 38px 34px;position:relative;
+   font-size:15.5px;line-height:1.76}
+#pop .x{position:sticky;float:right;top:0;margin:-14px -18px 0 0;z-index:2;cursor:pointer;font-size:28px;
+   color:#b9b2ac;line-height:1;border:none;background:none;padding:0}
+#pop .x:hover{color:var(--ink)}
+#pop h4{font-family:var(--mak);margin:0 0 6px;font-size:25px;color:var(--blue);font-weight:800;letter-spacing:-.012em}
+#pop .rd{font-size:14px;color:var(--amber);background:var(--amber-l);
+   display:inline-block;padding:5px 14px;border-radius:16px;margin-bottom:20px;font-weight:600}
+#pop .lb{font-family:var(--sec);font-size:13px;color:#fff;background:var(--mut);display:table;
+   padding:3px 12px;border-radius:12px;letter-spacing:.06em;margin-top:22px;font-weight:700}
+#pop .lb.e{background:var(--brown)}
+#pop .lb.u{background:var(--blue)}
+#pop .bd{margin-top:9px}
+#pop .easy{background:#fdfaf5;border-left:4px solid var(--brown);
+   padding:15px 20px;margin-top:9px;border-radius:0 8px 8px 0;line-height:1.82}
+#pop .use{background:var(--blue-l);border-left:4px solid var(--blue);
+   padding:15px 20px;margin-top:9px;border-radius:0 8px 8px 0;line-height:1.82}
+@media(max-width:640px){
+  body{font-size:16px;padding:8px 16px 70px}
+  h1{font-size:28px} h2{font-size:22px} h2.mak{font-size:23px} h3{font-size:18.5px}
+  .scene .who{font-size:22px}
+  .act .t{font-size:24px} #pop{padding:26px 22px}
+}
+</style>
+<div id="ov" onclick="if(event.target.id=='ov')cg()">
+<div id="pop"><button class="x" onclick="cg()">&times;</button>
+<h4 id="pn"></h4><div class="rd" id="pr"></div>
+<div class="lb e">쉽게 말하면</div><div class="easy" id="pe"></div>
+<div class="lb">통계에서는</div><div class="bd" id="ps"></div>
+<div class="lb u">이 연구에서는</div><div class="use" id="pu"></div>
+</div></div>
+<script>
+var GL={"lambda": {"n": "λ — 지역 신뢰도", "r": "람다 · lambda · 그리스 문자 11번째", "e": "<b>\"이 저울로 줄을 세워도 되는가\"를 0에서 1 사이 숫자 하나로 답한 것</b>입니다.<br><br>\n사람 250명의 키를 재서 줄을 세운다고 합시다. 저울(자)이 정확하고 사람들 키 차이가 크면 줄이 제대로 섭니다. 그런데 자가 부정확하거나 사람들 키가 다 비슷하면 줄이 뒤죽박죽이 됩니다.<br><br>\nλ는 이 두 가지를 한꺼번에 봅니다. <b>1에 가까우면 \"줄 세워도 된다\", 0에 가까우면 \"줄 세우면 안 된다\"</b>입니다.", "s": "신뢰도 계수를 뜻하는 기호로 널리 쓰입니다. 형태는 언제나 <b>진짜 차이 ÷ (진짜 차이 + 흔들림)</b>입니다.<br><br>\n값이 0.7 이상이면 쓸 만하다고 보는 것이 관행인데, 이 <b>0.7이라는 선은 절대 기준이 아닙니다.</b> 병원 성과평가 문헌에서 관행적으로 쓰던 값을 빌려 온 것입니다.", "u": "λ = τ²<sub>지역</sub> ÷ (τ²<sub>지역</sub> + τ²<sub>지역×연도</sub> + σ²/n<sub>eff</sub>)<br><br>\n시군구별 지표값이 흔들리는 것 중 <b>진짜 지역 차이가 차지하는 몫</b>입니다. 실측 결과 주관적건강 0.908에서 PHQ-9 0.428까지 나왔습니다.<br><br>\n<b>주의할 점</b> — λ가 0.7을 넘어도 <b>중위권 순위는 여전히 못 믿습니다.</b> λ는 250개 전체를 놓고 보는 값인데, 순위는 바로 옆 지역과 비교해 정해지기 때문입니다."}, "tau": {"n": "τ² — 지역 분산성분", "r": "타우 제곱 · tau squared · 그리스 문자 19번째", "e": "<b>지역들이 서로 얼마나 다른지를 숫자 하나로 나타낸 것</b>입니다.<br><br>\n'제곱'이 붙은 이유는 이렇습니다. 어떤 지역은 평균보다 높고 어떤 지역은 낮은데, 그냥 더하면 <b>플러스와 마이너스가 상쇄되어 0</b>이 됩니다. 그래서 <b>제곱해서 모두 양수로 만든 뒤</b> 평균을 냅니다. 이것이 분산이고, 통계에서는 제곱 기호를 그대로 이름에 붙입니다.", "s": "다층모형에서 <b>집단 수준 분산</b>을 나타내는 표준 기호입니다. 개인 수준 분산은 보통 σ²로 씁니다.", "u": "두 가지를 씁니다.<br><br>\n<b>τ²<sub>지역</sub></b> — 그 지역이 <b>해마다 일관되게</b> 갖는 차이. 우리가 알고 싶은 신호입니다.<br><br>\n<b>τ²<sub>지역×연도</sub></b> — 그 지역의 <b>그 해만의</b> 흔들림. '×'는 곱셈이 아니라 <b>\"지역과 연도가 맞물려 생기는\"</b>이라는 뜻입니다. 어떤 지역이 유독 2023년에만 튀었다면 여기 들어갑니다.<br><br>\n<b>뒤엣것이 이 연구의 열쇠입니다.</b> 표본을 아무리 늘려도 줄지 않기 때문입니다. 정신건강 지표는 이 성분이 30~37%를 차지해, 표본 증대로는 해결이 안 됩니다."}, "sigma": {"n": "σ² — 표본오차 분산", "r": "시그마 제곱 · sigma squared · 그리스 문자 18번째", "e": "<b>\"하필 그 사람들이 뽑혀서\" 생기는 흔들림</b>입니다.<br><br>\n한 동네에서 900명을 뽑아 우울감을 물었더니 7.0%가 나왔습니다. 그런데 <b>다른 900명을 뽑았다면</b> 6.6%나 7.3%가 나왔을 겁니다. 누가 뽑히느냐에 따라 값이 달라지죠. 이 흔들림의 크기가 σ²입니다.<br><br>\n<b>사람을 더 많이 뽑으면 줄어듭니다.</b> 극단적으로 그 동네 전 주민을 조사하면 0이 됩니다.", "s": "잔차분산, 즉 <b>설명되지 않고 남은 흔들림</b>입니다.<br><br>\n<b>혼동 주의</b> — 대문자 <b>Σ</b>는 \"모두 더하라\"는 <b>전혀 다른 기호</b>입니다. 같은 글자의 대소문자인데 뜻이 완전히 다릅니다.", "u": "λ 공식에서 <b>σ²/n<sub>eff</sub></b> 형태로 들어갑니다. 표본 크기로 나누는 이유는, 사람을 많이 뽑을수록 이 흔들림이 작아지기 때문입니다.<br><br>\n<b>n이 아니라 n<sub>eff</sub>로 나누는 것이 결정적입니다.</b> 927명을 조사해도 실제 정밀도는 620~760명어치뿐이기 때문입니다. n으로 나누면 정확도를 25~62% 부풀리게 됩니다."}, "mu": {"n": "μ — 평균", "r": "뮤 · mu · 그리스 문자 12번째", "e": "<b>'진짜 평균'을 가리키는 기호</b>입니다.<br><br>\n표본에서 계산한 평균은 <b>x̄</b>(엑스 바)로 쓰고, 우리가 알고 싶은 모집단 전체의 평균은 <b>μ</b>로 씁니다. 표본 평균은 μ의 추정치일 뿐입니다.", "s": "모집단의 참 평균입니다. 라틴 문자는 표본, 그리스 문자는 모집단을 가리키는 것이 통계학의 오랜 관례입니다.", "u": "모형식 <b>p̂ = μ<sub>t</sub> + a<sub>j</sub> + b<sub>jt</sub> + e<sub>jt</sub></b>에서 μ<sub>t</sub>는 <b>t년도의 전국 평균</b>입니다.<br><br>\n<b>왜 이걸 먼저 빼는가.</b> 2024년에 전국 걷기실천율이 다 같이 올랐다면, 그건 지역 차이가 아닙니다. 전국이 함께 움직인 몫을 먼저 덜어내야 <b>순수한 지역 차이</b>가 남습니다."}, "hat": {"n": "p̂ — 추정치 표시", "r": "피 햇 · p-hat · 모자(hat)를 씌운 p", "e": "글자 위의 <b>^ 모자는 \"이건 참값이 아니라 자료에서 계산해 낸 값\"이라는 표시</b>입니다.<br><br>\n어느 시군구의 진짜 우울감 경험률이 얼마인지는 <b>아무도 모릅니다.</b> 전 주민을 조사해야 알 수 있으니까요. 우리가 가진 것은 900명에게 물어 계산한 값이고, 그건 진짜 값 근처의 어떤 수입니다. 그 구분을 모자 하나로 표시합니다.", "s": "p는 비율(proportion)입니다. 모자가 없으면 <b>모수(참값)</b>, 있으면 <b>추정량</b>입니다. β̂, σ̂ 처럼 다른 기호에도 똑같이 씁니다.", "u": "이 연구의 모든 출발점이 <b>\"p̂은 p가 아니다\"</b>입니다. 만약 p̂이 참값이라면 순위표를 그대로 믿으면 되고 이 연구는 필요 없습니다."}, "variance": {"n": "분산 (variance)", "r": "버라이언스 · 기호는 σ² 또는 τ²", "e": "<b>값들이 얼마나 흩어져 있는지</b>를 재는 양입니다.<br><br>\n학생 다섯 명의 점수가 (70, 71, 70, 69, 70)이면 거의 안 흩어져 있습니다. (40, 95, 60, 88, 67)이면 많이 흩어져 있죠. 이 '흩어진 정도'를 숫자로 만든 것입니다.<br><br>\n계산은 이렇게 합니다 — ① 각 값에서 평균을 뺀다 ② <b>제곱한다</b>(음수를 없애려고) ③ 평균 낸다. 제곱을 도로 풀면(제곱근) <b>표준편차</b>가 됩니다.", "s": "통계학에서 가장 기본적인 산포 측도입니다. 분산의 큰 장점은 <b>쪼갤 수 있다</b>는 것입니다. 전체 분산 = 이 원인의 분산 + 저 원인의 분산 처럼요.", "u": "이 연구의 거의 모든 계산이 <b>분산을 세 조각으로 쪼개는</b> 일입니다. 신뢰도가 애초에 '분산의 비율'로 정의되기 때문에, 분산을 쪼개면 신뢰도가 나옵니다."}, "se": {"n": "표준오차 (standard error)", "r": "스탠더드 에러 · 줄여서 SE", "e": "<b>\"이 숫자가 얼마나 흔들리는가\"</b>를 나타냅니다.<br><br>\n같은 조사를 100번 반복한다고 상상해 보십시오. 매번 다른 900명이 뽑히니 매번 다른 값이 나옵니다. 그 100개 값이 얼마나 퍼져 있을지 — 그것이 표준오차입니다. <b>실제로 100번 하지 않고도 한 번의 조사에서 계산할 수 있습니다.</b><br><br>\n보통 <b>값 ± 2×표준오차</b> 범위에 참값이 있다고 봅니다.", "s": "추정량의 표준편차입니다. 표본이 커질수록 √n에 반비례해 작아집니다. 즉 <b>정밀도를 2배로 하려면 표본을 4배로</b> 늘려야 합니다.", "u": "비만율의 시군구별 표준오차는 <b>1.76%p</b>입니다. 어느 시군구의 비만율이 32.1%라면 <b>대략 28.6%~35.6% 사이 어딘가</b>가 참값이라는 뜻입니다.<br><br>\n<b>그런데 120~130위 11개 지역은 값이 0.28%p 안에 몰려</b> 있습니다. <b>오차가 그 폭의 6배</b>입니다. 그래서 중간 순위를 매길 수 없습니다."}, "ci": {"n": "신뢰구간 · 부트스트랩", "r": "컨피던스 인터벌 · 부트스트랩(bootstrap)", "e": "<b>추정치 하나만 내놓으면 위험하니 '범위'를 함께 내놓는 것</b>입니다.<br><br>\n\"우리 시 비만율 32.1%\"보다 <b>\"32.1%, 오차를 감안하면 28.6~35.6%\"</b>가 정직합니다.<br><br>\n<b>부트스트랩</b>은 그 범위를 구하는 한 방법인데, 이름이 재미있습니다. \"제 신발끈을 잡아당겨 스스로를 들어올린다\"는 영어 표현에서 왔습니다. <b>가진 자료만 가지고 자료를 여러 번 다시 만들어 내는</b> 방식이라 그런 이름이 붙었습니다.", "s": "95% 신뢰구간은 \"같은 방식으로 조사를 100번 반복하면 그중 95번은 이 범위가 참값을 포함한다\"는 뜻입니다. <b>\"참값이 이 범위에 있을 확률이 95%\"라는 뜻은 아닙니다</b>(자주 하는 오해입니다).", "u": "λ를 <b>400번 다시 계산</b>해 95% 구간을 냈습니다.<br><br>\n비만율은 λ=0.700인데 구간이 <b>0.652~0.742</b>였습니다. 커트라인 0.7에 정확히 걸쳐 있어, <b>어느 쪽으로 판정할지가 실제 결정 사항</b>이 되었습니다. 연구자께서 <b>\"아래쪽 끝(0.652)으로 판정한다\"</b>를 선택하셨습니다."}, "ctt": {"n": "고전검사이론 (CTT) · 참점수", "r": "Classical Test Theory", "e": "<b>\"모든 측정은 진짜 값 + 오차\"</b>라는, 놀랄 만큼 단순한 전제에서 출발하는 이론입니다.<br><br>\n체중계에 올라 70.2kg이 나왔다면, 진짜 몸무게 70kg에 오차 0.2kg이 붙은 것입니다. 이때 <b>70kg을 참점수(true score)</b>라 합니다.<br><br>\n참점수는 <b>영영 알 수 없습니다.</b> 오차 없는 측정은 없으니까요. 그래서 통계는 참점수를 직접 구하는 대신 <b>\"오차가 얼마나 작은가\"</b>를 재는 쪽으로 갑니다.", "s": "신뢰도 = 참점수 분산 ÷ 관측점수 분산. 100년 가까이 쓰인 틀이고 크론바흐 α가 여기서 나옵니다.<br><br>\n<b>한계</b> — 오차를 <b>하나로 뭉뚱그립니다.</b> 오차가 문항 때문인지 채점자 때문인지 그날 컨디션 때문인지 구분하지 않습니다.", "u": "이 연구의 λ도 <b>형태는 CTT와 똑같습니다.</b> 다만 두 가지가 다릅니다.<br><br>\n① '하나의 대상'을 사람이 아니라 <b>시군구</b>로 두었습니다.<br>\n② 오차를 뭉뚱그리지 않고 <b>둘로 쪼갰습니다</b>(그 해의 흔들림 + 표본오차). 이것이 G-theory입니다."}, "gtheory": {"n": "일반화가능도 이론 (G-theory)", "r": "지 세오리 · Generalizability Theory", "e": "<b>\"오차\"라고 뭉뚱그리지 말고 원인별로 나눠 보자</b>는 이론입니다.<br><br>\n학생의 수행평가 점수가 흔들린다고 합시다. 원인이 여럿입니다 — 채점자가 달라서, 과제가 달라서, 그날 컨디션이 달라서. 고전이론은 이걸 다 '오차'로 묶습니다. G-theory는 <b>채점자 때문인 몫, 과제 때문인 몫을 따로 재어</b> 줍니다.<br><br>\n<b>왜 나누는 게 중요한가.</b> 원인을 알아야 처방이 나오기 때문입니다. 채점자 때문이면 채점자를 늘리고, 과제 때문이면 과제를 늘려야 합니다. <b>엉뚱한 곳에 돈을 쓰지 않게 해 줍니다.</b>", "s": "오차의 원천을 <b>국면(facet)</b>이라 부르고 각 국면의 분산성분을 따로 추정합니다. 1970년대 Cronbach 등이 체계화했습니다.", "u": "국면을 <b>지역 × 연도</b>로 잡았습니다. <b>4개년 자료를 확보하면서 비로소 가능해진 분석</b>입니다.<br><br>\n그리고 실제로 처방이 갈렸습니다 — 표본오차 때문이면 <b>사람을 더 뽑으면</b> 되지만, 지역×연도 때문이면 <b>사람을 더 뽑아도 소용없습니다.</b> 나눠 보지 않았다면 정신건강 지표에 조사 예산을 쏟아붓는 헛수고를 권했을 겁니다."}, "gstudy": {"n": "G-study", "r": "지 스터디 · Generalizability study", "e": "G-theory의 <b>1단계 — 쪼개는 일</b>입니다.<br><br>\n\"이 지표가 흔들리는데, 그중 지역 때문인 게 얼마, 그 해 때문인 게 얼마, 표본 때문인 게 얼마인가\"를 계산해 냅니다. <b>회계로 치면 결산서</b>를 만드는 일입니다.", "s": "관측된 총분산을 국면별 분산성분으로 분해합니다. 보통 분산분석이나 다층모형으로 추정합니다.", "u": "9개 지표 각각에 대해 세 성분을 냈습니다. 이 연구의 <b>6단계</b>가 그것이고, 결과가 아래 표입니다.<br><br>\n<span style=\"font-size:10pt\">주관적건강 91 : 3 : 6 &nbsp;→ λ 0.908<br>\nPHQ-9 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 43 : 32 : 25 → λ 0.428</span><br><br>\n숫자만 봐도 <b>왜 하나는 되고 하나는 안 되는지</b>가 보입니다."}, "dstudy": {"n": "D-study", "r": "디 스터디 · Decision study", "e": "G-theory의 <b>2단계 — 처방하는 일</b>입니다.<br><br>\nG-study가 \"현재 상태가 이렇다\"를 알려 준다면, D-study는 <b>\"그럼 어떻게 해야 목표에 도달하는가\"</b>를 역산합니다.<br><br>\n보통은 이렇게 답이 나옵니다 — \"지금 900명인데 <b>2,000명으로 늘리면</b> 됩니다.\"<br><br>\n그런데 이 연구에서는 <b>전혀 다른 답이 나왔습니다.</b>", "s": "분산성분을 고정한 채 측정 조건(표본 수, 반복 횟수)을 바꿔 가며 신뢰도의 궤적을 그립니다. 목표 신뢰도에 필요한 조건을 역산합니다.", "u": "정신건강 지표 넷에서 <b>\"몇 명이 필요한가\"가 아니라 \"몇 명이어도 안 된다\"</b>가 나왔습니다.<br><br>\n이유는 이렇습니다. λ=0.7이 되려면 <b>(그 해의 흔들림 + 표본오차)가 진짜 지역 차이의 43% 이하</b>여야 합니다. 그런데 이 네 지표는 <b>그 해의 흔들림만으로 이미 43%를 넘습니다.</b> 표본오차를 0으로 만들어도 λ가 0.569~0.633에서 멈춥니다.<br><br>\n<b>실무적 값어치</b> — \"정확도가 낮으니 조사를 늘리자\"는 자연스러운 판단이 <b>이 경우 헛돈</b>이라는 것을 숫자로 보일 수 있습니다."}, "rank": {"n": "rankability (순위가능성)", "r": "랭커빌리티 · '순위를 매길 수 있는 정도'", "e": "<b>병원 평가에서 온 개념</b>입니다.<br><br>\n여러 병원의 수술 사망률을 줄 세운다고 합시다. A병원 2.1%, B병원 2.3%. 그런데 A병원은 그해 수술을 80건밖에 안 했습니다. 80건 중 2건이면 2.5%, 1건이면 1.25%입니다. <b>환자 한 명 차이로 순위가 뒤집힙니다.</b><br><br>\n그래서 \"이 순위가 실력 차이인가 운인가\"를 재는 지표를 만들었고, 그게 rankability입니다. <b>λ와 수학적으로 같은 양</b>입니다.", "s": "Van Houwelingen, Lingsma 등이 병원 성과평가 문헌에서 제안했습니다. 이름을 'reliability'가 아니라 'rankability'로 붙인 이유는 <b>목적이 \"순위를 매겨도 되는가\"</b>이기 때문입니다.", "u": "이 연구는 그 개념을 <b>병원에서 시군구로</b> 옮겨 온 것입니다.<br><br>\n<b>그런데 실측이 이름에 딴지를 걸었습니다.</b> rankability가 0.70인 비만율에서 <b>중위권 지역의 순위 구간이 250개 중 189개</b>였습니다. 즉 rankability가 높아도 순위를 못 매기는 경우가 있습니다.<br><br>\n이름이 약속하는 것보다 조심스럽게 써야 한다는 것 — 이것이 이 연구가 <b>기존 문헌에 보태는 지적</b>입니다."}, "icc": {"n": "ICC (급내상관)", "r": "아이시시 · Intraclass Correlation Coefficient", "e": "<b>\"같은 집단에 속하면 얼마나 닮는가\"</b>를 재는 값입니다.<br><br>\n형제자매의 키를 생각해 보십시오. 같은 집 아이들끼리는 남남보다 키가 비슷합니다. 그 '비슷한 정도'가 ICC입니다.<br><br>\n지역으로 바꾸면 — 같은 시군구 사람끼리 건강이 얼마나 비슷한가입니다. 값이 0에 가까우면 <b>\"어느 동네 사람인지가 별 의미 없다\"</b>는 뜻입니다.", "s": "총분산 중 집단 간 분산의 비율입니다. 0에서 1 사이. 지역 건강 연구에서는 보통 <b>1~5% 정도</b>로 작게 나옵니다.", "u": "선행 논문의 ICC ≈ 2.6%가 여기 해당합니다.<br><br>\n<b>해석에 함정이 있습니다.</b> ICC가 2.6%라고 \"지역은 중요하지 않다\"로 읽으면 안 됩니다. <b>개인차가 워낙 커서 상대적으로 작아 보이는 것</b>일 수 있기 때문입니다. 사람마다 건강이 크게 다른 건 당연하고, 그 위에 지역 차이가 2.6% 얹혀 있다면 <b>정책적으로는 충분히 큰 값</b>일 수 있습니다."}, "deff": {"n": "deff (설계효과)", "r": "디이에프에프 · design effect", "e": "<b>\"제비뽑기처럼 뽑지 않아서 손해 본 정밀도\"</b>를 나타내는 배율입니다.<br><br>\n900명을 뽑는데 <b>전국에서 완전 무작위로</b> 뽑으면 가장 정확합니다. 그런데 그러면 조사원이 900곳을 다 돌아다녀야 하니 비용이 감당이 안 됩니다.<br><br>\n그래서 <b>동네 단위로 묶어서</b> 뽑습니다 — 한 아파트 단지에서 20가구씩. 비용은 크게 줄지만 문제가 생깁니다. <b>같은 단지 사람들은 소득도 나이도 비슷해서 답이 닮아 있습니다.</b> 20명에게 물었는데 정보는 15명어치밖에 안 되는 셈이죠.<br><br>\n그 손해 배율이 deff입니다. <b>1.5면 \"분산이 1.5배로 늘었다\"</b>는 뜻입니다.", "s": "deff = 복합표본 분산 ÷ 단순무작위 분산. 집락 추출은 deff를 키우고(손해), 층화는 줄입니다(이득). 보통 둘이 겹쳐 1보다 조금 큰 값이 됩니다.", "u": "이 자료에서 <b>1.26~1.64</b>였습니다. 걷기실천율이 가장 크고(1.62) PHQ-9이 가장 작습니다(1.28). 걷기는 <b>동네 환경(산책로, 보도)의 영향을 받으니</b> 같은 동네 사람끼리 더 닮아 있는 것으로 보입니다.<br><br>\n<b>이걸 무시하면 정확도를 25~62% 부풀려 계산합니다.</b> 이 연구에서 가장 저지르기 쉬운 치명적 오류 지점입니다."}, "neff": {"n": "n_eff (유효표본크기)", "r": "엔 이에프에프 · effective sample size", "e": "<b>\"실제로는 몇 명어치인가\"</b>입니다.<br><br>\n927명을 조사했지만 동네 단위로 묶어 뽑은 탓에 정보가 겹칩니다. 그래서 <b>정밀도로 따지면 700명 정도</b>밖에 안 됩니다. 그 700명이 유효표본크기입니다.<br><br>\n계산은 간단합니다 — <b>실제 인원 ÷ deff</b>. 927 ÷ 1.32 = 702명.", "s": "정밀도 계산에는 반드시 n이 아니라 n<sub>eff</sub>를 씁니다. 신뢰구간, 검정력, 표본 설계 모두 마찬가지입니다.", "u": "시군구당 실제 응답자는 약 <b>927명</b>이지만 n<sub>eff</sub>는 <b>620~760명</b>입니다.<br><br>\n연구설계서에 이런 문장이 있습니다 — <b>\"λ의 분모에 반드시 n_eff를 넣어야 한다. 본 연구에서 가장 저지르기 쉬운 치명적 오류 지점이다.\"</b> 실수하면 <b>\"이 지표는 믿을 만하다\"는 정반대 결론</b>이 나오기 때문입니다."}, "complex": {"n": "복합표본설계", "r": "컴플렉스 서베이 · complex survey design", "e": "<b>큰 조사에서 쓰는 '제비뽑기 아닌' 표본 추출 방식</b>입니다. 세 가지가 겹쳐 있습니다.<br><br>\n<b>① 층화</b> — 시군구를 동·읍·면으로 나눠 <b>각 구역에서 따로</b> 뽑습니다. 우연히 한 구역에만 몰리는 사고를 막습니다. <b>정밀도가 올라갑니다.</b><br><br>\n<b>② 집락</b> — 아파트 한 동, 마을 한 곳 단위로 묶어 뽑고 그 안에서 여러 집을 조사합니다. <b>비용이 줄지만 정밀도는 떨어집니다.</b><br><br>\n<b>③ 가중치</b> — 뽑힐 확률이 낮았던 사람에게 <b>더 큰 무게</b>를 줍니다. 예를 들어 1인 가구는 뽑히기 어려우니 한 명이 세 명 몫을 하게 합니다.", "s": "단순 무작위 추출이 아닌 모든 설계를 통칭합니다. 분석할 때 이 구조를 반영하지 않으면 <b>표준오차가 틀립니다</b> — 보통 <b>실제보다 작게</b> 나와 \"유의하다\"는 잘못된 결론으로 이어집니다.", "u": "CHS는 kstrata(층), spot_no(표본지점=집락), wt_p(개인가중치)를 갖고 있습니다.<br><br>\n이 셋을 반영하는 계산법을 <b>울티메이트 클러스터 + 테일러 선형화</b>라 합니다. 이름은 무섭지만 하는 일은 <b>\"같은 동네 사람끼리 닮은 만큼 정밀도를 깎는다\"</b>는 것입니다."}, "singleton": {"n": "단일 표본지점 층", "r": "싱글턴 스트라텀 · singleton stratum · 'lonely PSU'", "e": "<b>\"층을 나눠 놓았는데 그 층에 표본이 딱 하나만 있는 경우\"</b>입니다.<br><br>\n왜 문제인가 하면 — <b>흩어짐은 최소 두 개가 있어야 잴 수 있기 때문</b>입니다. 한 점만 있으면 그 점들이 얼마나 퍼져 있는지 말할 수가 없습니다.<br><br>\n영어로 'lonely PSU(외로운 표본단위)'라고도 부릅니다.", "s": "분산 추정이 불가능해지므로 관행적 처리법이 있습니다 — <b>adjust</b>(전체 평균을 중심으로 삼음), <b>collapse</b>(외로운 층들끼리 합침), <b>certainty</b>(그냥 무시하고 0으로 둠).", "u": "시군구 층의 <b>19.4%</b>가 여기 해당했습니다. 어떤 처리법을 쓰느냐가 결과를 바꾸면 큰일이므로 <b>세 가지를 다 해 보고 비교</b>했습니다.<br><br>\n결과 — adjust와 collapse의 차이가 <b>정확히 0.0%</b>였습니다. 안심하고 보수적인 쪽(adjust)을 썼습니다.<br><br>\n<b>다만 무시(certainty)하면 deff를 최대 24% 과소추정</b>합니다. 이 비교를 안 해 본 연구는 그 사실 자체를 모릅니다."}, "alpha": {"n": "α — 크론바흐 알파 (내적 일관성)", "r": "알파 · alpha · Cronbach's alpha · 그리스 문자 1번째", "e": "<b>\"이 문항들이 정말 같은 것을 재고 있는가\"</b>를 확인하는 방법입니다.<br><br>\n우울을 재는 문항이 아홉 개 있다고 합시다. 진짜로 우울한 사람이라면 <b>아홉 문항 모두에서 높게</b> 나와야 합니다. 어떤 문항에서만 높고 다른 문항에서는 낮다면, 그 문항은 <b>다른 걸 재고 있는 것</b>입니다.<br><br>\n그래서 <b>문항끼리 얼마나 발맞춰 움직이는지</b>를 봅니다. 0.7 이상이면 쓸 만하고 0.8~0.9면 좋습니다.<br><br>\n<b>결정적 제약</b> — 문항끼리 비교하는 방법이니 <b>문항이 하나뿐이면 계산 자체가 안 됩니다.</b>", "s": "내적 일관성 신뢰도의 대표 지표입니다. 다만 가정이 엄격해(모든 문항의 기여도가 같다) 요즘은 <b>ω(오메가, McDonald's omega)</b>를 권장합니다.<br><br>\n<b>흔한 오해</b> — α가 높다고 \"하나의 개념을 잰다\"는 뜻은 아닙니다. 문항 수만 늘려도 α는 올라갑니다.", "u": "CHS에서 쓸 수 있는 곳은 <b>PHQ-9(9문항) 하나뿐</b>입니다.<br><br>\n우울감·주관적건강·흡연·걷기 등 <b>주요 지표 대부분이 문항 하나</b>라 적용이 불가능합니다. EQ-5D는 5문항이지만 이동·자기관리·통증처럼 <b>서로 다른 영역</b>을 재므로 α를 쓰면 오적용입니다.<br><br>\n<b>이것이 이 연구가 다른 길을 낸 첫 번째 이유입니다.</b> 교과서 방법이 CHS의 90%에 닿지 않습니다."}, "kappa": {"n": "κ — 재검사 신뢰도", "r": "카파 · kappa · Cohen's kappa · 그리스 문자 10번째", "e": "<b>\"같은 사람에게 2주 뒤 다시 물으면 같게 답하는가\"</b>를 재는 값입니다.<br><br>\n그 사이 실제로 변할 리 없는 것을 물었는데 답이 달라진다면, <b>문항이 애매하거나 응답자가 대충 답한 것</b>입니다.<br><br>\n그냥 '일치율'을 쓰지 않는 이유가 있습니다. 예/아니오 문항이면 <b>아무렇게나 찍어도 50%는 맞습니다.</b> 그래서 카파는 <b>우연히 맞을 몫을 빼고</b> 계산합니다. 0.6 이상이면 상당한 일치로 봅니다.<br><br>\n<b>결정적 조건</b> — 다시 물을 때 <b>지난번 답을 알려 주면 안 됩니다.</b> \"지난번에 이렇게 답하셨죠?\" 하면 일치도가 인위적으로 100%가 되어 아무 의미가 없어집니다.", "s": "연속형 변수에는 카파 대신 급내상관(ICC)을 씁니다. 재검사 간격은 보통 1~2주 — 너무 짧으면 응답자가 기억해서 답하고, 너무 길면 실제 변화가 섞입니다.", "u": "<b>CHS에는 재조사 자료가 아예 없습니다.</b> 이 모듈을 통째로 폐기해야 했습니다.<br><br>\n<b>중요한 구분</b> — 지자체 조사용역에도 '재조사'라는 말이 나오는데, 그건 <b>\"조사원이 실제로 그 집에 갔는가\"를 확인</b>하는 절차이지 측정 재검사가 아닙니다. 즉 현행 품질관리는 <b>\"조사를 했는가\"는 확인하되 \"제대로 쟀는가\"는 확인하지 않습니다.</b><br><br>\n그래서 이 부재를 <b>정책 제언으로 전환</b>했습니다 — 조사용역 사양서에 \"표본 5%, 7~14일 뒤, 이전 답 비고지\"를 넣자는 것입니다."}, "rho": {"n": "ρ — 상관계수", "r": "로 · rho · 그리스 문자 17번째", "e": "<b>\"둘이 같이 움직이는가\"</b>를 −1에서 +1 사이 숫자로 나타낸 것입니다.<br><br>\n+1이면 완전히 같은 방향(키가 크면 몸무게도 큼), −1이면 완전히 반대, <b>0이면 아무 관계없음</b>입니다.<br><br>\n<b>주의</b> — 상관이 높다고 인과관계가 아닙니다. 아이스크림 판매량과 익사 사고는 상관이 높지만, 아이스크림이 익사를 일으키는 게 아니라 <b>둘 다 여름에 늘어나는</b> 것입니다.", "s": "보통 피어슨 상관계수를 가리킵니다. 순위만 볼 때는 스피어만 ρ나 켄달 τ를 씁니다.", "u": "이 연구에서 두 군데 씁니다.<br><br>\n<b>① 오류 탐지기로.</b> 선행 프로젝트에서 흡연 지표의 연도 간 ρ가 0.13으로 이상하게 낮았습니다. 지역 흡연율이 1년 만에 뒤집힐 리 없으니 <b>뭔가 잘못된 것</b>이죠. 추적해 보니 자료 처리 오류였고, 고치니 0.73으로 회복됐습니다.<br><br>\n<b>② 품질 점검에.</b> 신장·체중 무응답률의 연도 간 ρ가 <b>0.83</b>이었습니다. 매년 같은 지역이 높다는 뜻이고, <b>우연이 아니라 그 보건소의 관행</b>임을 보여 줍니다."}, "kendall": {"n": "τ — 켄달 타우 (순위 일치도)", "r": "켄달스 타우 · Kendall's tau", "e": "<b>두 개의 순위표가 얼마나 비슷한지</b>를 재는 값입니다.<br><br>\n계산 방식이 직관적입니다. 아무 <b>두 지역을 골라</b> 두 순위표에서 <b>앞뒤 관계가 같은지</b> 봅니다. 모든 쌍에 대해 이걸 세어 \"같은 쌍 − 다른 쌍\"을 전체로 나눕니다. 1이면 순서가 완전히 같습니다.<br><br>\n<b>값의 크기가 아니라 순서만</b> 보므로 이상치에 강합니다.", "s": "스피어만 상관과 목적은 같지만 해석이 더 명확합니다. τ=0.8이면 \"아무 두 개를 골랐을 때 90%는 순서가 같다\"로 읽을 수 있습니다.<br><br>\n<b>혼동 주의</b> — τ²(분산성분)과 같은 글자지만 완전히 다른 쓰임입니다.", "u": "EB 수축 전후의 순위를 비교했습니다. <b>0.981~0.997</b>이 나왔습니다 — 수축해도 순위가 거의 안 바뀝니다.<br><br>\n<b>이걸 \"수축이 무의미하다\"로 읽으면 안 됩니다.</b> 오히려 반대입니다. <b>수축해도 순위가 그대로라는 것은, 순위의 불확실성이 수축으로 해결되지 않는다는 뜻</b>입니다. 순위 문제는 <b>순위를 말하지 않는 것으로만</b> 해결됩니다."}, "eb": {"n": "EB 수축 (경험적 베이즈)", "r": "이비 슈링키지 · Empirical Bayes shrinkage", "e": "<b>못 미더운 값을 전체 평균 쪽으로 끌어당겨 보정하는 방법</b>입니다.<br><br>\n야구로 설명하면 쉽습니다. 시즌 초에 10타수 5안타를 친 선수의 타율은 <b>5할</b>입니다. 그런데 이 선수가 정말 5할 타자일까요? 아니겠죠. <b>10타수는 너무 적습니다.</b><br><br>\n그래서 <b>리그 평균(2할 7푼) 쪽으로 끌어당겨</b> \"이 선수의 진짜 실력은 3할쯤\"이라고 보정합니다. 타수가 많아질수록 덜 당기고, 적을수록 많이 당깁니다.<br><br>\n<b>당기는 정도가 정확히 신뢰도(λ)만큼</b>입니다.", "s": "보정값 = λ × 관측값 + (1−λ) × 전체평균.<br>표본이 작은 집단의 극단값을 완화해 <b>전체적으로 더 정확한 추정</b>을 만듭니다. Stein의 역설로도 알려진 현상입니다.", "u": "실측에서 <b>순위가 거의 바뀌지 않았습니다</b>(켄달 타우 0.98 이상).<br><br>\n<b>그래도 값어치가 있습니다.</b> 수축의 목적은 순위 변경이 아니라 <b>\"우리 시가 전국 최악\"이라는 과잉 해석을 막는 것</b>입니다. 표본이 작은 군 지역이 우연히 극단값을 받았을 때, 그것을 그대로 공표하면 그 지역은 억울해집니다."}, "reml": {"n": "REML — 분산성분 추정법", "r": "레멜 · Restricted Maximum Likelihood · 제한최대가능도", "e": "<b>분산을 추정할 때 생기는 미묘한 편향을 바로잡는 방법</b>입니다.<br><br>\n비유하자면 이렇습니다. 다섯 명의 키에서 분산을 구할 때, <b>평균을 먼저 계산해서 씁니다.</b> 그런데 그 평균도 이 다섯 명에게서 나온 값입니다. 즉 자료를 두 번 쓰는 셈이죠.<br><br>\n그러면 <b>흩어짐이 실제보다 작게</b> 계산됩니다. 학교에서 분산을 구할 때 n이 아니라 <b>n−1로 나누라고</b> 배우는 이유가 바로 이것입니다. REML은 복잡한 모형에서 같은 보정을 해 주는 방법입니다.", "s": "일반 최대가능도(ML)는 고정효과 추정에 쓴 자유도를 감안하지 않아 분산성분을 과소추정합니다. REML은 그 부분을 제거한 가능도를 최대화합니다. 다층모형의 표준입니다.", "u": "주 추정 방법으로 썼습니다. 그런데 <b>결과 전체가 이 계산에 달려 있으니</b> 방법 자체를 세 가지로 검증했습니다.<br><br>\n<b>① 가짜 자료 시험</b> — 참값을 아는 자료 300세트에서 λ를 회수. 편향 −0.003~+0.002<br>\n<b>② 다른 방법과 대조</b> — 적률법과 비교. 전 지표 2% 이내 일치<br>\n<b>③ 산수 검산</b> — 추정 성분으로 원래 흩어짐이 재현되는지 확인"}, "irt": {"n": "IRT (문항반응이론)", "r": "아이알티 · Item Response Theory", "e": "<b>설문지 전체가 아니라 문항 하나하나를 따로 평가하는 방법</b>입니다.<br><br>\n시험 문제로 생각해 보십시오. 같은 100점 만점 시험이라도 문제마다 성격이 다릅니다.<br><br>\n<b>변별도</b> — 이 문제가 잘하는 학생과 못하는 학생을 <b>잘 갈라내는가.</b> 모두가 맞히거나 모두가 틀리는 문제는 변별도가 0입니다.<br><br>\n<b>문턱</b> — <b>어느 정도 실력이면</b> 이 문제를 맞히기 시작하는가. 쉬운 문제는 문턱이 낮습니다.<br><br>\n<b>정보함수</b> — 이 문제가 <b>어느 실력대에서 유용한가.</b> 아주 어려운 문제는 <b>상위권을 가르는 데만</b> 쓸모 있고, 중하위권 학생들에게는 아무 정보도 주지 않습니다.", "s": "고전검사이론이 '총점'만 보는 데 비해, IRT는 <b>문항 특성과 응답자 특성을 같은 척도 위에 놓습니다.</b> 그래서 다른 문항으로 시험을 봐도 점수를 비교할 수 있습니다.", "u": "PHQ-9에 적용할 예정입니다(3편, 그리고 1편 보조).<br><br>\n<b>왜 중요한가.</b> PHQ-9은 <b>우울증 진단을 돕기 위해</b> 만들어진 척도입니다. 즉 <b>중등도 이상 구간</b>에서 잘 갈라내도록 설계되었을 가능성이 큽니다. 그런데 지역사회 일반인구는 <b>대부분 가벼운 쪽에 몰려</b> 있습니다.<br><br>\n만약 그렇다면 — <b>\"표본을 늘려도 안 되는\" 이유가 문항 자체에 있다</b>는 뜻이고, 처방이 <b>'표본 증대'에서 '문항 교체'로</b> 바뀝니다. 6단계가 남긴 질문에 답하는 유일한 길입니다."}, "grm": {"n": "GRM (등급반응모형)", "r": "지알엠 · Graded Response Model · Samejima(1969)", "e": "IRT 모형 중 <b>①②③④ 같은 순서형 답</b>에 쓰는 것입니다.<br><br>\n맞다/틀리다 두 갈래면 간단한데, PHQ-9처럼 <b>\"전혀 아니다 / 여러 날 / 일주일 이상 / 거의 매일\"</b> 네 갈래면 문턱이 하나가 아니라 <b>셋</b>입니다. ①→② 넘어가는 문턱, ②→③ 문턱, ③→④ 문턱.<br><br>\nGRM은 그 문턱들을 각각 추정합니다.", "s": "Samejima가 1969년 제안했습니다. 순서형 응답 자료의 표준 모형입니다.", "u": "PHQ-9 9문항이 4개년 모두 온전하므로 적용 가능합니다.<br><br>\n<b>특별한 쓸모가 하나 있습니다.</b> 2025년에 응답 보기에 일수가 붙었습니다 — \"① 전혀 아니다 <b>(0-1일)</b> ② 여러 날 <b>(2-6일)</b>…\". 이게 <b>문턱을 움직였는지</b>를 연도별 GRM으로 직접 확인할 수 있습니다.<br><br>\n측정을 개선하려던 변경이 <b>시계열 비교를 망가뜨렸는지</b> 여부를 숫자로 답하는 것입니다."}, "invar": {"n": "측정동일성", "r": "메저먼트 인베리언스 · measurement invariance", "e": "<b>\"같은 자로 재고 있는가\"</b>를 확인하는 절차입니다.<br><br>\n한국 학생과 미국 학생의 수학 실력을 비교한다고 합시다. 같은 문제로 시험을 봤는데 <b>번역 과정에서 한 문제가 더 어려워졌다면?</b> 점수 차이가 실력 차이인지 번역 차이인지 알 수 없습니다.<br><br>\n그래서 <b>세 단계로 올라가며</b> 확인합니다.<br><br>\n<b>1단계 형태동일성</b> — 두 집단에서 문항들이 <b>같은 구조</b>로 묶이는가<br>\n<b>2단계 계량동일성</b> — 각 문항의 <b>변별력이 같은가</b><br>\n<b>3단계 절편동일성</b> — <b>같은 실력이면 같은 점수</b>가 나오는가<br><br>\n<b>3단계가 통과되어야 비로소 평균 점수를 비교할 수 있습니다.</b>", "s": "단계별로 모형을 제약해 가며 적합도가 얼마나 나빠지는지 봅니다. 판정 기준은 <b>ΔCFI &lt; 0.010, ΔRMSEA &lt; 0.015</b>(Δ는 '델타', 변화량).<br><br>\n집단을 너무 잘게 쪼개면 집단당 표본이 부족해 검정력이 무너집니다.", "u": "3편의 주제입니다. <b>250개 시군구로 쪼개면 검정이 안 되므로</b> 4~8개 군집이나 도농·권역 단위로 묶어 봅니다.<br><br>\n<b>확장 아이디어</b> — 집단이 아니라 <b>연도</b>를 축으로 삼으면, 2025년 PHQ-9 응답범주 변경이 시계열 비교를 얼마나 훼손했는지 정량화할 수 있습니다."}, "dif": {"n": "DIF (문항기능차이)", "r": "디아이에프 · Differential Item Functioning", "e": "<b>\"실력이 같은데 집단에 따라 답이 다르게 나오는 문항\"</b>을 찾아내는 작업입니다.<br><br>\n이 연구에서 가장 걱정되는 사례는 이겁니다.<br><br>\n<b>\"귀하의 건강은 어떻습니까?\"</b>에 70대 어르신과 20대 청년이 <b>둘 다 '보통'</b>이라고 답했습니다. 두 분의 건강이 같을까요? <b>아닙니다.</b> 어르신은 <b>또래와 비교해</b> 보통이라 답했고, 청년은 <b>다른 기준</b>을 씁니다.<br><br>\n같은 답이 다른 뜻인 것입니다.", "s": "측정동일성이 깨지는 원인을 <b>문항 단위</b>에서 찾습니다. 순서형 로지스틱 회귀나 MIMIC 모형을 씁니다. 효과크기 기준을 미리 정해 두어야 합니다(예: ΔR² ≥ 0.035면 중간 정도의 DIF).", "u": "<b>왜 이게 지역 비교를 오염시키는가.</b> 농촌은 고령자가 많고 도시는 젊은 층이 많습니다. 그렇다면 <b>도농 간 주관적건강 차이의 일부는 건강 차이가 아니라 기준 차이</b>일 수 있습니다.<br><br>\n선행 논문이 <b>검정 없이 가정</b>했던 부분이라 3편의 주제로 두었습니다. 6단계에서 주관적건강이 λ 0.908로 1위가 나왔기 때문에 <b>우선순위가 더 올라갔습니다.</b>"}, "vignette": {"n": "앵커링 비네트", "r": "앵커링 비녯 · anchoring vignette", "e": "<b>DIF를 탐지만 하는 게 아니라 실제로 보정하는 방법</b>입니다. 발상이 아주 단순합니다.<br><br>\n모든 응답자에게 <b>똑같은 가상 인물</b>을 제시합니다.<br><br>\n<span style=\"background:#f5f5f4;padding:8px 12px;display:block;margin:8px 0\">\"영수 씨는 계단을 오를 때 조금 숨이 찹니다. 가끔 허리가 아프지만 일상생활에는 지장이 없습니다. <b>영수 씨의 건강은 어떻다고 생각하십니까?</b>\"</span>\n같은 사람을 두고 누구는 '좋음', 누구는 '보통'이라 답합니다. <b>그 차이가 곧 응답기준의 차이</b>입니다. 이걸 알면 각자의 답에서 기준 차이를 빼낼 수 있습니다.<br><br>\n<b>자로 재기 전에 자를 서로 맞춰 보는 것</b>과 같습니다.", "s": "King 등이 국가 간 자기보고 건강 비교를 위해 제안했습니다. 비네트 2~3개만 추가하면 되므로 조사 부담이 작습니다.", "u": "<b>CHS에는 이 문항이 없습니다.</b> 그래서 DIF를 <b>탐지까지만 하고 보정은 못 합니다.</b><br><br>\n한계로 남기는 대신 <b>제언으로 전환</b>했습니다 — 차기 조사표 개정 시 문항 2~3개만 추가하면 주관적건강의 지역·연령 간 보고기준 문제를 정면으로 해결할 수 있습니다."}, "tse": {"n": "TSE (총조사오차)", "r": "티에스이 · Total Survey Error · Groves 등", "e": "<b>\"조사에서 틀릴 수 있는 모든 지점을 지도로 그려 놓은 것\"</b>입니다.<br><br>\n조사는 여러 단계를 거칩니다. 그리고 <b>각 단계마다 다른 종류의 오류</b>가 생깁니다.<br><br>\n<b>측정 쪽</b> — 문항이 개념을 제대로 담았나 → 응답자가 제대로 답했나 → 자료 입력에서 뭉개지지 않았나<br><br>\n<b>대표성 쪽</b> — 명부에 빠진 사람은 없나 → 표본을 잘 뽑았나 → <b>답 안 한 사람이 한쪽으로 치우치지 않았나</b> → 가중치가 적절한가<br><br>\n<b>핵심 사고방식</b> — 오차를 하나로 뭉뚱그리지 말고 <b>어디서 생겼는지</b> 짚어야 고칠 수 있다는 것입니다.", "s": "Groves 등이 체계화했습니다. 조사방법론의 기본 틀이며, 각 오차마다 다른 처방이 대응합니다.", "u": "이 연구에서 두 군데 걸립니다.<br><br>\n<b>① 처리오차</b> — 조사표 개정(2023년 흡연 도입문항)과 행정구역 코드 개편이 여기 해당합니다.<br><br>\n<b>② 무응답 오차</b> — 신장·체중 무응답률이 <b>보건소별로 고착</b>되어 있습니다(연도 간 상관 0.83). 이건 <b>무응답이 지역 단위로 구조화된</b> 사례입니다.<br><br>\n그리고 <b>2편의 주제인 '조사기관 효과'</b>는 TSE에서 <b>면접원 효과</b>라는 이름으로 이미 정리되어 있습니다."}, "cosmin": {"n": "COSMIN", "r": "코스민 · COnsensus-based Standards for the selection of health Measurement INstruments", "e": "<b>보건 분야에서 \"이 측정도구가 쓸 만한가\"를 평가할 때 쓰는 국제 체크리스트</b>입니다.<br><br>\n신뢰도는 봤나? 타당도는? 반응성(변화를 잡아내는가)은? — 이런 항목들을 빠뜨리지 않게 정리해 놓은 목록입니다. 여러 나라 전문가들이 합의해 만들었습니다.", "s": "개발·평가·보고의 각 단계에 대해 방법론적 질을 채점하는 도구를 제공합니다.", "u": "참고하되 <b>그대로 쓸 수는 없습니다.</b><br><br>\n<b>왜냐하면 COSMIN은 전부 '개인 수준' 도구를 전제하기 때문입니다.</b> \"이 척도가 한 환자의 상태를 잘 재는가\"를 묻지, \"이 조사로 250개 지역을 줄 세울 수 있는가\"는 묻지 않습니다.<br><br>\n<b>지역 수준 신뢰도는 COSMIN 바깥에 있는 별도의 축</b>이고, <b>이 확장 자체가 이 연구의 방법론적 기여점</b>이 됩니다."}, "maup": {"n": "MAUP (가변공간단위 문제)", "r": "마웁 · Modifiable Areal Unit Problem", "e": "<b>\"지도를 어떻게 나누느냐에 따라 결과가 달라지는 문제\"</b>입니다.<br><br>\n같은 자료라도 <b>시군구로 묶을 때</b>와 <b>읍면동으로 묶을 때</b> 답이 다르게 나옵니다. 심지어 <b>어느 동네를 어느 구에 넣느냐</b>에 따라서도 달라집니다.<br><br>\n선거구 획정을 생각하시면 이해가 빠릅니다. 같은 유권자들인데 <b>선을 어디에 긋느냐로 결과가 뒤집힙니다.</b> 통계에서도 똑같은 일이 벌어집니다.", "s": "두 가지가 겹쳐 있습니다 — <b>축척 효과</b>(얼마나 크게 묶는가)와 <b>구획 효과</b>(같은 크기라도 어떻게 나누는가). 공간 자료 분석에서 원리적으로 피할 수 없는 문제입니다.", "u": "이 연구의 <b>모든 결론에 \"시군구 단위에서는\"이라는 단서</b>가 붙습니다. 읍면동으로 재구획하면 τ²도 λ도 달라집니다.<br><br>\n<b>부천 사례가 이를 실증합니다.</b> 부천은 2024년에 일반구가 다시 생기면서 <b>1개 단위에서 3개로</b> 나뉘었습니다. 표본 수는 그대로인데 <b>층화 구조가 20개에서 70개로</b> 바뀌었고, 그 결과 deff가 달라집니다. 같은 사람들, 같은 답인데 <b>선을 다시 그었더니 통계가 바뀐</b> 것입니다."}, "pooling": {"n": "pooling (다개년 통합)", "r": "풀링 · '한데 모으다'", "e": "<b>여러 해 자료를 묶어 하나의 값을 만드는 것</b>입니다.<br><br>\n한 해 900명 대신 <b>4년치 3,600명</b>을 쓰는 셈이니 정밀도가 올라갑니다.<br><br>\n<b>그런데 이득이 하나 더 있습니다.</b> 표본오차만 주는 게 아니라 <b>'그 해의 흔들림'도 함께 줍니다.</b> 어떤 해에 유난히 높았다면 다른 해에는 낮았을 테니, <b>평균 내면 서로 상쇄</b>되기 때문입니다.<br><br>\n이게 이 연구에서 pooling이 결정적인 이유입니다. <b>표본을 늘려도 못 잡는 성분을 잡아 줍니다.</b>", "s": "T개년을 묶으면 표본오차와 지역×연도 성분이 모두 1/T로 줍니다.<br>λ<sub>pooled</sub> = τ²<sub>지역</sub> ÷ (τ²<sub>지역</sub> + τ²<sub>지역×연도</sub>/T + v̄/T)", "u": "<b>이 연구의 핵심 정책 처방입니다.</b><br><br>\n우울감 0.47 → <b>0.78</b> &nbsp;·&nbsp; PHQ-9 0.43 → <b>0.75</b> &nbsp;·&nbsp; 미충족의료 0.52 → <b>0.82</b><br><br>\n<b>예산이 한 푼도 들지 않습니다.</b> 이미 있는 자료를 다르게 쓰는 것뿐이니까요.<br><br>\n<b>대가</b> — 4개년 평균이므로 <b>\"작년보다 나아졌는가\"는 볼 수 없습니다.</b> 연간 성과 평가를 포기하는 대신 지역 비교를 얻는 맞바꿈이고, 담당자가 그걸 <b>알고</b> 선택해야 합니다."}, "mde": {"n": "MDE (최소탐지가능 효과크기)", "r": "엠디이 · Minimum Detectable Effect", "e": "<b>\"우리가 가진 자료로 잡아낼 수 있는 가장 작은 차이\"</b>입니다.<br><br>\n왜 필요한지는 이 상황을 보면 압니다. 어떤 연구가 <b>\"조사기관에 따른 차이는 없었다\"</b>고 결론냈습니다. 그런데 표본이 워낙 작아서 <b>2%p 차이도 못 잡아내는</b> 자료였다면요?<br><br>\n\"차이가 없다\"가 아니라 <b>\"차이를 찾아낼 힘이 없었다\"</b>가 정확한 표현입니다. 이 둘은 전혀 다른 말입니다.<br><br>\nMDE를 밝히면 독자가 판단할 수 있습니다 — <b>\"아, 이 연구는 1%p 이상 차이는 잡을 수 있었는데 안 나왔구나.\"</b>", "s": "검정력 분석의 산물입니다. 표본 크기, 유의수준, 원하는 검정력(보통 80%)이 정해지면 계산됩니다.", "u": "2편에서 <b>\"기관 효과가 없다\"</b>는 결과가 나올 경우 반드시 병기해야 합니다.<br><br>\n사실 null 결과도 충분히 가치 있습니다 — 선행 논문이 한계로 적었던 우려를 <b>실증적으로 해소</b>하는 것이니까요. 다만 <b>MDE 없이는 게재되지 않습니다.</b>"}, "crossclass": {"n": "교차분류 다층모형", "r": "크로스클래시파이드 · cross-classified multilevel model", "e": "<b>한 사람이 두 집단에 동시에 속하는데, 그 둘이 포개지지 않을 때</b> 쓰는 모형입니다.<br><br>\n보통의 다층모형은 <b>깔끔하게 포개집니다.</b> 학생은 학급 안에, 학급은 학교 안에. 러시아 인형처럼요.<br><br>\n그런데 <b>학생이 '학교'에도 속하고 '동네'에도 속한다면?</b> 같은 학교 학생들이 여러 동네에 흩어져 살고, 같은 동네 학생들이 여러 학교에 다닙니다. <b>포개지지 않고 교차합니다.</b><br><br>\n이럴 때 학교 효과와 동네 효과를 <b>따로 떼어 재는</b> 방법입니다.", "s": "y ~ 1 + (1|집단A) + (1|집단B) 형태로 각 소속의 랜덤효과를 동시에 둡니다.<br><br>\n<b>결정적 조건</b> — 두 소속이 <b>어느 정도 뒤섞여</b> 있어야 합니다. 완전히 일대일로 대응하면 분리가 원리적으로 불가능합니다.", "u": "응답자는 <b>지역</b>에도 속하고 <b>조사 수행기관</b>에도 속합니다. 기관 분산이 유의하면, 선행 논문의 τ²<sub>지역</sub>은 사실 <b>지역 효과의 상한</b>이었다는 뜻이 됩니다.<br><br>\n<b>가장 큰 위험</b> — 한 시군구를 한 기관이 4년 내내 전담했다면 지역과 기관이 <b>완전히 붙어 있어</b> 분리할 수 없습니다. 그래서 착수 전에 <b>기관–지역 교차표</b>를 먼저 그려 확인해야 합니다."}, "event": {"n": "이벤트 스터디", "r": "이벤트 스터디 · event study · 사건연구", "e": "<b>\"어떤 일이 일어난 순간 값이 툭 튀는가\"</b>를 보는 방법입니다.<br><br>\n논리가 단순하고 강력합니다. 어느 시군구에서 <b>조사기관이 2024년에 바뀌었다</b>고 합시다. 그런데 그 지역의 우울률이 2024년에 갑자기 2%p 뛰었습니다.<br><br>\n<b>지역 주민의 건강이 1년 만에 그렇게 변할 리 없습니다.</b> 인구 구성도, 경제 조건도 그대로입니다. 바뀐 건 조사기관 하나뿐입니다.<br><br>\n그렇다면 그 2%p는 <b>실제 변화가 아니라 측정 산물</b>입니다.", "s": "처치군(기관이 바뀐 지역)과 대조군(안 바뀐 지역)의 차이를 사건 전후로 비교합니다(이중차분). <b>사건 전 두 군의 추세가 평행했는지</b>를 반드시 확인해야 인과 해석이 가능합니다.", "u": "2편의 결정적 설계입니다. 다만 <b>교란 요인을 미리 걸러야</b> 합니다.<br><br>\n2023년은 흡연 도입문항이 신설된 해, 2024년은 행정구역 코드가 바뀐 해, 2025년은 PHQ-9 보기와 걷기 산출식이 바뀐 해입니다. <b>이 해들에 지표가 튀는 것은 기관 때문이 아닐 수 있습니다.</b><br><br>\n그래서 <b>조사표 개정이 없었던 지표(우울감·음주)를 주 분석</b>으로 삼습니다."}, "prereg": {"n": "사전등록 · HARKing", "r": "프리레지스트레이션 · preregistration · OSF", "e": "<b>\"분석하기 전에 무엇을 볼지 미리 공개하는 것\"</b>입니다.<br><br>\n왜 필요한지는 반대 상황을 보면 압니다. 자료를 이리저리 돌리다 보면 <b>뭔가 신기한 게 하나쯤은 나옵니다.</b> 그걸 발견하고 나서 \"나는 처음부터 이걸 예상했다\"고 쓰는 것 — 이걸 <b>HARKing</b>이라 합니다(Hypothesizing After Results are Known).<br><br>\n<b>왜 문제인가.</b> 20개를 들여다보면 그중 하나쯤은 우연히 유의하게 나옵니다. 그 하나만 골라 \"예상대로였다\"고 쓰면 <b>독자는 나머지 19개를 모릅니다.</b><br><br>\n사전등록은 <b>손을 대기 전에 패를 보여 주는 것</b>입니다.", "s": "OSF 같은 공개 저장소에 가설·분석 계획·판정 기준을 시점 기록과 함께 등록합니다. <b>확인적 분석</b>과 <b>탐색적 분석</b>을 구분해 보고하는 것이 핵심입니다.", "u": "이 연구도 사전등록을 계획하고 있습니다. 그런데 <b>정직하게 짚어야 할 것</b>이 있습니다.<br><br>\n<b>순위 정밀도 문제와 응답 품질 얽힘은 사전 가설이 아니었습니다.</b> 자료를 보다가 발견한 것입니다. 같은 자료로 발견하고 같은 자료로 검정했으니 <b>확인적 근거가 아닙니다.</b><br><br>\n논문에 <b>\"탐색적 발견\"으로 명확히 표기</b>하고, 다른 자료에서의 재현을 후속 과제로 남겨야 합니다. 이걸 사전 가설처럼 쓰면 <b>이 연구가 비판하려는 바로 그 종류의 오류</b>가 됩니다."}, "funnel": {"n": "깔때기 도표 (funnel plot)", "r": "퍼널 플롯 · 漏斗圖", "e": "가로축에 <b>그 지역의 표본 크기</b>, 세로축에 <b>그 지역의 값</b>을 찍고, 가운데에 전국 평균선을 긋습니다. 그리고 평균선 위아래로 <b>\"이 정도 흔들림은 우연일 수 있다\"는 띠</b>를 두릅니다.<br><br>표본이 작은 지역은 우연히 크게 튈 수 있으니 띠가 넓고, 표본이 큰 지역은 띠가 좁습니다. 그래서 그림 모양이 옆으로 누운 깔때기처럼 됩니다.<br><br>판정은 아주 단순합니다 — <b>점이 띠 안에 있으면 \"전국과 다르다고 말할 수 없다\", 띠 밖에 있으면 \"정말 다르다\"</b>입니다. 등수를 매기지 않습니다.", "s": "병원·학교 성과 비교에서 순위표(league table)의 대안으로 표준이 된 방법입니다. Spiegelhalter(2005)가 정립했으며, 통상 <b>95% 한계(경고선)</b>와 <b>99.8% 한계(행동선)</b> 두 겹을 그립니다. 99.8%를 쓰는 이유는 비교 대상이 수백 개일 때 95%만 쓰면 우연히 걸리는 곳이 너무 많이 나오기 때문입니다(다중비교 문제).<br><br>지역 간 차이가 표본오차보다 훨씬 클 때는 대부분의 점이 띠 밖으로 나가는데, 이것은 그림이 잘못된 것이 아니라 <b>실제 지역차가 크다는 증거</b>입니다.", "u": "이 연구의 실측 결과, 250개 시군구 중 <b>주관적건강은 174곳, PHQ-9조차 30곳</b>이 99.8% 한계 밖에 있었습니다. 같은 자료로 3분위(상·중·하) 소속이 확정되는 지역은 각각 59곳과 <b>0곳</b>뿐이었습니다.<br><br>즉 <b>\"몇 등인가\"는 못 말해도 \"전국과 다른가\"는 말할 수 있다</b>는 것이 이 방법을 택하는 이유입니다. D-34의 권고안이 여기서 나옵니다."}, "limit": {"n": "관리한계 (control limit)", "r": "컨트롤 리밋", "e": "깔때기 도표에서 평균선 위아래로 두르는 <b>띠의 경계선</b>입니다. \"여기까지는 우연으로 설명된다\"는 선입니다.<br><br>95% 한계는 <b>노란불</b>(주의해서 살펴볼 곳), 99.8% 한계는 <b>빨간불</b>(거의 확실히 다른 곳)로 생각하시면 됩니다.", "s": "평균 ± k×표준오차로 계산합니다. k=1.96이면 95%, k=3.09면 99.8%입니다. 비교 대상 수가 많을수록 더 바깥쪽 한계를 씁니다.", "u": "250개 시군구를 동시에 비교하므로 <b>99.8%를 본선으로, 95%를 참고선으로</b> 쓰는 것을 권고합니다. 95%만 쓰면 250곳 중 12~13곳은 실제로 차이가 없어도 우연히 걸립니다."}, "multiple": {"n": "다중비교 문제 (multiple comparisons)", "r": "멀티플 컴패리즌", "e": "한 번 검사할 때 \"우연히 이상하게 나올 확률\"이 5%라면, <b>250번 검사하면 우연히 이상한 곳이 12~13곳은 나옵니다.</b> 아무 문제가 없어도 말입니다.<br><br>250개 시군구를 한꺼번에 비교하는 대시보드는 이 함정에 정면으로 노출됩니다.", "s": "검정을 반복하면 1종 오류가 누적됩니다. 본페로니 보정, FDR 통제, 또는 더 엄격한 한계선(99.8%) 사용 등으로 대응합니다.", "u": "시군구 대시보드에서 \"우리 시가 빨간불\"이라는 표시는 예산과 인사가 걸리는 신호입니다. 우연히 걸린 것을 실제 문제로 오인하면 자원이 엉뚱한 곳으로 갑니다. <b>99.8% 한계 채택의 실질적 이유</b>입니다."}, "league": {"n": "순위표 (league table)", "r": "리그 테이블", "e": "축구 순위표처럼 지역을 1등부터 250등까지 줄 세운 표입니다. 직관적이고 눈에 잘 들어와서 널리 쓰이지만, <b>통계적으로는 가장 위험한 표시 방식</b>입니다.", "s": "순위는 값의 아주 작은 차이에도 크게 흔들립니다. 값들이 촘촘히 모여 있는 중위권에서 특히 심합니다 — 0.1%p 차이가 30등을 가르기도 합니다.", "u": "이 연구 실측: λ=0.700인 비만율에서 <b>125위 지역의 95% 순위 구간은 22~225위</b>였습니다. 중위권 11개 지역의 값이 0.28%p 안에 모여 있는데 그 지역들의 표준오차는 1.76%p였습니다 — <b>오차가 간격의 6배</b>. 순위표를 만들 근거가 없습니다."}};
+function og(k){var d=GL[k];if(!d)return;
+ document.getElementById('pn').innerHTML=d.n;
+ document.getElementById('pr').innerHTML='읽는 법 &nbsp;'+d.r;
+ document.getElementById('pe').innerHTML=d.e;
+ document.getElementById('ps').innerHTML=d.s;
+ document.getElementById('pu').innerHTML=d.u;
+ document.getElementById('ov').className='on';
+ document.getElementById('pop').scrollIntoView({block:'nearest'});}
+function cg(){document.getElementById('ov').className='';}
+document.addEventListener('keydown',function(e){if(e.key=='Escape')cg();});
+document.addEventListener('click',function(e){
+ var t=e.target.closest('.g'); if(t&&t.dataset.g) og(t.dataset.g);});
+</script>
+
+<div style="max-width:900px;margin:0 auto 24px;padding:14px 17px;border:1px solid #cbd5e1;border-radius:10px;background:#eff6ff;font-size:14px;line-height:1.75"><a href="../" style="font-weight:700;text-decoration:none">← 조기행 소개 페이지</a><br>연구설계서를 줄거리 순서로 다시 쓴 글입니다. 학술지 투고를 위한 내부 검토 부분은 덜어낸 <b>공개판</b>입니다.</div><h1>CHS 문항 신뢰도 연구 — 이야기로 읽기</h1>
+<p style="color:#57534e;margin-top:0">연구설계서(개정 6판)를 <b>줄거리 순서로</b> 다시 쓴 것입니다 · 2026-08-29<br>
+<span style="font-size:10pt">파란 점선 밑줄이 그어진 용어는 <b>누르면 설명이 뜹니다.</b> 그리스 문자의 읽는 법도 함께 나옵니다.</span></p>
+
+<div class="toc">
+<b>차례</b>
+<ol>
+<li><a href="#a1">CHS는 어떤 조사인가</a> — 무엇을 누가 어떻게 조사하는가</li>
+<li><a href="#a2">문항은 어떻게 생겼나</a> — 그리고 왜 그것이 문제가 되는가</li>
+<li><a href="#a3">궁금증이 생기다</a> — 선행 연구가 남긴 세 가지 숙제</li>
+<li><a href="#a4">궁금증이 학문과 만나다</a> — 어떤 개념을 빌려 올 것인가</li>
+<li><a href="#a5">자료를 열어보니</a> — 여섯 번의 검증</li>
+<li><a href="#a6">분석 결과</a> — 무엇이 나왔나</li>
+<li><a href="#a7">현장에 무엇을 말할 것인가</a> — 시군구 담당자를 위한 답</li>
+<li><a href="#a8">먼저 온 사람들</a> — 이 질문에 먼저 답한 연구들</li>
+</ol>
+</div>
+
+<div class="scene">
+<div class="who">프롤로그 · 어느 보건소의 아침</div>
+<p>○○시 보건소 건강증진과 김 주무관은 월요일 아침에 표 하나를 받았습니다. 지역사회건강조사 결과입니다.</p>
+<p style="margin-left:20px"><b>우울감 경험률 6.2% — 전국 250개 시군구 중 193위</b><br>
+<span style="color:#78716c">(작년 6.8%, 205위 → 12계단 상승)</span></p>
+<p>과장님이 묻습니다. <b>"작년보다 나아진 거네? 뭐가 효과가 있었나?"</b></p>
+<p>김 주무관은 답을 해야 합니다. 그런데 정말 나아진 걸까요? 12계단이 오른 게 <b>사업의 성과</b>일까요, 아니면 <b>그냥 우연</b>일까요?</p>
+<p style="margin-bottom:0">이 연구는 김 주무관의 이 질문에서 시작합니다.</p>
+</div>
+
+<div class="act" id="a1"><div class="n">1막</div><div class="t">CHS는 어떤 조사인가</div>
+<div class="s">이야기의 무대를 먼저 봅니다</div></div>
+
+<h2>조사의 얼개</h2>
+
+<p>지역사회건강조사<span style="color:#78716c">(Community Health Survey, 줄여서 CHS)</span>는 <b>2008년부터 매년</b> 시행되는 전국 조사입니다. 질병관리청이 주관하고, <b>전국 보건소가 실제로 수행</b>합니다.</p>
+
+<table>
+<tr><th style="width:22%">항목</th><th>내용</th></tr>
+<tr><td>대상</td><td>만 19세 이상 성인</td></tr>
+<tr><td>규모</td><td><b>매년 약 23만 명</b> (2022년 231,785명 … 2025년 231,615명)</td></tr>
+<tr><td>단위</td><td><b>250개 시군구</b> · 시군구당 약 <b>900명</b></td></tr>
+<tr><td>시기</td><td>매년 8~10월</td></tr>
+<tr><td>방식</td><td>조사원이 <b>가구를 방문</b>해 1:1 면접 (컴퓨터 입력)</td></tr>
+<tr><td>수행</td><td>보건소가 조사기관에 <b>용역 발주</b> — <b>지자체마다 기관이 다릅니다</b></td></tr>
+</table>
+
+<div class="key">
+<p style="margin:0"><b>이 표에서 앞으로 계속 나올 두 가지를 미리 짚어 둡니다.</b></p>
+<ul style="margin-bottom:0">
+<li><b>"시군구당 900명"</b> — 이 숫자가 이 연구의 절반을 설명합니다. 900명으로 만든 비율은 얼마나 정확할까요?</li>
+<li><b>"지자체마다 조사기관이 다르다"</b> — 이것은 결함이 아니라 <b>연구 자산</b>입니다. 기관이 바뀐 해에 지표가 튀는지 보면 조사 시행의 영향을 잴 수 있으니까요. 이것이 2편의 주제입니다.</li>
+</ul>
+</div>
+
+<h3>표본을 어떻게 뽑는가 — 그냥 무작위가 아닙니다</h3>
+
+<p>250개 시군구에서 각각 900명을 뽑는데, <b>제비뽑기처럼 아무나 뽑지 않습니다.</b> 세 가지 장치가 겹쳐 있습니다. 이것을 <b class="g" data-g="complex">복합표본설계</b>라 합니다.</p>
+
+<table>
+<tr><th style="width:16%">장치</th><th style="width:26%">무엇인가</th><th>왜 하는가 / 무슨 결과가 따르는가</th></tr>
+<tr><td><b>층화</b><br><span style="font-size:9pt;color:#78716c">kstrata</span></td><td>시군구를 동·읍·면으로 나눠 <b>각 구역에서 따로</b> 뽑습니다</td><td>어느 한 구역에 몰리는 사고를 막습니다. <b>정밀도가 올라갑니다</b></td></tr>
+<tr><td><b>집락</b><br><span style="font-size:9pt;color:#78716c">spot_no</span></td><td><b>조사구</b>(아파트 한 동, 마을 한 곳) 단위로 묶어 뽑고, 그 안에서 여러 가구를 조사합니다</td><td>조사원이 한 동네에서 여러 집을 방문하니 <b>비용이 절감됩니다.</b> 그런데 같은 동네 사람들은 서로 닮아 있어 <b>정보가 겹칩니다</b> — 정밀도가 떨어집니다</td></tr>
+<tr><td><b>가중치</b><br><span style="font-size:9pt;color:#78716c">wt_p</span></td><td>뽑힐 확률이 낮았던 사람에게 <b>더 큰 무게</b>를 줍니다. 무응답과 인구 구성도 보정합니다</td><td>표본을 실제 인구 구조에 맞춥니다</td></tr>
+</table>
+
+<div class="q">
+<p><b>여기서 매우 중요한 결과가 하나 나옵니다.</b></p>
+<p style="margin-bottom:0">집락 때문에 <b>900명을 조사해도 실제 정밀도는 900명어치가 안 됩니다.</b> 같은 동네 사람들의 답이 겹치기 때문입니다. 그 손실 배율을 <b class="g" data-g="deff">설계효과(deff)</b>라 하고, 실제 쓸 수 있는 인원을 <b class="g" data-g="neff">유효표본크기(n_eff)</b>라 합니다.<br><br>
+이 자료에서 재어 보니 deff는 <b>1.26~1.64</b>였습니다. 즉 927명을 조사했지만 <b>정밀도로는 620~760명</b>인 셈입니다. <b>이걸 빼먹으면 정확도를 25~62% 부풀려 계산하게 됩니다.</b></p>
+</div>
+
+<h3>4년을 한 바퀴로 도는 구조</h3>
+
+<p>CHS에는 특이한 구조가 하나 있습니다. <b>매년 같은 문항을 묻지 않습니다.</b></p>
+
+<div class="aside">
+<p style="margin:0">"지역사회건강조사는 2010년부터 <b>4년을 하나의 조사주기</b>로 설정하고 지표의 중요도와 활용성, 표본의 크기 등을 고려하여 각각의 조사항목을 <b>1년, 2년, 4년 주기</b>로 구분하여 조사하고 있으며, 순환주기는 총 4년으로 구성됩니다."<br>
+<span style="font-size:9.5pt">— 지역사회건강조사 2025년 원시자료 이용지침서</span></p>
+</div>
+
+<p>즉 어떤 문항은 매년 묻고, 어떤 문항은 2년에 한 번, 어떤 문항은 4년에 한 번만 묻습니다. 조사 부담을 줄이기 위한 합리적 설계입니다.</p>
+
+<p><b>그런데 이것이 나중에 큰 문제가 됩니다.</b> 실제로 세어 보니 이랬습니다.</p>
+
+<table>
+<tr><th class="n">4개년 중 조사된 횟수</th><th class="n">변수 수</th><th>분석에서의 처지</th></tr>
+<tr><td class="n">4번 (매년)</td><td class="n"><b>122개</b></td><td>온전히 분석 가능</td></tr>
+<tr><td class="n">3번</td><td class="n">23개</td><td>가능하지만 불확실</td></tr>
+<tr><td class="n">2번</td><td class="n">53개</td><td>해석에 단서를 달아야 함</td></tr>
+<tr><td class="n">1번</td><td class="n">102개</td><td><b>분석 불가</b></td></tr>
+</table>
+
+<p>전체 300개 변수 중 <b>4개년 모두 있는 것은 122개뿐</b>입니다. 그리고 하필 정신건강의 핵심 지표인 <b>자살생각은 2022년과 2024년 두 번만</b> 조사되었습니다.</p>
+
+<div class="key">
+<p style="margin:0"><b>김 주무관에게 이것이 뜻하는 바.</b> 성과지표로 쓰고 있는 어떤 지표는 <b>애초에 매년 조사되지 않습니다.</b> 그런데 조사되지 않은 해의 값이 표에 안 나오니, 담당자는 그냥 "작년 자료가 없네" 하고 넘어갑니다. <b>'전년 대비 증감'이라는 개념 자체가 성립하지 않는데도</b> 그걸 성과로 보고하는 일이 벌어집니다.</p>
+</div>
+
+<div class="act" id="a2"><div class="n">2막</div><div class="t">문항은 어떻게 생겼나</div>
+<div class="s">그리고 왜 그것이 신뢰도 검증을 까다롭게 만드는가</div></div>
+
+<h2>CHS 문항의 세 가지 얼굴</h2>
+
+<p>CHS는 300개 가까운 변수를 담고 있습니다. 그런데 성격이 <b>제각각</b>입니다. 크게 셋으로 나뉩니다.</p>
+
+<h4>① 단일문항 지표 — 문항 하나가 지표 하나</h4>
+<div class="scene" style="border-left-color:#1668a8;background:#f7fafd;border-color:#d6e4f0">
+<p style="margin:0"><b>"최근 1년 동안 연속적으로 2주 이상 슬프거나 절망감 등을 느낀 적이 있습니까?"</b><br>
+① 예 &nbsp;&nbsp; ② 아니오</p>
+</div>
+<p>이 <b>한 문항</b>이 <b>우울감 경험률</b>의 전부입니다. 주관적건강("귀하의 건강은 어떻습니까?" 5점 척도), 흡연, 걷기, 음주도 마찬가지입니다. <b>CHS 주요 지표의 대부분이 여기 속합니다.</b></p>
+
+<h4>② 내장된 표준 척도 — 여러 문항이 모여 하나의 점수</h4>
+<div class="scene" style="border-left-color:#1668a8;background:#f7fafd;border-color:#d6e4f0">
+<p style="margin:0"><b>PHQ-9</b> — 우울 증상을 재는 국제 표준 척도. 아홉 문항입니다.<br>
+<span style="font-size:10pt">"일 또는 여가 활동을 하는 데 흥미나 즐거움을 느끼지 못한다"<br>
+"기분이 가라앉거나, 우울하거나, 희망이 없다"<br>… (총 9문항)</span><br><br>
+각 문항 ① 전혀 아니다 ② 여러 날 동안 ③ 일주일 이상 ④ 거의 매일<br>
+→ 0~27점으로 합산, <b>10점 이상이면 우울증상 있음</b></p>
+</div>
+<p><b>EQ-5D-5L</b>(삶의 질 5문항)도 여기 속합니다.</p>
+
+<h4>③ 사실 확인 문항 — 주관적 판단이 거의 없는 것</h4>
+<p>"최근 2년 동안 건강검진을 받으셨습니까?" 같은 문항입니다. 기억의 문제는 있어도 <b>답하는 기준이 사람마다 다르지는</b> 않습니다.</p>
+
+<div class="key">
+<p><b>★ 이 구성이 왜 문제인가 — 교과서 방법이 막힙니다</b></p>
+<p>보통 '설문 신뢰도'를 잰다고 하면 <b class="g" data-g="alpha">크론바흐 α(알파)</b>를 계산합니다. 여러 문항이 서로 비슷하게 움직이는지를 보는 방법입니다.</p>
+<p style="margin-bottom:0">그런데 <b>①에는 쓸 수 없습니다.</b> 비교할 다른 문항이 없으니까요. <b>문항이 하나면 α는 계산 자체가 성립하지 않습니다.</b> ②에는 쓸 수 있지만 CHS에서 다문항 척도는 PHQ-9과 EQ-5D뿐입니다. 게다가 EQ-5D는 다섯 문항이 서로 다른 영역(이동·자기관리·통증…)을 재므로 α를 쓰면 오적용입니다.<br><br>
+결국 <b>CHS 전체에 크론바흐 α를 적용하는 것은 도구를 잘못 고른 것</b>이고, 실제로 쓸 수 있는 곳은 <b>PHQ-9 하나</b>입니다.</p>
+</div>
+
+<h3>두 번째 막힘 — 같은 사람을 두 번 잴 수 없습니다</h3>
+
+<p>신뢰도를 재는 또 하나의 정석은 <b class="g" data-g="kappa">재검사 신뢰도(κ, 카파)</b>입니다. 같은 사람에게 2주 뒤 같은 문항을 다시 묻고 답이 일치하는지 보는 것이죠.</p>
+
+<p><b>CHS에는 이 자료가 아예 없습니다.</b> 재조사 절차가 설계에 없기 때문입니다.</p>
+
+<div class="aside">
+<p style="margin:0"><b>혼동하기 쉬운 것 하나.</b> 지자체 조사용역에는 '재조사'라는 말이 나옵니다. 그런데 그것은 <b>"조사원이 실제로 그 집에 갔는가"를 확인하는 절차</b>(검증 재확인)이지, <b>"같은 사람이 같은 문항에 일관되게 답하는가"를 보는 것</b>(측정 재검사)이 아닙니다.<br><br>
+즉 현행 품질관리는 <b>"조사를 했는가"는 확인하되 "제대로 쟀는가"는 확인하지 않습니다.</b> 이 구분이 이 연구가 정책 제언으로 남긴 항목 중 하나입니다.</p>
+</div>
+
+<h3>세 번째 막힘 — 매년 새 사람을 뽑습니다</h3>
+<p>CHS는 <b>패널 조사가 아닙니다.</b> 작년에 답한 사람과 올해 답한 사람이 다릅니다. 그래서 개인의 변화를 따라갈 수 없습니다.</p>
+
+<div class="q">
+<p style="margin:0"><b>정리하면 이렇습니다.</b> 설문 신뢰도를 재는 <b>교과서 방법 세 가지가 모두 막혀 있습니다.</b><br>
+① 크론바흐 α — 단일문항이라 대부분 불가<br>
+② 재검사 신뢰도 — 자료가 없어 원천 불가<br>
+③ 개인 추적 — 매년 새 표본이라 불가<br><br>
+<b>그렇다면 이 조사의 신뢰도는 어떻게 재야 할까요?</b> 이것이 이 연구가 풀어야 했던 첫 번째 문제입니다.</p>
+</div>
+
+<div class="act" id="a3"><div class="n">3막</div><div class="t">궁금증이 생기다</div>
+<div class="s">선행 연구가 남긴 세 가지 숙제</div></div>
+
+<h2>앞선 연구에서 걸린 것</h2>
+
+<p>이 트랙은 갑자기 시작된 것이 아닙니다. <b>「시군구 건강격차의 사회적 결정요인 분석」</b>이라는 논문을 쓰는 과정에서 남은 <b>찜찜함</b>에서 나왔습니다.</p>
+
+<p>그 논문은 CHS 응답 약 69.5만 건을 250개 시군구로 집계해, "어떤 사회적 조건이 지역의 건강 수준을 설명하는가"를 분석했습니다. 그런데 결과에 이상한 대목이 있었습니다.</p>
+
+<div class="scene">
+<div class="who">숙제 ① · 정신건강만 설명이 안 된다</div>
+<p>신체 건강 지표들은 사회경제적 조건으로 꽤 설명되었습니다. 그런데 <b>정신·정서 지표는 유독 설명력이 낮았습니다.</b> 조율 R²(설명된 비율)이 0.11 정도, 우울과 자살생각은 0.07 미만이었습니다.</p>
+<p style="margin-bottom:0"><b>이걸 어떻게 읽어야 할까요?</b> 두 가지 정반대 해석이 가능합니다.<br>
+㈎ 정신건강에는 <b>진짜로 지역 차이가 없다</b> — 그럼 지역 단위 정신건강 정책은 의미가 약합니다.<br>
+㈏ 지역 차이는 있는데 <b>잡음에 묻혀 안 보인다</b> — 그럼 측정을 개선해야 합니다.<br>
+<b>이 둘을 구분할 방법이 없었습니다.</b></p>
+</div>
+
+<div class="scene">
+<div class="who">숙제 ② · 검정하지 않은 가정 하나</div>
+<p>주관적건강("귀하의 건강은 어떻습니까?")을 지역 간에 비교했습니다. 그런데 <b>70대 어르신과 20대 청년이 '보통'이라고 답할 때 같은 뜻일까요?</b> 아닐 가능성이 큽니다. 각자 <b>다른 기준</b>으로 답하니까요.</p>
+<p style="margin-bottom:0">농촌은 고령자가 많고 도시는 젊은 층이 많습니다. 그럼 <b>도농 간 주관적건강 차이의 일부는 건강 차이가 아니라 기준 차이</b>일 수 있습니다. 논문은 이것을 <b>검정 없이 가정</b>했습니다.</p>
+</div>
+
+<div class="scene">
+<div class="who">숙제 ③ · 누가 조사했는지가 섞여 있을지도 모른다</div>
+<p>CHS는 <b>지자체마다 다른 기관</b>이 수행합니다. 조사원 교육 수준, 면접 방식, 조사 기간이 지역마다 다릅니다.</p>
+<p style="margin-bottom:0">그렇다면 "A시가 B시보다 우울률이 높다"는 결과가 <b>정말 A시 주민이 더 우울해서인지</b>, 아니면 <b>A시 조사원이 그 문항을 더 꼼꼼히 물어서인지</b> 구분이 안 됩니다. 논문은 이것을 <b>한계로만 적었습니다.</b></p>
+</div>
+
+<h2>그리고 현장에서 온 네 번째 궁금증</h2>
+
+<p>위 셋은 학술적 찜찜함입니다. 그런데 더 급한 것이 하나 있었습니다. <b>프롤로그의 김 주무관</b>입니다.</p>
+
+<div class="q">
+<p style="margin:0"><b>지자체 대시보드에 지표를 공표할 때, 순위가 실제 차이인지 표본오차인지 구분해 주지 않으면 담당자가 잡음을 두고 정책 경쟁을 하게 됩니다.</b><br><br>
+193위에서 181위로 올랐다고 표창을 받고, 그 반대면 개선 계획을 세웁니다. 그런데 그 12계단이 <b>그냥 우연</b>이라면요? 예산과 인력이 존재하지 않는 문제를 쫓게 됩니다.</p>
+</div>
+
+<h3>그래서 물음이 이렇게 정리되었습니다</h3>
+
+<table>
+<tr><th style="width:10%">번호</th><th style="width:44%">물음</th><th>어디로 가는가</th></tr>
+<tr><td><b>RQ0</b></td><td>애초에 <b>어느 문항을</b> 몇 번이나, <b>같은 측정으로</b>, <b>같은 지역 단위에서</b> 비교할 수 있는가</td><td>1편 (준비 단계)</td></tr>
+<tr><td><b>RQ1</b></td><td>각 문항의 시군구 값은 <b>순위 비교가 가능할 만큼 믿을 만한가</b></td><td><b>1편 (핵심)</b></td></tr>
+<tr><td><b>RQ2</b></td><td>그 신뢰도를 확보하려면 지역당 <b>표본이 얼마나</b> 필요한가</td><td>1편</td></tr>
+<tr><td><b>RQ3</b></td><td><b>누가 조사했는가</b>가 지역 간 차이에 섞여 드는가</td><td>2편</td></tr>
+<tr><td><b>RQ4</b></td><td>지역·연령·성별 집단 간에 <b>같은 척도로</b> 측정되는가</td><td>3편</td></tr>
+</table>
+
+<div class="key">
+<p style="margin:0"><b>RQ0이 왜 따로 있는가.</b> 처음에는 없었습니다. RQ1부터 시작하려 했는데, <b>자료를 열어 보니 그 전에 확인할 것이 산더미였습니다.</b> 그 경과가 5막입니다. 그리고 이 RQ0이 결국 <b>이 연구에서 가장 실무적으로 유용한 부분</b>이 되었습니다.</p>
+</div>
+
+<div class="act" id="a4"><div class="n">4막</div><div class="t">궁금증이 학문과 만나다</div>
+<div class="s">이 물음에 답하려면 어떤 개념을 빌려 와야 하는가</div></div>
+
+<h2>먼저 깨달아야 했던 것 — 무엇을 '하나의 대상'으로 볼 것인가</h2>
+
+<p>2막에서 교과서 방법 세 가지가 다 막혔습니다. 그런데 막힌 이유를 들여다보니 공통점이 있었습니다. <b>세 방법 모두 '사람 한 명'을 재는 대상으로 삼습니다.</b></p>
+
+<p>그런데 김 주무관이 보는 숫자는 사람의 점수가 아닙니다. <b>900명에게 물어 만든 지역별 비율</b>입니다.</p>
+
+<div class="key">
+<p><b>발상의 전환은 여기서 일어났습니다.</b></p>
+<p style="margin-bottom:0">신뢰도 공식은 언제나 같습니다 — <b>진짜 차이 ÷ (진짜 차이 + 흔들림)</b>. 달라지는 것은 <b>"무엇을 하나의 대상으로 보는가"</b>뿐입니다.<br><br>
+그렇다면 <b>시군구를 하나의 대상</b>으로 놓으면 어떨까요? 그러면 저울은 설문지 하나가 아니라 <b>"CHS 설문 + 900명 표본추출 + 가중치 계산"이라는 과정 전체</b>가 됩니다. 그 저울에 시군구를 올려 "6.2%"라는 눈금을 읽는 것입니다.</p>
+</div>
+
+<table>
+<tr><th style="width:22%"></th><th>보통의 설문 신뢰도</th><th>이 연구</th></tr>
+<tr><td><b>하나의 대상</b></td><td>사람 한 명</td><td><b>시군구 한 곳</b></td></tr>
+<tr><td><b>한 번 잰다는 것</b></td><td>그 사람에게 문항을 묻는다</td><td><b>900명을 뽑아 물어 비율을 만든다</b></td></tr>
+<tr><td><b>저울</b></td><td>설문지</td><td><b>설문지 + 표본추출 + 가중치 계산</b></td></tr>
+<tr><td><b>알고 싶은 것</b></td><td>이 사람의 <b class="g" data-g="ctt">참점수</b></td><td><b>이 지역의 진짜 수준</b></td></tr>
+</table>
+
+<h2>빌려 온 개념 넷</h2>
+
+<h3>① 일반화가능도 이론 — 오차를 갈래로 쪼갠다</h3>
+
+<p><b class="g" data-g="ctt">고전검사이론</b>은 오차를 <b>하나</b>로 뭉뚱그립니다. "참점수 + 오차", 끝입니다. 그런데 우리에게는 그것으로 부족했습니다.</p>
+
+<p>지역 값이 흔들리는 데는 <b>성격이 다른 원인이 섞여</b> 있기 때문입니다. <b class="g" data-g="gtheory">일반화가능도 이론(G-theory)</b>은 바로 이럴 때 쓰는 틀입니다. 오차의 원천을 <b>여러 갈래(국면)로 쪼개</b> 각각의 크기를 따로 잽니다.</p>
+
+<p>이 연구에서는 국면을 <b>지역 × 연도</b>로 잡았습니다. 그러면 흔들림이 셋으로 갈립니다.</p>
+
+<table>
+<tr><th style="width:8%"></th><th style="width:30%">성분</th><th>정체</th><th style="width:22%">표본을 늘리면?</th></tr>
+<tr><td><b>①</b></td><td><b class="g" data-g="tau">τ²<sub>지역</sub></b> (타우 제곱)</td><td>그 지역이 <b>해마다 일관되게</b> 갖는 차이 — <b>우리가 알고 싶은 것</b></td><td>그대로 (신호니까)</td></tr>
+<tr><td><b>②</b></td><td><b class="g" data-g="tau">τ²<sub>지역×연도</sub></b></td><td>그 지역의 <b>그 해만의</b> 흔들림</td><td><b class="g" data-g="dstudy">줄지 않습니다</b></td></tr>
+<tr><td><b>③</b></td><td><b class="g" data-g="sigma">σ²</b>/<b class="g" data-g="neff">n<sub>eff</sub></b> (시그마 제곱)</td><td>어떤 900명이 뽑혔는가에 따른 <b>표본오차</b></td><td><b>줄어듭니다</b></td></tr>
+</table>
+
+<div class="calc"><b class="g" data-g="lambda">λ</b>(람다) =              ① 진짜 지역 차이
+        ──────────────────────────────────────────
+        ① 진짜 지역 차이 + ② 그 해의 흔들림 + ③ 표본오차</div>
+
+<p>이 λ가 <b>지역 신뢰도</b>입니다. 0에서 1 사이이고, <b>0.7 이상이면 순위를 매겨도 된다</b>는 것이 관행적 기준입니다.</p>
+
+<div class="aside">
+<p style="margin:0"><b>이 개념은 어디서 왔나.</b> 병원 성과평가 문헌에 <b class="g" data-g="rank">rankability(순위가능성)</b>라는 개념이 있습니다. 여러 병원의 사망률을 줄 세울 때 그 순위가 실력 차이인지 우연인지를 재는 지표인데, <b>λ와 수학적으로 같은 양</b>입니다. 이 연구는 그 개념을 <b>병원에서 시군구로</b> 옮겨 온 것입니다.</p>
+</div>
+
+<h3>② 총조사오차 — 조사 과정 전체를 오차의 지도로 본다</h3>
+
+<p><b class="g" data-g="tse">TSE(총조사오차)</b>는 조사에서 생길 수 있는 오차를 <b>발생 지점별로 지도처럼</b> 정리한 틀입니다. 문항이 개념을 제대로 담았는가, 응답자가 제대로 답했는가, 자료 처리에서 뭉개지지 않았는가, 표본이 모집단을 대표하는가, 무응답이 치우쳐 있지 않은가…</p>
+
+<p><b>이 연구에서의 쓸모.</b> 숙제 ③(누가 조사했는가)이 TSE에서는 <b>면접원 효과</b>라는 이름으로 이미 정리되어 있습니다. 그리고 나중에 보게 되겠지만, <b>무응답이 지역별로 치우친 문제</b>도 이 지도 위에 있습니다.</p>
+
+<h3>③ COSMIN — 국제 기준을 참고하되 그대로 쓰지는 않는다</h3>
+<p><b class="g" data-g="cosmin">COSMIN</b>은 보건 분야 측정도구 평가의 국제 합의 기준입니다. 빠뜨린 항목이 없는지 확인하는 체크리스트로 씁니다.</p>
+<p>다만 <b>그대로 쓸 수는 없습니다.</b> COSMIN은 전부 <b>개인 수준</b> 도구를 전제하기 때문입니다. <b>지역 수준 신뢰도라는 축은 COSMIN 바깥에 따로 있고, 이 확장 자체가 이 연구의 방법론적 기여점</b>이 됩니다.</p>
+
+<h3>④ MAUP — 답이 '시군구'라는 조건에 매여 있다는 자각</h3>
+<p><b class="g" data-g="maup">MAUP</b>는 <b>공간을 어떻게 구획하느냐에 따라 통계 결과가 달라지는</b> 문제입니다. 같은 자료를 시군구로 묶느냐 읍면동으로 묶느냐에 따라 분산도 상관도 달라집니다.</p>
+<p>따라서 이 연구의 모든 결론은 <b>"시군구 단위에서는"</b>이라는 단서가 붙습니다. 이것을 잊으면 "지역 차이가 없다"는 과잉 일반화를 하게 됩니다.</p>
+
+<h2>이 지점에서 세운 가설</h2>
+<table>
+<tr><th style="width:8%"></th><th>세운 가설</th></tr>
+<tr><td><b>H1</b></td><td>λ는 건강행태 문항에서 높고(0.7 이상), 정신·정서 문항에서 낮을 것이다(0.4 미만)</td></tr>
+<tr><td><b>H2</b></td><td>정신·정서 문항이 λ=0.7에 도달하려면 <b>현행의 2배 이상</b> 표본이 필요할 것이다</td></tr>
+<tr><td><b>H3</b></td><td>조사기관 수준 분산이 0이 아니며, 기관이 바뀐 시군구에서 <b>지표 불연속</b>이 관측될 것이다</td></tr>
+<tr><td><b>H4</b></td><td>주관적건강은 연령대·도농 간 <b class="g" data-g="dif">DIF</b>를 보일 것이다</td></tr>
+</table>
+<p class="aside" style="margin-top:6px">이 가설들이 실제로 어떻게 되었는지는 6막에서 답합니다. <b>세 군데에서 예상이 빗나갔고, 그 빗나감이 오히려 더 중요한 결과가 되었습니다.</b></p>
+<div class="act" id="a5"><div class="n">5막</div><div class="t">자료를 열어보니</div>
+<div class="s">분석을 시작하기 전에 여섯 번 멈춰 서야 했습니다</div></div>
+
+<h2>계획은 이랬습니다 — 자료 열고, λ 계산하고, 끝</h2>
+<p>그런데 자료를 열자마자 첫 번째 벽을 만났습니다. 그리고 그 뒤로 다섯 번 더 만났습니다.</p>
+<p><b>여섯 번 모두 공통점이 있습니다 — 겉으로는 아무 문제 없어 보였다는 점입니다.</b></p>
+
+<div class="scene">
+<div class="who">검증 1 · 어느 파일이 진짜인가</div>
+<p><b>상황.</b> 같은 연도 자료가 <b>세 가지 형태</b>로 있었습니다. 질병관리청 원본 텍스트, 267개 변수로 정리한 통합 CSV, 16개 변수만 뽑은 추출 CSV.</p>
+<p><b>왜 확인했나.</b> 선행 프로젝트에서 흡연 지표의 연도 간 상관(<b class="g" data-g="rho">ρ</b>)이 0.13으로 이상하게 낮게 나온 적이 있었습니다. 추적해 보니 <b>자료 처리 오류</b>였고, 고치니 0.73으로 회복됐습니다. <b>입력이 오염되면 결과가 조용히 틀린다</b>는 경험이 있었던 것입니다.</p>
+<p><b>발견.</b> 267개 변수 통합 CSV에서 <b>31개 변수의 값이 통째로 비어 있었습니다.</b> 교육수준, 혼인상태, EQ-5D, 행복감지수 — 매년 조사되는 항목들입니다. 고정 템플릿으로 뽑는 과정에서 누락된 것입니다.</p>
+<p style="margin-bottom:0"><b>결정.</b> 원본만 쓴다. <b>왜 중요한가</b> — 빠진 자료로 분석하면 그 결측이 <b>"그 해에 조사 안 함"으로 읽혀 ②(그 해의 흔들림)가 부풀려집니다.</b> 결과는 나오는데 틀린 결과가 나옵니다.</p>
+</div>
+
+<div class="scene">
+<div class="who">검증 2 · 어느 문항을 몇 번이나 쓸 수 있나</div>
+<p><b>왜 확인했나.</b> "4개년 자료가 있다"를 무심코 "모든 문항이 4번 조사됐다"로 읽고 있었습니다. 확인한 적이 없는 가정이었습니다.</p>
+<p><b>발견.</b> 1막에서 본 그 표입니다 — <b>300개 중 4개년 모두 있는 것은 122개뿐</b>. 자살생각은 2번. 그리고 더 고약한 것 하나 — <b>변수가 '존재'하는데 값이 전부 비어 있는</b> 경우가 있었습니다.</p>
+<p style="margin-bottom:0"><b>교훈.</b> <b>변수 목록을 보지 말고 실제 값을 세어라.</b> 목록에 이름이 있다고 자료가 있는 게 아닙니다.</p>
+</div>
+
+<div class="scene">
+<div class="who">검증 3 · 같은 변수명이 같은 측정인가</div>
+<p><b>왜 확인했나.</b> 선행 프로젝트에서 <b>"2023년 흡연 문항 스킵 구조가 바뀐 것을 놓쳐 2개 연도가 과대 산출된"</b> 전례가 있었습니다. 그런데 <b>정확히 무엇이 바뀐 것인지는 아무도 몰랐습니다.</b> "주의 사항"으로만 적혀 있었습니다.</p>
+<p><b>어떻게.</b> 2022~2025년 이용지침서 네 권을 펴 놓고 <b>문항 문장과 응답 보기를 글자 단위로 대조</b>했습니다. 공식 산출식(SAS 코드)도 비교했습니다.</p>
+<p><b>발견 — 정체를 찾았습니다.</b> 2023년에 <b>도입문항이 하나 신설</b>되었습니다.</p>
+<p style="margin-left:16px;background:#fff;padding:10px 14px;border:1px solid #e7e0d5"><b>smf_01z1</b> "지금까지 살아오는 동안 담배 제품을 사용하신 경험이 있습니까?"<br>→ ② 없다 라고 답하면 <b>흡연 영역 전체를 건너뜁니다</b></p>
+<p>서울 자료로 실측해 보니 이랬습니다.</p>
+<table style="background:#fff">
+<tr><th>연도</th><th class="n">"피운 적 없다" 응답</th><th class="n">비해당 처리</th><th class="n">현재흡연율</th></tr>
+<tr><td>2022</td><td class="n">15,062명</td><td class="n">—</td><td class="n">14.09%</td></tr>
+<tr><td><b>2023</b></td><td class="n"><b>49명</b></td><td class="n">14,556명</td><td class="n"><b>15.19%</b></td></tr>
+<tr><td>2024</td><td class="n">81명</td><td class="n">14,614명</td><td class="n">13.92%</td></tr>
+</table>
+<p style="margin-bottom:0">2022년에 15,062명이 답하던 자리가 2023년에 <b>49명</b>이 되었습니다. <b>문항에 답하는 사람들 자체가 바뀐 것</b>입니다. 이걸 모르고 2022년과 2023년 흡연율을 나란히 놓으면 <b>없는 변화를 있다고 하게 됩니다.</b><br><br>
+<b>추가 발견 둘.</b> 2025년에 PHQ-9 보기에 일수가 붙었고(① 전혀 아니다 <b>(0-1일)</b> …), 걷기 지표의 공식 계산식에서 결측 처리 분기가 사라졌습니다. <b>측정은 같은데 계산 규칙이 달라진 것</b>입니다.</p>
+</div>
+
+<div class="scene">
+<div class="who">검증 4 · 같은 코드가 같은 지역인가</div>
+<p><b>왜 확인했나.</b> 2024년에 행정구역 개편이 <b>세 건이나 겹쳤습니다.</b> 강원특별자치도, 전북특별자치도, 군위군 대구 편입. 게다가 부천시가 일반구를 다시 만들었습니다.</p>
+<p><b>왜 이게 치명적인가.</b> G-theory에서 '지역'은 4개년 내내 <b>같은 단위</b>여야 합니다. 코드가 바뀌면 같은 지역이 <b>두 개의 다른 지역으로 쪼개져</b>, ①이 부풀고 ②는 정의되지 않습니다.</p>
+<p><b>발견 — 그리고 오래된 수수께끼가 풀렸습니다.</b></p>
+<p>착수 문서에 <b>"선행 프로젝트에서 표준화 종속변수 33건 결측의 원인"</b>이라는 메모가 있었는데, <b>33이라는 숫자가 어디서 왔는지 아무도 몰랐습니다.</b></p>
+<p style="margin-left:16px;background:#fff;padding:10px 14px;border:1px solid #e7e0d5">강원 <b>18곳</b> (42xxx → 51xxx) &nbsp;+&nbsp; 전북 <b>15곳</b> (45xxx → 52xxx) &nbsp;=&nbsp; <b>33곳</b></p>
+<p style="margin-bottom:0">정확히 일치했습니다. 코드 변경을 반영하지 않은 채 외부 자료와 결합해 <b>33곳이 매칭에 실패</b>한 것이었습니다.<br><br>
+<b>그리고 더 고약한 것.</b> 파일 안에서 <b>시도코드와 시군구코드가 서로 다른 시점에 갱신</b>됩니다. 강원은 시군구코드만 51xxx로 바뀌고 시도코드는 42로 남았습니다. 군위는 <b>반대로</b> 시도코드가 먼저(2023년) 바뀌고 시군구코드는 나중(2024년)에 바뀌었습니다. <b>어느 한쪽만 믿으면 반드시 어딘가에서 틀립니다.</b></p>
+</div>
+
+<div class="scene">
+<div class="who">검증 5 · 조사가 지역마다 같은 품질로 이루어졌나 &nbsp;★</div>
+<p><b>왜 확인했나.</b> 이건 원래 계획에 없었습니다. 앞의 넷을 하고 나니 <b>"자료는 정리했는데, 그 자료를 만든 조사 자체는 지역마다 같았을까?"</b>라는 의문이 남았습니다.</p>
+<p><b>어떻게.</b> 응답 품질을 다섯 가지로 재어 시군구 × 연도 표로 만들었습니다. 항목무응답률, '모름' 선택률, 스킵 위반율, 직선응답 비율, <b>신장·체중 무응답률</b>.</p>
+<p><b>발견.</b> 넷은 깨끗했습니다. 그런데 다섯 번째가 이상했습니다.</p>
+<table style="background:#fff">
+<tr><th>확인한 것</th><th class="n">결과</th><th>뜻</th></tr>
+<tr><td>전국 무응답률</td><td class="n">0.3~0.5%</td><td>전체로는 문제없음</td></tr>
+<tr><td>시군구별 최댓값</td><td class="n"><b>15.9%</b></td><td>어떤 보건소는 6명 중 1명이 답을 안 함</td></tr>
+<tr><td>연도 간 상관</td><td class="n"><b>0.83</b></td><td><b>매년 같은 지역이 높음 — 우연이 아님</b></td></tr>
+<tr><td>고령화율과의 상관</td><td class="n">0.38</td><td>고령화로 설명 안 됨</td></tr>
+<tr><td>고령화 상위 8곳의 무응답률</td><td class="n">0~2.4%</td><td><b>오히려 낮음</b></td></tr>
+</table>
+<p style="margin-bottom:0">고령자가 많아서가 아니라면 남는 설명은 하나입니다 — <b>보건소마다 조사하는 방식이 다릅니다.</b> 어떤 곳은 키·몸무게를 꼭 받아 내고, 어떤 곳은 그냥 넘어갑니다.<br><br>
+<b>왜 이게 심각한가.</b> 이 차이가 <b>매년 반복되므로 ①(진짜 지역 차이)로 계산됩니다.</b> 조사 방식의 차이가 지역의 건강 차이로 둔갑하는 것입니다. 즉 <b>λ가 실제보다 높게 나옵니다.</b></p>
+</div>
+
+<div class="scene">
+<div class="who">검증 6 · 지금 가진 파일이 최신판인가</div>
+<p><b>왜 확인했나.</b> 이것도 계획에 없었습니다. <b>파이프라인이 멈추면서</b> 시작됐습니다. 2024년 시도별 파일 17개를 합치는데 전북 파일 하나가 변수 수가 달라 결합에 실패했습니다.</p>
+<p><b>부끄러운 대목.</b> 검증 1에서 "연도 내 파일들의 변수 구성이 같다"고 결론냈었습니다. 그런데 <b>그때 17개 중 6개만 대조했습니다.</b> 17번째에서 그 결론이 깨진 것입니다.</p>
+<p><b>발견.</b> 연구자께서 질병관리청 인증을 거쳐 재다운로드하니 <b>209개 변수</b>가 나왔습니다. 전북 파일과 같았습니다. 즉 <b>전북만 최신판이었고 나머지 16개가 구버전</b>이었습니다.</p>
+<p style="margin-bottom:0"><b>교훈.</b> 표본으로 대조하면 표본만큼만 압니다. <b>파일 수가 두 자리인 대조는 전수로 해야 합니다.</b><br><br>
+2022·2023년도 교체했고, 신·구 자료를 <b>응답자 한 명 단위까지 전수 대조</b>했습니다. 결과는 <b>추정치가 하나도 바뀌지 않았습니다.</b> 다만 2023년에서 군위군의 시도코드 869건이 소급 수정된 것을 발견했고, 그것이 검증 4의 결론을 강화했습니다.</p>
+</div>
+
+<div class="key">
+<p><b>여섯 검증이 남긴 것</b></p>
+<p>여섯 번 모두 <b>겉으로는 문제없어 보였습니다.</b> 파일은 열렸고, 변수는 있었고, 변수명은 같았고, 코드는 숫자였고, 응답은 채워져 있었고, 파일은 최신처럼 보였습니다.</p>
+<p style="margin-bottom:0">확인하지 않았다면 여섯 오류가 <b>모두 조용히 ① 또는 ②로 흡수</b>되어, <b>"지역 지표는 해마다 흔들린다"</b> 또는 <b>"이 지표는 지역 변별력이 높다"</b>는 <b>그럴듯한 결론</b>으로 이어졌을 것입니다. 그리고 그것이 틀렸다는 것을 아무도 몰랐을 것입니다.</p>
+</div>
+
+<div class="act" id="a6"><div class="n">6막</div><div class="t">분석 결과</div>
+<div class="s">그래서 무엇이 나왔나</div></div>
+
+<h2>먼저 저울을 검사했습니다</h2>
+<p>λ는 이 연구 전체를 지탱하는 숫자입니다. 그래서 <b>계산 방법 자체를 세 가지로 검증</b>했습니다.</p>
+<table>
+<tr><th style="width:26%">검증</th><th>방법</th><th>결과</th></tr>
+<tr><td><b>가짜 자료 시험</b></td><td><b>참값을 아는</b> 가짜 자료 300세트를 만들어 λ를 회수시켜 봄</td><td>편향 −0.003 ~ +0.002 <b>사실상 없음</b></td></tr>
+<tr><td><b>다른 방법과 대조</b></td><td><b class="g" data-g="reml">REML</b>과 <b>적률법</b>(더 단순한 대안) 결과 비교</td><td>전 지표 <b>2% 이내 일치</b></td></tr>
+<tr><td><b>산수 검산</b></td><td>추정된 성분으로 원래 관측값의 흩어짐이 재현되는지</td><td>대부분 2% 이내 재현</td></tr>
+</table>
+
+<h2>결과 ① — 흔들림의 구성</h2>
+<table>
+<tr><th>지표</th><th class="n">① 진짜 지역차</th><th class="n">② 그 해 흔들림</th><th class="n">③ 표본오차</th><th class="n">λ</th></tr>
+<tr><td>주관적건강 나쁨률</td><td class="n">91%</td><td class="n">3%</td><td class="n">6%</td><td class="n"><b>0.908</b></td></tr>
+<tr><td>걷기실천율</td><td class="n">79%</td><td class="n">18%</td><td class="n">3%</td><td class="n"><b>0.788</b></td></tr>
+<tr><td>현재흡연율</td><td class="n">73%</td><td class="n">3%</td><td class="n">24%</td><td class="n">0.725</td></tr>
+<tr><td>비만율</td><td class="n">70%</td><td class="n">5%</td><td class="n">25%</td><td class="n">0.700</td></tr>
+<tr><td>고위험음주율</td><td class="n">63%</td><td class="n">11%</td><td class="n">26%</td><td class="n">0.627</td></tr>
+<tr><td>자살생각률</td><td class="n">53%</td><td class="n">31%</td><td class="n">16%</td><td class="n">0.532</td></tr>
+<tr><td>미충족의료율</td><td class="n">52%</td><td class="n">37%</td><td class="n">11%</td><td class="n">0.524</td></tr>
+<tr><td>우울감 경험률</td><td class="n">47%</td><td class="n">34%</td><td class="n">19%</td><td class="n">0.473</td></tr>
+<tr><td>우울증상유병률(PHQ-9)</td><td class="n">43%</td><td class="n">32%</td><td class="n">25%</td><td class="n">0.428</td></tr>
+</table>
+<p><b>읽는 법.</b> 지표를 가르는 것은 <b>③(표본오차)이 아니라 ②(그 해의 흔들림)</b>입니다. 정신건강 지표들은 ②가 30~37%를 차지합니다.</p>
+
+<h2>결과 ② — 표본을 늘려도 안 되는 지표가 있다 &nbsp;★</h2>
+<p>우울감 경험률에서 표본을 늘려 봅니다. ③만 줄어듭니다.</p>
+<table>
+<tr><th></th><th class="n">현재 891명</th><th class="n">4배</th><th class="n">100배</th><th class="n">무한대</th></tr>
+<tr><td>① 진짜 지역 차이</td><td class="n">2.26</td><td class="n">2.26</td><td class="n">2.26</td><td class="n">2.26</td></tr>
+<tr><td>② 그 해의 흔들림</td><td class="n">1.60</td><td class="n">1.60</td><td class="n">1.60</td><td class="n"><b>1.60</b></td></tr>
+<tr><td>③ 표본오차</td><td class="n">0.91</td><td class="n">0.23</td><td class="n">0.01</td><td class="n">0</td></tr>
+<tr><td><b>λ</b></td><td class="n"><b>0.473</b></td><td class="n"><b>0.552</b></td><td class="n"><b>0.584</b></td><td class="n"><b>0.585</b></td></tr>
+</table>
+<div class="key">
+<p style="margin:0"><b>H2가 기각되었습니다 — 예상보다 강한 방향으로.</b> "2배가 필요할 것이다"라고 예상했는데, 실제로는 <b>몇 배가 되어도 안 됩니다.</b> 물통 바닥에 <b>막을 수 없는 구멍</b>이 이미 크게 뚫려 있기 때문입니다.<br><br>
+네 지표의 <b>천장값</b> — 자살생각 0.633 · 미충족의료 0.589 · 우울감 0.585 · PHQ-9 0.569.</p>
+</div>
+<p><b>그런데 방법이 있습니다.</b> <b class="g" data-g="pooling">4개년을 묶으면</b> ②도 함께 줄어듭니다. 해마다의 흔들림은 방향이 제각각이라 평균 내면 상쇄되기 때문입니다.</p>
+<table>
+<tr><th>지표</th><th class="n">단년</th><th class="n">4개년 묶으면</th></tr>
+<tr><td>우울감 경험률</td><td class="n">0.473</td><td class="n"><b>0.782</b></td></tr>
+<tr><td>우울증상유병률(PHQ-9)</td><td class="n">0.428</td><td class="n"><b>0.749</b></td></tr>
+<tr><td>미충족의료율</td><td class="n">0.524</td><td class="n"><b>0.815</b></td></tr>
+</table>
+<p><b>예산이 한 푼도 들지 않습니다.</b> 대가는 <b>"작년보다 나아졌는가"를 볼 수 없다는 것</b>입니다.</p>
+
+<h2>결과 ③ — λ가 높아도 순위는 못 믿는다 &nbsp;★★</h2>
+<p>이것은 <b>사전에 세운 어떤 가설에도 없던</b> 발견입니다.</p>
+<p>λ는 <b>250개 전체</b>를 놓고 신호와 잡음을 비교합니다. 그런데 순위는 <b>바로 옆 지역과</b> 비교해 정해집니다. 그리고 250개 시군구는 <b>가운데에 몰려</b> 있습니다.</p>
+<table>
+<tr><th>비만율 순위 구간</th><th class="n">지역 수</th><th class="n">값이 퍼진 폭</th></tr>
+<tr><td>1위 ~ 10위</td><td class="n">10곳</td><td class="n">3.86%p</td></tr>
+<tr><td><b>120위 ~ 130위</b></td><td class="n">11곳</td><td class="n"><b>0.28%p</b></td></tr>
+<tr><td>240위 ~ 250위</td><td class="n">11곳</td><td class="n">5.00%p</td></tr>
+</table>
+<div class="key">
+<p style="margin:0">비만율의 <b class="g" data-g="se">표준오차는 1.76%p</b>입니다. 그런데 <b>120~130위 11곳은 0.28%p 안에 몰려</b> 있습니다.<br>
+<b>저울의 흔들림이 그 11곳이 퍼진 폭의 6배입니다.</b> 눈금 하나 안에 11개 지역이 다 들어가 있으니 순서를 매길 수 없습니다.</p>
+</div>
+<table>
+<tr><th class="n">표에 적히는 순위</th><th>주관적건강 (λ=0.91)</th><th>비만율 (λ=0.70)</th><th>PHQ-9 (λ=0.43)</th></tr>
+<tr><td class="n">1위</td><td>1~20위</td><td>1~63위</td><td><b>1~212위</b></td></tr>
+<tr><td class="n">125위</td><td>75~196위</td><td><b>22~225위</b></td><td>11~242위</td></tr>
+<tr><td class="n">250위</td><td>230~250위</td><td>234~250위</td><td>89~250위</td></tr>
+</table>
+<p><b>구조가 보입니다.</b> λ가 높은 지표는 <b>양 끝만 식별</b>됩니다. λ가 중간이면 극단도 흔들립니다. λ가 낮으면 아무것도 식별되지 않습니다.</p>
+
+<h2>결과 ④ — 예상이 빗나간 세 곳</h2>
+<table>
+<tr><th style="width:8%"></th><th style="width:30%">예상</th><th>실제</th></tr>
+<tr><td><b>①</b></td><td>주관적건강은 <b>보고기준 차이</b> 때문에 중간 등급일 것</td><td><b>λ 0.908로 1위.</b> 사람마다 '보통'의 기준이 달라도 <b>지역 평균으로 묶으면 상쇄</b>되고 지역 차이가 살아남았습니다. <b>개인 수준 걱정이 지역 수준 결론으로 그대로 이어지지 않는다</b>는 실증입니다</td></tr>
+<tr><td><b>②</b></td><td>정신건강은 λ 0.4 미만(🔴)일 것</td><td><b>0.43~0.47로 0.4를 살짝 넘었습니다.</b> H1은 부분적으로만 지지되었습니다. 그런데 <b>결론은 오히려 강해졌습니다</b> — "λ가 낮다"보다 <b>"λ를 올릴 방법이 없다"</b>가 더 센 진술이기 때문입니다</td></tr>
+<tr><td><b>③</b></td><td>키·몸무게 무응답이면 <b>비만율</b>이 영향받을 것</td><td><b>비만율은 멀쩡했습니다</b>(상관 0.016). 대신 <b>주관적건강(0.42)과 걷기(−0.39)</b>가 걸렸습니다. 무응답률은 "키·몸무게를 안 받았다"기보다 <b>그 보건소의 전반적 꼼꼼함</b>을 나타내는 신호였던 것입니다. 통제하니 τ²<sub>지역</sub>이 각각 <b>18.6%, 15.8% 줄었습니다</b></td></tr>
+</table>
+<div class="q">
+<p style="margin:0"><b>③이 특히 중요합니다.</b> 하필 <b>λ가 가장 높은 두 지표</b>가 조사 품질과 얽혀 있었습니다. 논문에서 "가장 믿을 만한 지표"로 내세울 후보들이므로, <b>반드시 통제 결과를 함께 실어야 합니다.</b> 사전에 지목한 비만율만 검증하고 끝냈다면 이것을 놓쳤을 것입니다.</p>
+</div>
+<div class="act" id="a7"><div class="n">7막</div><div class="t">현장에 무엇을 말할 것인가</div>
+<div class="s">김 주무관에게 돌아갑니다</div></div>
+
+<h2>먼저 프롤로그의 질문에 답합니다</h2>
+
+<div class="scene">
+<div class="who">과장님의 질문 · "작년보다 나아진 거네? 뭐가 효과가 있었나?"</div>
+<p><b>답 —</b> 우울감 경험률 <b>193위 → 181위</b>의 12계단은 <b>성과로 볼 수 없습니다.</b></p>
+<p>이 지표의 λ는 0.473입니다. 중위권 지역의 순위 95% 구간은 <b>250개 중 226계단</b>입니다. 즉 이 지역의 '진짜 순위'는 <b>어디든 될 수 있습니다.</b> 12계단은 그 안에서 벌어진 요동이고, 사업 성과와 구분되지 않습니다.</p>
+<p style="margin-bottom:0"><b>대신 이렇게 보십시오.</b> 4개년 평균값(6.5%)과 전국 평균(6.9%)의 차이. 그리고 그 값이 4년에 걸쳐 <b>어느 방향으로</b> 움직였는지. 순위가 아니라 <b>값과 추세</b>입니다.</p>
+</div>
+
+<h2>등급표 — 어느 지표를 어떻게 쓸 것인가</h2>
+
+<p>이 연구의 최종 산출물입니다. 두 가지 원칙을 적용했습니다.
+<b>둘 다 결과를 보고 나서 정한 것</b>이며, 두 번째는 원래 계획을 뒤집은 것입니다.</p>
+
+<div class="key">
+<p><b>원칙 ① 등급은 λ의 '오차 아래쪽 끝'으로 매긴다</b></p>
+<p>λ 자체도 <b class="g" data-g="ci">추정치라 오차가 있습니다.</b> 비만율은 λ=0.700인데 진짜 값은 0.652~0.742 사이입니다.</p>
+<p style="margin-bottom:0">시험으로 치면 — <b>합격선 70점에 정확히 70.0점</b>을 받았는데 그 시험의 측정오차가 <b>±5점</b>입니다.
+<b>65점으로 보고 판정합니다.</b> 왜냐하면 🟢를 붙이면 담당자가 "이 지표는 써도 된다"고 읽고 예산을 쓰기 때문입니다.
+반대로 🟡을 붙였는데 사실 괜찮았다면 손해는 "좀 더 조심했다"에 그칩니다. <b>두 실수의 대가가 다릅니다.</b></p>
+</div>
+
+<div class="scene">
+<div class="who">원칙 ② 를 바꾼 이야기</div>
+<p>처음에 세운 두 번째 원칙은 이것이었습니다 — <b>"순위는 상·하위 극단에서만 말한다."</b>
+결과 ③에서 본 대로 양 끝은 순위를 말할 수 있고 가운데는 없으니, <b>자료가 허락하는 만큼만 말하자</b>는 뜻이었습니다.</p>
+<p>그런데 <b>"허락하는 만큼"이 정확히 얼마인지</b>를 세어보니 이야기가 달라졌습니다.</p>
+<div class="calc">상·하위 20% 소속이 95% 구간으로 확정되는 지역 (250곳 중)
+
+  주관적건강  21곳      걷기  5곳      흡연  5곳      비만  5곳
+  고위험음주   0곳
+  자살생각     0곳    미충족의료  0곳    우울감  0곳   PHQ-9  0곳</div>
+<p>혹시 <b>사분위(상위 25%·중상·중하·하위 25%)</b> 정도로 뭉뚱그리면 될까 싶어 다시 세었습니다.</p>
+<div class="calc">사분위 소속이 확정되는 지역 (250곳 중)
+
+  주관적건강  35곳      걷기  8곳      흡연  7곳      비만  6곳
+  고위험음주   1곳      정신건강 4개 지표 ─ 모두 <b>0곳</b></div>
+<p><b>가장 좋은 지표조차 250곳 중 215곳은 "어느 칸인지 모른다"였습니다.</b>
+극단만 표시하는 규칙을 쓰면 화면이 거의 빈 채로 남습니다.
+<b>원칙 ②는 실무적으로 성립하지 않았습니다.</b></p>
+</div>
+
+<h2>그래서 질문을 바꿨습니다</h2>
+
+<div class="q">
+순위도, 사분위도, 상·하위 20%도 안 되는 이유는 <b>셋 다 같은 것을 묻기 때문</b>입니다 —
+<b>"다른 249곳과 견주어 어디쯤인가?"</b><br><br>
+250개를 줄 세우려면 이웃한 지역들 사이의 <b>간격 하나하나가</b> 오차보다 커야 합니다. 그런 자료는 없습니다.<br><br>
+그런데 질문을 이렇게 바꾸면 어떨까요 — <b>"우리 지역은 전국 평균과 다른가?"</b><br>
+견줄 상대가 <b>249곳이 아니라 하나</b>입니다.
+</div>
+
+<p>세어봤습니다.</p>
+
+<div class="scene">
+<div class="who">같은 자료, 다른 질문</div>
+<table>
+<tr><th>지표</th><th class="n">λ</th><th class="n">사분위 확정</th><th class="n">전국 평균과 유의차</th></tr>
+<tr><td>주관적건강 나쁨률</td><td class="n">0.908</td><td class="n">35곳</td><td class="n"><b>174곳</b></td></tr>
+<tr><td>걷기실천율</td><td class="n">0.788</td><td class="n">8곳</td><td class="n"><b>101곳</b></td></tr>
+<tr><td>현재흡연율</td><td class="n">0.725</td><td class="n">7곳</td><td class="n"><b>91곳</b></td></tr>
+<tr><td>비만율(자가보고)</td><td class="n">0.700</td><td class="n">6곳</td><td class="n"><b>76곳</b></td></tr>
+<tr><td>고위험음주율</td><td class="n">0.627</td><td class="n">1곳</td><td class="n"><b>64곳</b></td></tr>
+<tr><td>연간 자살생각률</td><td class="n">0.532</td><td class="n">0곳</td><td class="n"><b>24곳</b></td></tr>
+<tr><td>연간 미충족의료율</td><td class="n">0.524</td><td class="n">0곳</td><td class="n"><b>42곳</b></td></tr>
+<tr><td>우울감 경험률</td><td class="n">0.473</td><td class="n">0곳</td><td class="n"><b>39곳</b></td></tr>
+<tr><td>우울증상유병률(PHQ-9)</td><td class="n">0.428</td><td class="n"><b>0곳</b></td><td class="n"><b>30곳</b></td></tr>
+</table>
+<p><b>사분위 확정이 0곳인 PHQ-9에서도 30곳은 "전국과 다르다"고 말할 수 있습니다.</b>
+같은 자료, 같은 오차입니다. <b>달라진 것은 질문뿐입니다.</b></p>
+</div>
+
+<h2>그 방법의 이름 — <span class="g" data-g="funnel">깔때기 도표</span></h2>
+
+<p>전국 평균선을 긋고, 그 위아래로 <b>"이 정도 흔들림은 우연일 수 있다"</b>는 띠를 두릅니다
+(<span class="g" data-g="limit">관리한계</span>).
+표본이 작은 지역은 우연히 크게 튈 수 있으니 띠가 넓고, 표본이 큰 지역은 좁습니다 —
+그래서 옆으로 누운 깔때기 모양이 됩니다.</p>
+
+<p>판정은 세 갈래뿐입니다.</p>
+<table>
+<tr><th style="width:22%">표시</th><th>뜻</th><th>담당자가 할 일</th></tr>
+<tr><td><b>유의하게 높음</b></td><td>전국 평균보다 확실히 나쁨</td><td>개입 검토</td></tr>
+<tr><td><b>주의 관찰</b></td><td>다를 가능성이 있으나 확실하지 않음</td><td>추이 관찰</td></tr>
+<tr><td><b>차이 있다고 말할 수 없음</b></td><td>판단할 근거 부족</td><td>지역 여건으로 따로 판단</td></tr>
+<tr><td><b>유의하게 낮음</b></td><td>전국 평균보다 확실히 좋음</td><td>유지</td></tr>
+</table>
+
+<p>선은 <b>두 겹</b>을 긋습니다. 바깥쪽(<b>99.8%</b>)이 빨간불, 안쪽(<b>95%</b>)이 노란불입니다.
+왜 95%만 쓰지 않느냐면 — <span class="g" data-g="multiple">250곳을 한꺼번에 비교</span>하면
+<b>실제로 아무 차이가 없어도 12~13곳은 우연히 걸리기</b> 때문입니다.
+빨간불이 예산과 평가로 이어지는 화면에서 그 정도 오탐은 감당할 수 없습니다.</p>
+
+<div class="key">
+<p><b>정리하면 — 원칙 ②는 이렇게 바뀌었습니다.</b></p>
+<p style="margin:8px 0"><b>바뀌기 전:</b> 순위는 상·하위 극단에서만 말한다<br>
+<b>바뀐 뒤:</b> <b>순위·분위를 어떤 형태로도 표시하지 않는다.</b> 대신 전국 평균과 견준다</p>
+<p style="margin-bottom:0">그리고 이건 <b>후퇴가 아닙니다.</b> 말할 수 있는 지역이 <b>0~35곳에서 24~174곳으로 늘었습니다.</b>
+포기한 것은 "몇 등인가"이고, 얻은 것은 "개입이 필요한가"입니다.
+<b>담당자가 실제로 알아야 하는 것은 후자입니다.</b></p>
+</div>
+
+<h2>등급의 새 역할</h2>
+<p>순위를 폐기했으니 등급(🟢🟡🔴)은 이제 <b>"순위 써도 된다는 허가증"이 아닙니다.</b>
+대신 <b>어느 시간 단위까지 말해도 되는지</b>를 정합니다.</p>
+
+<table>
+<tr><th style="width:10%">등급</th><th>말해도 되는 것</th><th>말하면 안 되는 것</th></tr>
+<tr><td><b>🟢</b></td><td>해마다의 평균 대비 위치 + <b>작년보다 나아졌는지</b></td><td>순위·분위</td></tr>
+<tr><td><b>🟡</b></td><td>해마다의 평균 대비 위치</td><td>순위·분위, <b>작년 대비 변화</b>
+<span class="meta">(해마다의 흔들림이 커서 변화의 상당 부분이 잡음)</span></td></tr>
+<tr><td><b>🔴</b></td><td><b>4개년을 묶은 값</b>의 평균 대비 위치</td><td>순위·분위, 단년 값, 변화</td></tr>
+</table>
+
+<table>
+<tr><th>지표</th><th class="n">λ</th><th>등급</th><th>현장에서 쓰는 법</th></tr>
+<tr><td>주관적건강 나쁨률</td><td class="n">0.908</td><td>🟢</td><td>전국 평균 대비 3구분 + 연도 간 변화 언급 가능. <b>250곳 중 174곳이 판정 가능</b></td></tr>
+<tr><td>걷기실천율</td><td class="n">0.788</td><td>🟢</td><td>동일. 단 <b>해마다 흔들림이 큰 편</b>(18%)이니 단년 변화는 신중히</td></tr>
+<tr><td>현재흡연율</td><td class="n">0.725</td><td>🟡</td><td>평균 대비 3구분만. <b>2022년과 2023년 이후는 비교 불가</b>(조사표 개정)</td></tr>
+<tr><td>비만율(자가보고)</td><td class="n">0.700</td><td>🟡</td><td>평균 대비 3구분만. 연도 간 변화 언급 금지</td></tr>
+<tr><td>고위험음주율</td><td class="n">0.627</td><td>🟡</td><td>동일. <b>표본을 1.6배로 늘리면 개선됩니다</b> — 유일하게 증원이 효과 있는 지표</td></tr>
+<tr><td>자살생각률</td><td class="n">0.532</td><td>🟡</td><td><b>2022·2024년만 조사</b>. 전년 대비 증감이라는 개념 자체가 없습니다</td></tr>
+<tr><td>미충족의료율</td><td class="n">0.524</td><td>🟡</td><td>평균 대비 3구분만. 4개년 평균 사용 시 λ 0.815로 개선</td></tr>
+<tr><td>우울감 경험률</td><td class="n">0.473</td><td>🟡</td><td>평균 대비 3구분만. 4개년 평균 사용 시 0.782</td></tr>
+<tr><td>우울증상유병률(PHQ-9)</td><td class="n">0.428</td><td><b>🔴</b></td><td><b>4개년을 묶은 값으로만</b> 평균 대비 3구분. 단년 값 표시 금지</td></tr>
+</table>
+
+<div class="scene">
+<div class="who">화면에 붙일 문장 하나</div>
+<p>이 방식에는 <b>반드시 함께 띄워야 하는 안내문</b>이 있습니다. PHQ-9은 250곳 중 220곳이
+"차이 없음" 또는 "주의"로 분류되는데, 안내가 없으면 담당자가
+<b>"우리는 아무것도 안 해도 되는구나"</b>로 읽어 버리기 때문입니다.</p>
+<p style="margin-left:16px"><b>"'차이 있다고 말할 수 없음'은 '문제가 없음'이 아닙니다.
+이 조사의 표본 규모로는 우리 지역이 전국 평균과 다른지 판단할 근거가 부족하다는 뜻입니다.
+지역 여건에 따른 사업 필요성은 별도로 판단하십시오."</b></p>
+</div>
+
+<h2>시군구에 제안하는 네 가지</h2>
+
+<h4>제안 ① 성과지표 체계를 손봅니다</h4>
+<ul>
+<li>정신건강 지표의 <b>"전국 ○위 달성"</b> 형태 목표를 <b>삭제</b>합니다. 달성 여부를 판정할 방법이 없습니다</li>
+<li>대신 ㈎ 4개년 이동평균의 <b>추세 방향</b> ㈏ 신뢰구간을 포함한 <b>전국 대비 위치</b> ㈐ 행정통계 기반 <b>대체지표</b>로 바꿉니다</li>
+<li><b>격년 지표는 성과지표 목록에서 뺍니다</b></li>
+<li><b>조사표가 바뀐 해나 행정구역이 개편된 해를 걸치는 목표치는 세우지 않습니다</b></li>
+<li>🟢 등급 지표라도 <b>"○위 달성" 목표는 세우지 않습니다</b> — 순위 자체를 표시하지 않기로 했으니까요. 대신 <b>"전국 평균 대비 유의하게 높음 → 차이 없음"</b> 같은 형태로 목표를 세웁니다</li>
+</ul>
+
+<h4>제안 ② 다개년 통합을 기본으로</h4>
+<p>4개년을 묶으면 정신건강 지표의 λ가 <b>0.43 → 0.75</b>로 오릅니다. <b>추가 예산이 전혀 들지 않습니다.</b></p>
+<p><b>단, 대가를 명시해야 합니다</b> — 4개년 평균이므로 <b>연간 변화를 볼 수 없습니다.</b> 이것은 "연간 성과 평가를 포기하고 지역 비교를 얻는" 맞바꿈입니다. 그 선택을 담당자가 알고 해야 합니다.</p>
+
+<h4>제안 ③ 보완조사는 대상을 가려서</h4>
+<div class="q">
+<p style="margin:0"><b>이것이 D-study의 실무적 값어치입니다.</b><br>
+표본을 늘려 효과가 있는 지표는 <b>고위험음주(1.6배)뿐</b>입니다.<br>
+정신건강 지표는 <b>보완조사로 해결되지 않으므로 예산을 쓰지 않습니다.</b><br><br>
+"정확도가 낮으니 조사를 늘리자"는 자연스러운 판단이 <b>이 경우에는 헛돈</b>이라는 것을 숫자로 보일 수 있습니다.</p>
+</div>
+
+<h4>제안 ④ 조사 발주 사양서를 고칩니다</h4>
+<ul>
+<li>조사원 교육 이수·면접 방식·조사 기간을 <b>사양서에 명시</b>하고 기록을 보관</li>
+<li><b>신장·체중 등 신체계측 문항의 무응답률을 품질 지표로 계약에 넣습니다.</b> 이 값이 보건소별로 최대 15.9%까지 벌어지고 해마다 반복된다는 것이 확인되었습니다</li>
+<li><b>측정 재검사를 도입합니다</b> — 표본 5%, 7~14일 뒤, 핵심 문항 10~15개. <b>응답자에게 이전 답을 알려 주지 않는 것이 결정적</b>입니다. 지금의 '재조사'는 조사원이 갔는지만 확인합니다</li>
+</ul>
+
+<h2>중앙(질병관리청)에 제안하는 다섯 가지</h2>
+<p>모두 <b>추가 조사 부담이 없고</b>, 이미 내부에 있거나 계산 가능한 정보를 정리해 공개하는 것만으로 충족됩니다.</p>
+<table>
+<tr><th style="width:8%"></th><th style="width:34%">제안</th><th>근거가 된 경험</th></tr>
+<tr><td><b>①</b></td><td>성과지표로 지정된 항목은 <b>매년 조사</b>하거나, 격년임을 공표 자료에 명시</td><td>자살생각이 격년인데 지자체는 연간 변화를 성과로 보고합니다</td></tr>
+<tr><td><b>②</b></td><td><b>조사표 변경 이력표</b>를 원시자료와 함께 배포</td><td>2023년 흡연 도입문항 신설을 찾는 데 지침서 네 권을 글자 단위로 대조해야 했습니다</td></tr>
+<tr><td><b>③</b></td><td><b>행정구역 코드 대응표</b> 동봉. 시도코드와 시군구코드의 <b>갱신 시점이 다르다는 점</b>도 명시</td><td>33곳 결측의 원인이 이것이었고, 원시자료 어디에도 표기가 없었습니다</td></tr>
+<tr><td><b>④</b></td><td><b>배포본 버전 관리</b> — 파일에 버전·배포일 표기, 재배포 시 변경 내역 공지</td><td>17개 파일 중 16개가 구버전인 것을 결합이 실패하고 나서야 알았습니다</td></tr>
+<tr><td><b>⑤</b></td><td><b>응답 품질 지표</b>(무응답률·스킵 위반율 등)를 시군구별로 공표</td><td>원시자료에서 계산 가능한데 공표되지 않아, 이용자가 지역 차이를 해석할 방법이 없습니다</td></tr>
+</table>
+
+<div class="act" id="a8"><div class="n">8막</div><div class="t">먼저 온 사람들</div>
+<div class="s">이 질문에 먼저 답한 연구들 — 그리고 그들이 남긴 것</div></div>
+
+<h2>먼저 온 사람들</h2>
+
+<div class="scene">
+<div class="who">검증 7 · 정말 아무도 안 했을까</div>
+<p>여기까지 오고 나서 당연히 들어야 할 질문이 하나 남았습니다.</p>
+<p style="margin-left:16px"><b>"이걸 정말 아무도 안 해봤을까?"</b></p>
+<p>연구에서 이 질문을 미루면 위험합니다. 논문을 다 써서 투고한 뒤에 심사자가
+"이미 나온 얘기 아닌가요"라고 물으면, 그때는 손쓸 방법이 없습니다.
+그래서 KCI·Google Scholar·PubMed·ScienceON을 뒤졌습니다.</p>
+<p><b>있었습니다. 두 편이나.</b></p>
+</div>
+
+<h2>1. 16년 전의 경고 — 권근용 등 (2010)</h2>
+
+<p>2010년 <b>예방의학회지</b>에 실린 논문입니다. 제목은
+「지역 간 건강수준 비교를 위한 표준화율 적용의 적절성 평가」.
+자료는 <b>지역사회건강조사 2008년</b>, 우리와 같은 조사입니다.</p>
+
+<p>그들이 던진 질문은 우리와 조금 달랐습니다. 지역 간 건강수준을 비교할 때는
+<b>연령 구성이 다른 것을 보정</b>해야 합니다. 노인이 많은 군은 당연히 유병률이 높게 나오니까요.
+이 보정에는 <b>직접표준화</b>와 <b>간접표준화</b> 두 가지 방법이 있는데 — 어느 쪽을 쓰느냐에 따라
+결과가 달라지지 않을까? 그것이 그들의 질문이었습니다.</p>
+
+<div class="scene">
+<div class="who">그들이 발견한 것</div>
+<p>31개 지표에 대해 두 방법을 다 돌려 비교했습니다. 결과는 <b>겉보기에는 안심되는 것</b>이었습니다 —
+31개 중 <b>29개 지표에서 두 방법의 상관이 0.9 이상</b>. 거의 같은 답이 나온 셈입니다.</p>
+<p>그런데 그들은 한 걸음 더 들어갔습니다. <b>"사분순위가 바뀌는 지역이 몇 개인가"</b>를 세어본 것입니다.</p>
+<div class="calc">상관계수                     :  0.9 이상 (29/31개 지표)
+그런데 사분순위가 바뀐 지역 :  <b>지표당 평균 30~40곳</b></div>
+<p>전체적으로는 거의 같은데, <b>개별 지역의 등급은 계산 방법 하나만 바꿔도 30~40곳이 뒤바뀌었습니다.</b></p>
+<p>결론은 이랬습니다 — <b>"순위가 아닌, 범주화되고 대략적인 비교"</b>를 하라.</p>
+</div>
+
+<div class="key">
+<p style="margin:0"><b>이것을 처음 읽었을 때의 감정을 정직하게 적어 둡니다.</b><br>
+반가움 반, 낭패 반이었습니다. <b>우리가 지금 도달한 결론을 16년 전에 누군가 이미 냈습니다.</b>
+그것도 같은 조사, 같은 학술지 급, 같은 정책 대상에 대해서.</p>
+</div>
+
+<h2>2. 그런데 왜 아무것도 안 바뀌었을까</h2>
+
+<p>낭패감이 가라앉고 나서 든 생각은 이것이었습니다.</p>
+
+<div class="q">
+<b>2010년에 예방의학회지에 "순위 매기지 마라"는 논문이 실렸는데,<br>
+2026년 현재 시군구 순위표는 여전히 만들어지고 있습니다. 왜일까요?</b>
+</div>
+
+<p>답은 그 논문을 다시 읽으면 보입니다. 그들의 권고는
+<b>"범주화되고 대략적인 비교를 하라"</b>였습니다. 옳은 말입니다. 그런데 —</p>
+
+<ul>
+<li>"범주화"는 <b>몇 개 칸</b>으로 나누라는 것인지</li>
+<li>어느 지표는 되고 어느 지표는 안 되는지</li>
+<li>"대략적"이라는 것을 <b>화면에 어떻게 그리라</b>는 것인지</li>
+</ul>
+
+<p>아무것도 정해져 있지 않습니다. 담당자가 월요일 아침에 <b>따를 수 있는 규칙이 없습니다.</b>
+그래서 경고는 논문에 남고, 순위표는 현장에 남았습니다.</p>
+
+<div class="key">
+<p style="margin:0"><b>여기서 이 연구의 자리가 정해집니다.</b><br>
+우리는 <b>새로운 문제를 발견한 것이 아닙니다.</b> 알려진 문제에
+<b>지표별 숫자와 실행 가능한 규칙</b>을 붙이는 것입니다.<br><br>
+그리고 실제로 우리 자료는 한 걸음 더 나갑니다 —
+권근용 등이 권고한 <b>사분위 범주조차</b>, 우리 실측으로는
+250개 시군구 중 <b>0~35곳만 확정</b>됩니다(정신건강 4개 지표는 <b>0곳</b>).
+<b>범주화만으로는 부족합니다.</b> 비교 기준점 자체를 249곳에서
+<b>전국 평균 하나</b>로 바꾸어야 합니다. 그것이 <span class="g" data-g="funnel">깔때기 도표</span>입니다.</p>
+</div>
+
+<h2>3. 개인 쪽 문은 이미 열려 있었다 — Kim 등 (2015)</h2>
+
+<p>두 번째 논문은 성격이 전혀 다릅니다.
+<i>Epidemiology and Health</i> 2015년,
+「Test-retest reliability of health behavior items in the Community Health Survey」.</p>
+
+<p>기억하실 것입니다. 「기초적 설명_분기」에서 <b>'사람 단위' 갈래</b>로 들어가면 나오던 이야기 —
+같은 사람에게 두 번 물어 <span class="g" data-g="kappa">κ(카파)</span>를 재는 <b>재검사 신뢰도</b>.
+<b>그것을 실제로 한 사람들이 있었습니다.</b></p>
+
+<div class="scene">
+<div class="who">그들이 한 것</div>
+<p>159명을 모아 <b>14~21일 간격</b>으로 같은 문항을 다시 물었습니다.
+건강행태 <b>28개 문항</b> — 흡연 5, 음주 4, 안전 2, 신체활동 5, 식생활·체중 4, 정신건강 8개.</p>
+<div class="calc">κ 범위          :  0.44 ~ 0.93
+습관 관련 문항  :  평균 0.70   ← "담배 피우십니까"
+인식·태도 문항  :  더 낮음     ← "건강하다고 생각하십니까"
+                              (차이 p = 0.012)</div>
+<p><b>습관을 묻는 문항이 생각을 묻는 문항보다 안정적이었습니다.</b>
+당연해 보이지만, 숫자로 확인된 것과 그렇지 않은 것은 다릅니다.</p>
+</div>
+
+<div class="q">
+이 결과를 우리 연구에 대입해 보십시오. 우리가 <span class="g" data-g="lambda">λ</span>가 가장 낮게 나온
+지표로 꼽은 것이 <b>PHQ-9·우울감·자살생각</b> — 즉 <b>생각과 감정을 묻는 문항들</b>이었습니다.
+Kim 등이 개인 수준에서 본 것과 <b>같은 방향</b>입니다.<br><br>
+전혀 다른 두 방법이 같은 쪽을 가리키고 있습니다. 이건 서로에게 힘이 됩니다.
+</div>
+
+<p>다만 이 논문에는 두 가지 한계가 있고, 그 한계가 <b>정확히 우리 자리</b>입니다.</p>
+
+<table>
+<tr><th style="width:24%">Kim 등 (2015)</th><th>우리</th></tr>
+<tr><td>159명, 한 지역 편의표본</td><td><b>250개 시군구 전수, 4개년</b></td></tr>
+<tr><td>사람이 두 번 같게 답하는가</td><td><b>지역 평균이 지역끼리 구별되는가</b></td></tr>
+<tr><td>κ — 개인 수준</td><td>λ — <b>지역 수준</b></td></tr>
+<tr><td colspan="2" class="meta">두 축은 서로를 대체하지 않습니다. κ가 높아도 지역 평균은 구별이 안 될 수 있고, 그 반대도 가능합니다.
+「기초적 설명_분기」에서 두 갈래를 다 본 뒤 나타나던 <b>"두 갈래가 만나는 곳"</b>이 바로 이 표입니다.</td></tr>
+</table>
+
+<h2>4. 그래서 정리하면</h2>
+
+<table>
+<tr><th style="width:16%">　</th><th>이미 있던 것</th><th>없던 것 = 우리 자리</th></tr>
+<tr><td><b>지역 축</b></td><td>권근용 등 (2010) — 표준화 <b>방법 선택</b>이 순위를 흔든다.
+"대략적으로 비교하라"</td><td><b>표본오차와 연도 변동</b>이 얼마나 흔드는지 <b>지표별 수치</b>.
+그리고 "대략적"을 <b>실행 규칙</b>으로 번역</td></tr>
+<tr><td><b>개인 축</b></td><td>Kim 등 (2015) — 159명 재검사 κ 0.44~0.93</td>
+<td>전국 규모 · <b>3편</b>이 이어받을 자리</td></tr>
+<tr><td><b>방법</b></td><td>—</td><td><span class="g" data-g="gtheory">일반화가능도이론</span>을
+국내 소지역 건강지표에 적용한 사례는 <b>찾지 못했습니다</b>.
+<span class="g" data-g="complex">복합표본</span> 설계기반 오차를 <b>알려진 값으로 넣고</b>
+τ²를 <span class="g" data-g="reml">REML</span> 추정한 국내 연구도 없었습니다</td></tr>
+</table>
+
+<div class="key">
+<p style="margin:0"><b>표현을 바꾸기로 했습니다.</b><br>
+설계서 5판까지는 <b>"국내 최초"</b>라는 취지로 써 두었습니다. 그건 이제 사실이 아닙니다.<br>
+정확한 표현은 이것입니다 — <b>"선행이 없는 것이 아니라, 선행이 닿지 않은 축이 있다."</b></p>
+</div>
+
+
+<h2>에필로그</h2>
+<div class="scene">
+<p>김 주무관은 이제 과장님께 이렇게 답할 수 있습니다.</p>
+<p style="margin-left:16px"><b>"12계단은 성과로 보기 어렵습니다. 이 지표는 순위 자체가 오차 범위 안에서 크게 움직입니다.<br>
+애초에 순위표를 보지 않는 편이 낫습니다 — 250곳 중 사분위 소속조차 확정되는 곳이 한 곳도 없는 지표입니다.<br>
+대신 이렇게 보고드리겠습니다. 4개년 평균으로 우리 시는 8.6%, 전국 평균은 6.9%입니다.<br>
+차이가 오차보다 큽니다 — <b>'주의 관찰'</b> 구간입니다. 우연이라고 넘기기는 어렵습니다.<br>
+그리고 이 지표는 조사 인원을 늘려도 정확해지지 않습니다. 4개년 평균을 공식 지표로 쓰는 편이 낫습니다."</b></p>
+<p style="margin-bottom:0">이 답을 할 수 있게 되는 것 — 그것이 이 연구의 목적이었습니다.</p>
+</div>
+
+<div class="q">
+<p style="margin:0"><b>한 줄로 요약하면</b><br><br>
+<b>지금은 "조사를 했는가"만 확인하고 "제대로 쟀는가"는 확인하지 않습니다.</b><br>
+그리고 그 확인 없이 만들어진 순위로 예산이 움직입니다. 이 연구는 그 순위 옆에 <b>"여기까지만 믿으십시오"라는 선</b>을 긋는 일입니다.</p>
+</div>
+
+<h2 id="gloss">부록. 용어 사전 — 눌러 보십시오</h2>
+<p>이 문서와 「기초적 설명_분기」에 나오는 용어 전체입니다. 각 항목을 누르면 <b>읽는 법 · 통계에서의 뜻 · 이 연구에서의 쓰임</b>이 뜹니다.</p>
+<div style="line-height:2.8;background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:18px 22px">
+<span class="g" data-g="lambda">λ</span>
+<span class="g" data-g="tau">τ²</span>
+<span class="g" data-g="sigma">σ²</span>
+<span class="g" data-g="alpha">α</span>
+<span class="g" data-g="kappa">κ</span>
+<span class="g" data-g="rho">ρ</span>
+<span class="g" data-g="mu">μ</span>
+<span class="g" data-g="hat">p̂</span>
+<span class="g" data-g="variance">분산</span>
+<span class="g" data-g="se">표준오차</span>
+<span class="g" data-g="ci">신뢰구간 · 부트스트랩</span>
+<span class="g" data-g="ctt">고전검사이론</span>
+<span class="g" data-g="gtheory">일반화가능도 이론</span>
+<span class="g" data-g="gstudy">G-study</span>
+<span class="g" data-g="dstudy">D-study</span>
+<span class="g" data-g="rank">rankability</span>
+<span class="g" data-g="icc">ICC</span>
+<span class="g" data-g="deff">deff</span>
+<span class="g" data-g="neff">n_eff</span>
+<span class="g" data-g="complex">복합표본설계</span>
+<span class="g" data-g="eb">EB 수축</span>
+<span class="g" data-g="reml">REML</span>
+<span class="g" data-g="irt">IRT</span>
+<span class="g" data-g="grm">GRM</span>
+<span class="g" data-g="invar">측정동일성</span>
+<span class="g" data-g="dif">DIF</span>
+<span class="g" data-g="vignette">앵커링 비네트</span>
+<span class="g" data-g="tse">TSE</span>
+<span class="g" data-g="cosmin">COSMIN</span>
+<span class="g" data-g="maup">MAUP</span>
+<span class="g" data-g="pooling">pooling</span>
+<span class="g" data-g="kendall">켄달 타우</span>
+<span class="g" data-g="mde">MDE</span>
+<span class="g" data-g="crossclass">교차분류 다층모형</span>
+<span class="g" data-g="event">이벤트 스터디</span>
+<span class="g" data-g="prereg">사전등록</span>
+<span class="g" data-g="funnel">깔때기 도표</span>
+<span class="g" data-g="limit">관리한계</span>
+<span class="g" data-g="multiple">다중비교 문제</span>
+<span class="g" data-g="league">순위표</span>
+<span class="g" data-g="singleton">단일 표본지점 층</span>
+</div>
+
+<h3>그리스 문자 읽는 법 — 한눈에</h3>
+<table>
+<tr><th style="width:12%">기호</th><th style="width:24%">읽는 법</th><th>이 연구에서</th></tr>
+<tr><td style="font-size:14pt"><b>&#955;</b></td><td><b>람다</b> &middot; lambda</td><td>지역 신뢰도. 이 연구의 주인공</td></tr>
+<tr><td style="font-size:14pt"><b>&#964;&sup2;</b></td><td><b>타우 제곱</b> &middot; tau squared</td><td>지역 분산성분</td></tr>
+<tr><td style="font-size:14pt"><b>&#963;&sup2;</b></td><td><b>시그마 제곱</b> &middot; sigma squared</td><td>표본오차 분산</td></tr>
+<tr><td style="font-size:14pt"><b>&#956;</b></td><td><b>뮤</b> &middot; mu</td><td>그 해의 전국 평균</td></tr>
+<tr><td style="font-size:14pt"><b>&#945;</b></td><td><b>알파</b> &middot; alpha</td><td>크론바흐 알파 (내적 일관성)</td></tr>
+<tr><td style="font-size:14pt"><b>&#969;</b></td><td><b>오메가</b> &middot; omega</td><td>맥도날드 오메가 (&#945;의 개선판)</td></tr>
+<tr><td style="font-size:14pt"><b>&#954;</b></td><td><b>카파</b> &middot; kappa</td><td>재검사 일치도</td></tr>
+<tr><td style="font-size:14pt"><b>&#961;</b></td><td><b>로</b> &middot; rho</td><td>상관계수</td></tr>
+<tr><td style="font-size:14pt"><b>&#916;</b></td><td><b>델타</b> &middot; delta</td><td>차이 (&#916;CFI = CFI의 변화량)</td></tr>
+<tr><td style="font-size:14pt"><b>&#931;</b></td><td><b>시그마</b>(대문자) &middot; sigma</td><td>"모두 더하라". &#963;&sup2;와 전혀 다른 기호입니다</td></tr>
+<tr><td style="font-size:14pt"><b>p&#770;</b></td><td><b>피 햇</b> &middot; p-hat</td><td>자료에서 추정한 비율 (참값이 아님)</td></tr>
+<tr><td style="font-size:14pt"><b>x&#772;</b></td><td><b>엑스 바</b> &middot; x-bar</td><td>표본 평균</td></tr>
+</table>
+
+<p style="color:#57534e;font-size:10pt;margin-top:40px">막히는 막(幕)이 있으면 번호만 알려 주십시오. 그 대목을 더 잘게 나눠 다시 쓰겠습니다.</p>
+
+<style>
+/* ───────── 어두운 화면 ───────── */
+[data-theme="dark"]{
+  --ink:#ece7e0; --ink2:#c6bdb2; --mut:#948a80; --line:#3b352e;
+  --bg:#14120f; --card:#1e1b17;
+  --blue:#6fb4ec; --blue-l:#17293a;
+  --amber:#e0a154; --amber-l:#2c2317;
+  --amb:#e0a154;   --amb-l:#2c2317;
+  --brown:#cfae87;
+  color-scheme:dark;
+}
+[data-theme="dark"] body{background:#14120f;color:#ece7e0}
+[data-theme="dark"] strong,[data-theme="dark"] b{color:#fbf7f2}
+[data-theme="dark"] h1{color:#f4efe8}
+[data-theme="dark"] h2{color:#6fb4ec}
+[data-theme="dark"] h3{color:#ece7e0}
+[data-theme="dark"] h4{color:#e0a154}
+
+/* 표 */
+[data-theme="dark"] th{background:#262119;color:#d8cfc4;border-color:#4a433a}
+[data-theme="dark"] td{border-bottom-color:#332e28}
+[data-theme="dark"] tbody tr:nth-child(even) td,
+[data-theme="dark"] table tr:nth-child(even) td{background:#1a1714}
+[data-theme="dark"] table{background:#1e1b17;border-color:#3b352e}
+[data-theme="dark"] caption{color:#ece7e0}
+
+/* 강조 블록 */
+[data-theme="dark"] .q{background:#17293a}
+[data-theme="dark"] .q b{color:#9ccbf0}
+[data-theme="dark"] .key{background:#2c2317;border-left-color:#e0a154}
+[data-theme="dark"] .aside{background:#201d19}
+[data-theme="dark"] .calc{background:#1c1916;border-color:#3b352e}
+[data-theme="dark"] .scene{background:#1d1a15;border-color:#3a332a}
+[data-theme="dark"] .scene .who{border-bottom-color:#3a332a;color:#cfae87}
+[data-theme="dark"] .term{background:#23282e;border-color:#3b352e;color:#c6bdb2}
+[data-theme="dark"] .toc{background:#1e1b17;border-color:#3b352e}
+[data-theme="dark"] .meta{color:#948a80}
+[data-theme="dark"] .yes{color:#6ec98a}
+[data-theme="dark"] .no{color:#f08a84}
+[data-theme="dark"] code,[data-theme="dark"] pre{background:#211e1a;color:#ddd5cb}
+[data-theme="dark"] pre{border-left-color:#3b352e}
+
+/* 막 표지·분기 (Story·분기판) */
+[data-theme="dark"] .act{background:linear-gradient(100deg,#0e4573,#155e9c);box-shadow:0 3px 14px rgba(0,0,0,.45)}
+[data-theme="dark"] .fork button{background:#1e1b17;border-color:#3b352e;color:#ece7e0}
+[data-theme="dark"] .fork button:hover{border-color:#6fb4ec;box-shadow:0 4px 16px rgba(111,180,236,.18)}
+[data-theme="dark"] .fork button .s{color:#c6bdb2}
+[data-theme="dark"] .switch{background:rgba(20,18,15,.96);border-bottom-color:#3b352e}
+[data-theme="dark"] .switch button{background:#1e1b17;border-color:#3b352e;color:#c6bdb2}
+[data-theme="dark"] .switch button.cur{background:#155e9c;color:#fff;border-color:#155e9c}
+[data-theme="dark"] .switch button.cur.b{background:#b06a10;border-color:#b06a10}
+[data-theme="dark"] .hdA{background:#17293a}
+[data-theme="dark"] .hdB{background:#2c2317}
+
+/* 용어 팝업 */
+[data-theme="dark"] .g:hover{background:#1d3348}
+[data-theme="dark"] #ov{background:rgba(0,0,0,.68)}
+[data-theme="dark"] #pop{background:#221e1a;box-shadow:0 18px 60px rgba(0,0,0,.6)}
+[data-theme="dark"] #pop .x{color:#7d746b}
+[data-theme="dark"] #pop .x:hover{color:#ece7e0}
+[data-theme="dark"] #pop .easy{background:#1f1b16}
+[data-theme="dark"] #pop .use{background:#17293a}
+
+/* 설계서(6판) 전용 */
+[data-theme="dark"] .rule{background:#201c17;border-left-color:#b08a55}
+[data-theme="dark"] .new{background:#221e12;border-left-color:#d97706}
+[data-theme="dark"] .note{background:#1b1f24;border-left-color:#7d8896}
+[data-theme="dark"] div[style*="#eef4fa"]{background:#16202b !important;border-left-color:#6fb4ec !important}
+[data-theme="dark"] div[style*="#f7fafd"]{background:#16202b !important;border-left-color:#6fb4ec !important;border-color:#2b3f52 !important}
+[data-theme="dark"] [style*="color:#b45309"]{color:#e0a154 !important}
+[data-theme="dark"] [style*="color:#d97706"]{color:#e0a154 !important}
+[data-theme="dark"] [style*="color:#57534e"],[data-theme="dark"] [style*="color:#78716c"],
+[data-theme="dark"] [style*="color:#7a716b"]{color:#948a80 !important}
+[data-theme="dark"] [style*="color:#b91c1c"]{color:#f08a84 !important}
+[data-theme="dark"] [style*="background:#fff"]{background:#1e1b17 !important;border-color:#3b352e !important}
+
+/* 1편 원고 전용 */
+[data-theme="dark"] .abs{background:#1e1b17;border-color:#3b352e}
+[data-theme="dark"] .abs h4{color:#c6bdb2}
+[data-theme="dark"] .kw{border-top-color:#332e28}
+[data-theme="dark"] .eq{background:#1c1916;border-color:#3b352e;border-left-color:#cfae87}
+[data-theme="dark"] .tnote{color:#948a80}
+[data-theme="dark"] figcaption{color:#c6bdb2}
+[data-theme="dark"] figcaption b{color:#f4efe8}
+[data-theme="dark"] .todo{background:#2a2214;border-color:#6b5636;color:#e3b877}
+[data-theme="dark"] .todo b{color:#f4cf95}
+[data-theme="dark"] #help{background:#1e1b17;border-color:#3b352e;color:#c6bdb2}
+[data-theme="dark"] body.help #help{background:#155e9c;color:#fff;border-color:#155e9c}
+
+/* 그림은 색을 건드리지 않는다 — 어두운 바탕 위에 흰 종이처럼 얹는다 */
+[data-theme="dark"] figure img,[data-theme="dark"] img{
+  background:#fff;padding:8px;border-radius:8px;border-color:#3b352e}
+
+/* ───────── 테마 단추 ───────── */
+#thm{position:fixed;left:16px;bottom:16px;z-index:80;cursor:pointer;
+  font-family:'Pretendard','Malgun Gothic','맑은 고딕',-apple-system,sans-serif;
+  font-size:13px;font-weight:600;letter-spacing:-.01em;
+  border:1px solid var(--line,#ded7cf);background:var(--card,#fff);
+  color:var(--ink2,#4a4440);border-radius:24px;padding:9px 16px;
+  box-shadow:0 3px 14px rgba(0,0,0,.14);transition:.15s;line-height:1}
+#thm:hover{border-color:var(--blue,#155e9c);color:var(--blue,#155e9c)}
+#thm .ic{margin-right:6px;font-size:12px;opacity:.85}
+@media(max-width:640px){#thm{left:10px;bottom:10px;padding:8px 13px;font-size:12.5px}}
+@media print{#thm{display:none}}
+</style>
+<button id="thm" onclick="window.__toggleTheme()"><span class="ic">◐</span><span class="lb">어둡게</span></button>
+<script>
+(function(){
+  var K='chs-doc-theme';
+  function label(){
+    var d=document.documentElement.getAttribute('data-theme')==='dark';
+    var b=document.getElementById('thm'); if(!b) return;
+    b.querySelector('.lb').textContent = d ? '밝게' : '어둡게';
+    b.querySelector('.ic').textContent = d ? '☼' : '◐';
+    b.setAttribute('title', d ? '밝은 화면으로 전환' : '어두운 화면으로 전환');
+  }
+  window.__toggleTheme=function(){
+    var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',n);
+    try{localStorage.setItem(K,n);}catch(e){}
+    label();
+  };
+  label();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',label);
+})();
+</script>
+
+</body>
+</html>
