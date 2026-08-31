@@ -2,13 +2,13 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>조기행 | 공공데이터 분석 · 정책정보 도출 · 대시보드 서비스</title>
 <meta name="description" content="전국 시군구·읍면동 단위 공공데이터를 지방정부의 정책 판단 근거로 바꾸는 일을 합니다. 인구·건강·가족·재정·주거 영역의 분석 설계와 대시보드.">
 <meta name="theme-color" content="#0f172a">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f172a'/%3E%3Ctext x='32' y='45' font-size='34' font-weight='700' text-anchor='middle' fill='%2338bdf8' font-family='sans-serif'%3E%EC%A1%B0%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="profile">
-<meta property="og:title" content="조기행 | 공공데이터 분석 · 정책정보 도출 · 대시보드 서비스">
+<meta property="og:title" content="Cho, KiHaing">
 <meta property="og:description" content="전국 시군구·읍면동 단위 공공데이터를 지방정부의 정책 판단 근거로 바꾸는 일을 합니다.">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:url" content="https://k2obong.github.io/">
@@ -17,14 +17,15 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="조기행 · 공공데이터 분석 · 정책정보 도출 · 대시보드 서비스">
 <meta name="twitter:card" content="summary_large_image">
-
 <style>
   :root{
-    --bg:#0f172a; --bg2:#131f37; --surface:#1e293b; --surface2:#172033;
+    --bg:#0f172a; --surface:#1e293b; --surface2:#172033;
     --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.05);
     --ink:#f1f5f9; --ink2:#cbd5e1; --ink3:#94a3b8;
     --sky:#38bdf8; --lime:#bef264; --orange:#f97316;
+    --btn:#334155;
     --maxw:860px;
+    --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -32,50 +33,115 @@
     background:var(--bg); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
     -webkit-font-smoothing:antialiased; line-height:1.7; font-size:16px;
+    -webkit-tap-highlight-color:transparent;
   }
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
   a{color:var(--sky)}
 
-  /* ── 머리 ── */
-  header{
-    padding:72px 0 52px;
-    background:radial-gradient(1100px 420px at 50% -8%, rgba(56,189,248,.13), transparent 70%);
-    border-bottom:1px solid var(--line);
+  /* ══════════ 첫 화면 — 명함 ══════════ */
+  #card{
+    height:100vh; height:100dvh;
+    display:flex; flex-direction:column;
+    padding:calc(var(--safe-t) + 14px) 20px calc(var(--safe-b) + 14px);
+    overflow:hidden;
+    background:radial-gradient(900px 460px at 50% -10%,rgba(56,189,248,.13),transparent 70%);
   }
-  .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:1.4px;color:var(--sky);text-transform:uppercase;margin-bottom:14px}
-  h1{font-size:clamp(34px,6.4vw,50px);font-weight:800;letter-spacing:-1.4px;line-height:1.12;margin-bottom:16px}
-  .lede{font-size:clamp(16px,2.4vw,19px);color:var(--ink2);max-width:36em}
-  .lede strong{color:var(--ink);font-weight:700}
-  .role{
-    display:inline-block;margin-top:22px;font-size:13px;font-weight:600;line-height:1.5;
-    color:var(--lime);background:rgba(163,230,53,.13);border:1px solid rgba(163,230,53,.36);
-    padding:7px 15px;border-radius:9999px;
+  .c-top{flex:2;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+         gap:clamp(6px,1.3vh,13px);text-align:center}
+  .c-avatar{
+    width:clamp(62px,10vh,92px);height:clamp(62px,10vh,92px);border-radius:50%;flex-shrink:0;
+    overflow:hidden;background:#f8fafc;border:3px solid rgba(56,189,248,.55);
+    box-shadow:0 8px 26px rgba(56,189,248,.30);
   }
+  .c-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .c-name{font-size:clamp(29px,6vh,44px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:#fff}
+  .c-title{
+    display:inline-block;font-size:clamp(11px,1.7vh,14px);font-weight:600;line-height:1.45;
+    color:var(--lime);background:rgba(163,230,53,.14);border:1px solid rgba(163,230,53,.38);
+    padding:5px 13px;border-radius:9999px;max-width:100%;
+  }
+  .c-contact{margin-top:clamp(3px,1.2vh,12px);display:flex;flex-direction:column;
+             align-items:center;gap:clamp(3px,.8vh,8px)}
+  .c-tel-reveal{
+    font:inherit;font-size:clamp(13px,2.1vh,16px);font-weight:700;color:var(--sky);cursor:pointer;
+    background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);
+    padding:7px 18px;border-radius:9999px;
+  }
+  .c-tel{font-size:clamp(20px,4vh,30px);font-weight:700;color:#fff;text-decoration:none;
+         letter-spacing:.5px;font-variant-numeric:tabular-nums}
+  .c-mail{font-size:clamp(13px,2.1vh,17px);color:var(--ink2);text-decoration:none;overflow-wrap:anywhere}
 
-  /* ── 수상 ── */
-  .award{
-    display:flex;gap:16px;align-items:flex-start;
-    margin:34px 0 0;padding:18px 20px;
-    background:linear-gradient(120deg,rgba(190,242,100,.09),rgba(56,189,248,.05));
-    border:1px solid rgba(190,242,100,.28);border-radius:14px;
+  .c-acts{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;
+          margin-top:clamp(7px,1.8vh,18px);flex-shrink:0}
+  .c-act{
+    font:inherit;font-size:clamp(12.5px,1.9vh,15px);font-weight:700;cursor:pointer;
+    padding:clamp(9px,1.4vh,13px) clamp(15px,4vw,22px);border-radius:12px;
+    display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:#fff;border:none;
   }
+  .c-act.solid{background:linear-gradient(135deg,#0284c7,#2563eb);box-shadow:0 4px 14px rgba(37,99,235,.35)}
+  .c-act.ghost{background:var(--btn);border:1px solid rgba(255,255,255,.1)}
+  .c-act:active{transform:scale(.97)}
+  .c-act svg{width:16px;height:16px;fill:currentColor}
+
+  .c-more{
+    flex-shrink:0;margin-top:clamp(8px,2.2vh,22px);
+    display:inline-flex;align-items:center;gap:9px;
+    font:inherit;font-size:clamp(13px,2vh,16px);font-weight:800;letter-spacing:-.2px;
+    color:#fff;cursor:pointer;border:none;text-decoration:none;
+    padding:clamp(10px,1.6vh,14px) clamp(19px,5vw,27px);border-radius:9999px;
+    background:linear-gradient(135deg,#0ea5e9 0%,#2563eb 52%,#7c3aed 100%);
+    animation:haloPulse 2.8s ease-out infinite;
+  }
+  .c-more .chev{font-size:.85em;line-height:1;animation:chevBob 1.7s ease-in-out infinite}
+  @keyframes haloPulse{
+    0%{box-shadow:0 6px 22px rgba(37,99,235,.5),0 0 0 0 rgba(56,189,248,.55)}
+    70%{box-shadow:0 6px 22px rgba(37,99,235,.5),0 0 0 16px rgba(56,189,248,0)}
+    100%{box-shadow:0 6px 22px rgba(37,99,235,.5),0 0 0 0 rgba(56,189,248,0)}
+  }
+  @keyframes chevBob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+
+  .c-bottom{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;
+            justify-content:flex-end;gap:clamp(5px,1.1vh,10px)}
+  .qr-frame{flex:1;min-height:0;aspect-ratio:1/1;max-width:min(78vw,300px);
+            background:#fff;border-radius:14px;padding:clamp(6px,1vh,10px);
+            box-shadow:0 8px 24px rgba(0,0,0,.45)}
+  .qr-frame svg{width:100%;height:100%;display:block}
+  .qr-hint{font-size:clamp(10.5px,1.5vh,12.5px);color:var(--ink3);text-align:center;line-height:1.45;flex-shrink:0}
+
+  /* ══════════ 소개 ══════════ */
+  #intro{scroll-margin-top:0}
+  section{padding:58px 0;border-top:1px solid var(--line2)}
+  section:first-of-type{border-top:none}
+  .sec-label{font-size:12px;font-weight:700;letter-spacing:1.3px;color:var(--ink3);text-transform:uppercase;margin-bottom:10px}
+  h2{font-size:clamp(23px,4vw,30px);font-weight:800;letter-spacing:-.7px;line-height:1.25;margin-bottom:14px}
+  .sec-intro{color:var(--ink2);max-width:38em;margin-bottom:30px}
+  .sec-intro strong{color:var(--ink)}
+
+  .award{display:flex;gap:16px;align-items:flex-start;padding:18px 20px;
+    background:linear-gradient(120deg,rgba(190,242,100,.09),rgba(56,189,248,.05));
+    border:1px solid rgba(190,242,100,.28);border-radius:14px}
   .award .medal{font-size:22px;line-height:1.3;flex-shrink:0}
   .award-label{font-size:11.5px;font-weight:700;letter-spacing:.6px;color:var(--lime);text-transform:uppercase;margin-bottom:5px}
   .award-title{font-size:15.5px;font-weight:700;line-height:1.5;margin-bottom:4px}
   .award-meta{font-size:13px;color:var(--ink3)}
 
-  /* ── 구획 ── */
-  section{padding:64px 0}
-  section + section{border-top:1px solid var(--line2)}
-  .sec-label{font-size:12px;font-weight:700;letter-spacing:1.3px;color:var(--ink3);text-transform:uppercase;margin-bottom:10px}
-  h2{font-size:clamp(23px,4vw,30px);font-weight:800;letter-spacing:-.7px;line-height:1.25;margin-bottom:14px}
-  .sec-intro{color:var(--ink2);max-width:38em;margin-bottom:34px}
-
-  /* ── 프로젝트 ── */
-  .proj{
-    background:var(--surface2);border:1px solid var(--line);border-radius:20px;
-    padding:28px 26px;margin-bottom:26px;
+  /* 도메인 태그 — 눌러서 해당 사례로 */
+  .tags{display:flex;flex-wrap:wrap;gap:10px}
+  .tag{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:15px;font-weight:700;letter-spacing:-.2px;
+    padding:11px 17px;border-radius:12px;text-decoration:none;line-height:1.35;
+    background:rgba(var(--c),.14);border:1px solid rgba(var(--c),.36);color:rgb(var(--c));
+    transition:background-color .15s,transform .15s;
   }
+  .tag:hover{background:rgba(var(--c),.24);transform:translateY(-2px)}
+  .tag:active{transform:scale(.97)}
+  .tag .go{font-size:.85em;opacity:.75}
+  .t1{--c:125,211,252}.t2{--c:134,239,172}.t3{--c:253,164,175}.t4{--c:252,211,77}
+  .t5{--c:253,186,116}.t6{--c:103,232,249}.t7{--c:196,181,253}.t8{--c:240,171,252}
+
+  .proj{background:var(--surface2);border:1px solid var(--line);border-radius:20px;
+        padding:28px 26px;margin-bottom:26px;scroll-margin-top:18px}
   .proj-tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.5px;padding:4px 10px;border-radius:7px;margin-bottom:12px}
   .tag-health{color:#fda4af;background:rgba(253,164,175,.13);border:1px solid rgba(253,164,175,.32)}
   .tag-pop{color:#7dd3fc;background:rgba(125,211,252,.13);border:1px solid rgba(125,211,252,.32)}
@@ -83,37 +149,26 @@
   h3{font-size:clamp(19px,3.2vw,23px);font-weight:800;letter-spacing:-.5px;line-height:1.35;margin-bottom:12px}
   .proj p{color:var(--ink2);margin-bottom:14px}
   .proj p:last-child{margin-bottom:0}
-  .quote{
-    border-left:3px solid var(--sky);padding:4px 0 4px 16px;margin:18px 0;
-    color:var(--ink2);font-size:15px;line-height:1.75;
-  }
+  .quote{border-left:3px solid var(--sky);padding:4px 0 4px 16px;margin:18px 0;color:var(--ink2);font-size:15px;line-height:1.75}
   .quote em{color:var(--ink);font-style:normal;font-weight:600}
-  .finding{
-    background:var(--surface);border:1px solid var(--line);border-radius:12px;
-    padding:16px 18px;margin:18px 0;
-  }
+  .finding{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0}
   .finding-h{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--sky);text-transform:uppercase;margin-bottom:7px}
   .finding p{font-size:14.5px;margin:0;color:var(--ink2)}
-  .more{
-    display:inline-flex;align-items:center;gap:7px;margin-top:6px;
-    font-size:14px;font-weight:700;color:var(--sky);text-decoration:none;
-    padding:9px 16px;border-radius:10px;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3);
-  }
+  .more{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14px;font-weight:700;
+        color:var(--sky);text-decoration:none;padding:9px 16px;border-radius:10px;
+        background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.3)}
   .more:hover{background:rgba(56,189,248,.18)}
 
-  /* 수치 */
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:12px;margin:20px 0}
   .stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
   .stat-v{font-size:22px;font-weight:800;letter-spacing:-.6px;line-height:1.2;font-variant-numeric:tabular-nums}
   .stat-l{font-size:11.5px;color:var(--ink3);margin-top:4px;line-height:1.45}
 
-  /* 그림 */
   figure{margin:22px 0}
   .fig-frame{background:#fff;border-radius:14px;padding:14px;border:1px solid var(--line)}
   .fig-frame img{width:100%;height:auto;display:block}
   figcaption{font-size:12.5px;color:var(--ink3);margin-top:10px;line-height:1.6}
 
-  /* 차트 */
   .chart-frame{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 16px 12px}
   .legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px;font-size:12.5px;color:var(--ink2)}
   .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
@@ -122,250 +177,317 @@
   .bar{transition:opacity .15s}
   .chart-frame:hover .bar{opacity:.55}
   .chart-frame .bar:hover{opacity:1}
-  #tip{
-    position:fixed;pointer-events:none;opacity:0;transition:opacity .12s;
-    background:#0b1220;border:1px solid var(--line);border-radius:9px;
-    padding:8px 11px;font-size:12.5px;line-height:1.55;color:var(--ink);
-    box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:50;white-space:nowrap;
-  }
-  #tip b{font-variant-numeric:tabular-nums}
+  #tip{position:fixed;pointer-events:none;opacity:0;transition:opacity .12s;background:#0b1220;
+       border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:12.5px;line-height:1.55;
+       color:var(--ink);box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:50;white-space:nowrap}
   details.tbl{margin-top:14px}
   details.tbl summary{font-size:12.5px;color:var(--ink3);cursor:pointer;padding:6px 0}
   details.tbl table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
   details.tbl th,details.tbl td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line2);color:var(--ink2)}
   details.tbl td:last-child,details.tbl th:last-child{text-align:right;font-variant-numeric:tabular-nums}
 
-  /* 도메인 */
-  .tags{display:flex;flex-wrap:wrap;gap:8px}
-  .tag{font-size:13px;font-weight:600;padding:7px 13px;border-radius:9px;
-       background:rgba(var(--c),.13);border:1px solid rgba(var(--c),.33);color:rgb(var(--c))}
-  .t1{--c:125,211,252}.t2{--c:134,239,172}.t3{--c:253,164,175}.t4{--c:252,211,77}
-  .t5{--c:253,186,116}.t6{--c:103,232,249}.t7{--c:196,181,253}.t8{--c:240,171,252}
-
-  /* 연락 */
-  .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:8px}
-  .cbtn{
-    display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);
-    background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:15px 17px;
-  }
+  .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:8px}
+  .cbtn{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);
+        background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:15px 17px}
   .cbtn:hover{border-color:rgba(56,189,248,.45)}
   .cbtn .k{font-size:11px;color:var(--ink3);display:block;font-weight:600}
   .cbtn .v{font-size:14.5px;font-weight:600;overflow-wrap:anywhere}
   footer{padding:40px 0 60px;color:var(--ink3);font-size:12.5px;border-top:1px solid var(--line2)}
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(28px + var(--safe-b));z-index:80;
+         background:#0b1220;border:1px solid var(--line);color:var(--ink);font-size:13px;font-weight:600;
+         padding:11px 18px;border-radius:9999px;opacity:0;transition:opacity .18s;pointer-events:none;
+         box-shadow:0 8px 26px rgba(0,0,0,.5)}
+  .toast.on{opacity:1}
+
+  :focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto} .c-more,.tag:hover{transform:none}}
+  /* 가로 화면 */
+  @media (orientation:landscape) and (max-height:560px){
+    #card{flex-direction:row;align-items:center;gap:22px}
+    .c-top{flex:1.25} .c-bottom{flex:1;justify-content:center}
+    .qr-frame{max-width:min(38vw,250px)}
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <p class="eyebrow">Public Data · Policy · Dashboard</p>
-    <h1>조기행</h1>
-    <p class="lede">전국 시군구·읍면동 단위의 <strong>공공데이터를 지방정부가 실제로 쓸 수 있는 판단 근거</strong>로 바꾸는 일을 합니다. 인구·건강·가족·재정·주거 영역의 분석 설계와, 담당자가 열어보는 대시보드까지.</p>
-    <p class="role">공공데이터 분석 · 정책정보 도출 · 대시보드 서비스</p>
+<!-- ══════════ 첫 화면 — 명함 ══════════ -->
+<main id="card">
+  <div class="c-top">
+    <div class="c-avatar"><img src="avatar.png" alt="조기행" width="512" height="512"></div>
+    <h1 class="c-name">조기행</h1>
+    <p style="font-size:clamp(11px,1.6vh,13px);letter-spacing:1.6px;color:var(--ink3);font-weight:600;margin-top:-2px">CHO, KIHAING</p>
+    <p class="c-title">공공데이터 분석 · 정책정보 도출 · 대시보드 서비스</p>
+    <div class="c-contact">
+      <div id="telSlot"><button type="button" class="c-tel-reveal" id="telReveal">전화번호 보기</button></div>
+      <a class="c-mail" href="mailto:key@loyalty.co.kr">key@loyalty.co.kr</a>
+    </div>
+    <div class="c-acts">
+      <button type="button" class="c-act solid" id="vcardBtn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>연락처 저장
+      </button>
+      <button type="button" class="c-act ghost" id="shareBtn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg><span id="shareLabel">카톡으로 보내기</span>
+      </button>
+    </div>
+    <a class="c-more" href="#intro">제가 하는 일 보기<span class="chev" aria-hidden="true">▾</span></a>
+  </div>
+  <div class="c-bottom">
+    <div class="qr-frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 69 69" shape-rendering="crispEdges" role="img" aria-label="조기행 연락처 QR 코드"><rect width="69" height="69" fill="#ffffff"/><path fill="#000000" d="M2 2h7v1h-7zM10 2h2v1h-2zM14 2h2v1h-2zM18 2h1v1h-1zM20 2h1v1h-1zM22 2h2v1h-2zM25 2h3v1h-3zM30 2h1v1h-1zM32 2h1v1h-1zM34 2h1v1h-1zM36 2h1v1h-1zM38 2h2v1h-2zM41 2h1v1h-1zM45 2h1v1h-1zM48 2h1v1h-1zM51 2h2v1h-2zM55 2h1v1h-1zM57 2h1v1h-1zM60 2h7v1h-7zM2 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM12 3h2v1h-2zM15 3h1v1h-1zM17 3h1v1h-1zM21 3h3v1h-3zM25 3h4v1h-4zM31 3h3v1h-3zM35 3h4v1h-4zM41 3h1v1h-1zM44 3h3v1h-3zM48 3h2v1h-2zM51 3h3v1h-3zM58 3h1v1h-1zM60 3h1v1h-1zM66 3h1v1h-1zM2 4h1v1h-1zM4 4h3v1h-3zM8 4h1v1h-1zM12 4h1v1h-1zM15 4h3v1h-3zM19 4h4v1h-4zM26 4h1v1h-1zM28 4h5v1h-5zM34 4h3v1h-3zM40 4h2v1h-2zM43 4h2v1h-2zM48 4h2v1h-2zM52 4h1v1h-1zM55 4h2v1h-2zM58 4h1v1h-1zM60 4h1v1h-1zM62 4h3v1h-3zM66 4h1v1h-1zM2 5h1v1h-1zM4 5h3v1h-3zM8 5h1v1h-1zM11 5h3v1h-3zM22 5h1v1h-1zM24 5h1v1h-1zM28 5h2v1h-2zM32 5h2v1h-2zM36 5h1v1h-1zM38 5h1v1h-1zM41 5h2v1h-2zM45 5h2v1h-2zM49 5h6v1h-6zM56 5h2v1h-2zM60 5h1v1h-1zM62 5h3v1h-3zM66 5h1v1h-1zM2 6h1v1h-1zM4 6h3v1h-3zM8 6h1v1h-1zM11 6h3v1h-3zM15 6h2v1h-2zM21 6h1v1h-1zM23 6h1v1h-1zM26 6h4v1h-4zM32 6h8v1h-8zM42 6h3v1h-3zM46 6h1v1h-1zM50 6h2v1h-2zM53 6h2v1h-2zM58 6h1v1h-1zM60 6h1v1h-1zM62 6h3v1h-3zM66 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM11 7h2v1h-2zM14 7h1v1h-1zM16 7h2v1h-2zM19 7h2v1h-2zM25 7h2v1h-2zM29 7h4v1h-4zM36 7h2v1h-2zM39 7h1v1h-1zM44 7h2v1h-2zM49 7h2v1h-2zM52 7h1v1h-1zM54 7h3v1h-3zM60 7h1v1h-1zM66 7h1v1h-1zM2 8h7v1h-7zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM30 8h1v1h-1zM32 8h1v1h-1zM34 8h1v1h-1zM36 8h1v1h-1zM38 8h1v1h-1zM40 8h1v1h-1zM42 8h1v1h-1zM44 8h1v1h-1zM46 8h1v1h-1zM48 8h1v1h-1zM50 8h1v1h-1zM52 8h1v1h-1zM54 8h1v1h-1zM56 8h1v1h-1zM58 8h1v1h-1zM60 8h7v1h-7zM11 9h1v1h-1zM15 9h2v1h-2zM18 9h2v1h-2zM21 9h2v1h-2zM24 9h1v1h-1zM26 9h1v1h-1zM29 9h4v1h-4zM36 9h1v1h-1zM38 9h2v1h-2zM41 9h1v1h-1zM46 9h1v1h-1zM49 9h1v1h-1zM53 9h2v1h-2zM56 9h2v1h-2zM3 10h1v1h-1zM8 10h5v1h-5zM14 10h2v1h-2zM18 10h2v1h-2zM21 10h2v1h-2zM24 10h4v1h-4zM29 10h2v1h-2zM32 10h7v1h-7zM41 10h1v1h-1zM44 10h2v1h-2zM50 10h10v1h-10zM65 10h2v1h-2zM2 11h1v1h-1zM4 11h1v1h-1zM6 11h1v1h-1zM9 11h6v1h-6zM17 11h1v1h-1zM19 11h2v1h-2zM22 11h1v1h-1zM25 11h2v1h-2zM29 11h2v1h-2zM33 11h1v1h-1zM35 11h2v1h-2zM41 11h2v1h-2zM45 11h1v1h-1zM48 11h2v1h-2zM52 11h1v1h-1zM56 11h1v1h-1zM59 11h1v1h-1zM64 11h3v1h-3zM2 12h4v1h-4zM8 12h2v1h-2zM11 12h1v1h-1zM13 12h3v1h-3zM17 12h1v1h-1zM20 12h1v1h-1zM22 12h1v1h-1zM24 12h1v1h-1zM29 12h2v1h-2zM34 12h2v1h-2zM37 12h5v1h-5zM43 12h1v1h-1zM45 12h2v1h-2zM49 12h7v1h-7zM58 12h2v1h-2zM61 12h1v1h-1zM2 13h1v1h-1zM4 13h3v1h-3zM10 13h1v1h-1zM13 13h1v1h-1zM15 13h1v1h-1zM17 13h3v1h-3zM21 13h2v1h-2zM24 13h1v1h-1zM28 13h2v1h-2zM31 13h1v1h-1zM35 13h1v1h-1zM37 13h2v1h-2zM43 13h2v1h-2zM46 13h2v1h-2zM49 13h1v1h-1zM51 13h2v1h-2zM54 13h1v1h-1zM56 13h1v1h-1zM58 13h2v1h-2zM61 13h1v1h-1zM63 13h3v1h-3zM2 14h1v1h-1zM4 14h2v1h-2zM7 14h3v1h-3zM11 14h1v1h-1zM14 14h2v1h-2zM17 14h1v1h-1zM19 14h3v1h-3zM29 14h1v1h-1zM31 14h3v1h-3zM35 14h1v1h-1zM37 14h1v1h-1zM42 14h2v1h-2zM46 14h5v1h-5zM52 14h2v1h-2zM55 14h4v1h-4zM60 14h1v1h-1zM62 14h2v1h-2zM65 14h1v1h-1zM2 15h2v1h-2zM5 15h3v1h-3zM10 15h1v1h-1zM13 15h2v1h-2zM16 15h1v1h-1zM21 15h6v1h-6zM30 15h10v1h-10zM42 15h1v1h-1zM45 15h2v1h-2zM50 15h1v1h-1zM55 15h3v1h-3zM59 15h1v1h-1zM62 15h5v1h-5zM2 16h1v1h-1zM7 16h2v1h-2zM12 16h1v1h-1zM14 16h3v1h-3zM18 16h2v1h-2zM22 16h2v1h-2zM25 16h1v1h-1zM28 16h2v1h-2zM31 16h1v1h-1zM36 16h2v1h-2zM41 16h1v1h-1zM44 16h1v1h-1zM47 16h1v1h-1zM49 16h1v1h-1zM54 16h1v1h-1zM58 16h2v1h-2zM65 16h1v1h-1zM2 17h1v1h-1zM6 17h2v1h-2zM11 17h2v1h-2zM17 17h1v1h-1zM20 17h3v1h-3zM25 17h4v1h-4zM32 17h2v1h-2zM35 17h1v1h-1zM37 17h3v1h-3zM43 17h1v1h-1zM46 17h1v1h-1zM48 17h1v1h-1zM50 17h2v1h-2zM53 17h1v1h-1zM55 17h4v1h-4zM60 17h2v1h-2zM64 17h2v1h-2zM2 18h3v1h-3zM6 18h3v1h-3zM10 18h6v1h-6zM17 18h1v1h-1zM19 18h2v1h-2zM22 18h2v1h-2zM27 18h1v1h-1zM33 18h1v1h-1zM39 18h1v1h-1zM43 18h2v1h-2zM47 18h1v1h-1zM52 18h2v1h-2zM56 18h1v1h-1zM60 18h1v1h-1zM62 18h5v1h-5zM2 19h1v1h-1zM5 19h1v1h-1zM9 19h1v1h-1zM11 19h1v1h-1zM18 19h2v1h-2zM23 19h2v1h-2zM29 19h2v1h-2zM32 19h1v1h-1zM34 19h1v1h-1zM38 19h2v1h-2zM42 19h1v1h-1zM45 19h1v1h-1zM49 19h1v1h-1zM51 19h2v1h-2zM54 19h3v1h-3zM62 19h3v1h-3zM3 20h1v1h-1zM5 20h5v1h-5zM11 20h1v1h-1zM14 20h2v1h-2zM19 20h2v1h-2zM22 20h3v1h-3zM26 20h3v1h-3zM34 20h2v1h-2zM37 20h4v1h-4zM46 20h1v1h-1zM49 20h1v1h-1zM51 20h2v1h-2zM57 20h3v1h-3zM63 20h2v1h-2zM66 20h1v1h-1zM2 21h1v1h-1zM4 21h1v1h-1zM6 21h1v1h-1zM9 21h6v1h-6zM19 21h1v1h-1zM24 21h1v1h-1zM31 21h1v1h-1zM33 21h1v1h-1zM36 21h3v1h-3zM41 21h2v1h-2zM44 21h2v1h-2zM48 21h2v1h-2zM55 21h1v1h-1zM59 21h2v1h-2zM65 21h2v1h-2zM2 22h2v1h-2zM6 22h1v1h-1zM8 22h2v1h-2zM11 22h4v1h-4zM17 22h2v1h-2zM21 22h3v1h-3zM25 22h2v1h-2zM29 22h4v1h-4zM35 22h3v1h-3zM40 22h1v1h-1zM44 22h2v1h-2zM47 22h1v1h-1zM51 22h2v1h-2zM61 22h4v1h-4zM66 22h1v1h-1zM3 23h1v1h-1zM5 23h3v1h-3zM9 23h4v1h-4zM16 23h1v1h-1zM18 23h8v1h-8zM27 23h4v1h-4zM34 23h2v1h-2zM40 23h2v1h-2zM43 23h4v1h-4zM51 23h2v1h-2zM55 23h4v1h-4zM60 23h2v1h-2zM63 23h3v1h-3zM3 24h1v1h-1zM6 24h1v1h-1zM8 24h4v1h-4zM13 24h4v1h-4zM20 24h3v1h-3zM24 24h1v1h-1zM26 24h1v1h-1zM34 24h2v1h-2zM37 24h1v1h-1zM41 24h2v1h-2zM44 24h1v1h-1zM46 24h1v1h-1zM48 24h1v1h-1zM57 24h1v1h-1zM59 24h1v1h-1zM63 24h1v1h-1zM65 24h2v1h-2zM2 25h1v1h-1zM6 25h1v1h-1zM9 25h2v1h-2zM15 25h1v1h-1zM18 25h2v1h-2zM21 25h1v1h-1zM23 25h5v1h-5zM30 25h1v1h-1zM32 25h2v1h-2zM36 25h4v1h-4zM43 25h1v1h-1zM45 25h1v1h-1zM47 25h3v1h-3zM52 25h2v1h-2zM56 25h1v1h-1zM58 25h2v1h-2zM61 25h1v1h-1zM63 25h1v1h-1zM5 26h4v1h-4zM11 26h2v1h-2zM15 26h2v1h-2zM18 26h1v1h-1zM22 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM30 26h1v1h-1zM33 26h2v1h-2zM37 26h1v1h-1zM42 26h1v1h-1zM44 26h2v1h-2zM48 26h2v1h-2zM51 26h1v1h-1zM53 26h2v1h-2zM56 26h3v1h-3zM60 26h3v1h-3zM64 26h3v1h-3zM3 27h1v1h-1zM6 27h1v1h-1zM9 27h4v1h-4zM16 27h2v1h-2zM25 27h1v1h-1zM27 27h4v1h-4zM36 27h2v1h-2zM41 27h1v1h-1zM44 27h1v1h-1zM48 27h6v1h-6zM56 27h3v1h-3zM61 27h1v1h-1zM64 27h1v1h-1zM2 28h2v1h-2zM5 28h1v1h-1zM7 28h2v1h-2zM11 28h1v1h-1zM13 28h2v1h-2zM17 28h2v1h-2zM21 28h1v1h-1zM23 28h1v1h-1zM25 28h5v1h-5zM32 28h1v1h-1zM34 28h1v1h-1zM38 28h1v1h-1zM40 28h1v1h-1zM44 28h3v1h-3zM48 28h1v1h-1zM50 28h1v1h-1zM52 28h2v1h-2zM55 28h2v1h-2zM58 28h1v1h-1zM60 28h1v1h-1zM63 28h1v1h-1zM65 28h1v1h-1zM3 29h1v1h-1zM7 29h1v1h-1zM9 29h1v1h-1zM11 29h1v1h-1zM13 29h1v1h-1zM17 29h1v1h-1zM20 29h1v1h-1zM22 29h1v1h-1zM24 29h1v1h-1zM27 29h1v1h-1zM29 29h5v1h-5zM37 29h4v1h-4zM42 29h2v1h-2zM45 29h2v1h-2zM50 29h1v1h-1zM52 29h1v1h-1zM54 29h2v1h-2zM57 29h1v1h-1zM59 29h2v1h-2zM62 29h3v1h-3zM3 30h4v1h-4zM8 30h1v1h-1zM11 30h4v1h-4zM19 30h3v1h-3zM25 30h1v1h-1zM27 30h4v1h-4zM36 30h2v1h-2zM43 30h1v1h-1zM46 30h1v1h-1zM48 30h4v1h-4zM53 30h1v1h-1zM58 30h2v1h-2zM63 30h4v1h-4zM4 31h4v1h-4zM11 31h1v1h-1zM13 31h1v1h-1zM17 31h1v1h-1zM19 31h5v1h-5zM25 31h3v1h-3zM31 31h3v1h-3zM35 31h1v1h-1zM37 31h1v1h-1zM41 31h1v1h-1zM44 31h2v1h-2zM47 31h1v1h-1zM52 31h3v1h-3zM56 31h1v1h-1zM59 31h2v1h-2zM63 31h2v1h-2zM66 31h1v1h-1zM2 32h2v1h-2zM5 32h8v1h-8zM15 32h5v1h-5zM24 32h3v1h-3zM29 32h2v1h-2zM32 32h9v1h-9zM43 32h1v1h-1zM48 32h3v1h-3zM57 32h7v1h-7zM66 32h1v1h-1zM5 33h2v1h-2zM10 33h3v1h-3zM14 33h1v1h-1zM16 33h4v1h-4zM21 33h1v1h-1zM23 33h1v1h-1zM25 33h1v1h-1zM28 33h2v1h-2zM31 33h2v1h-2zM36 33h1v1h-1zM38 33h3v1h-3zM44 33h3v1h-3zM48 33h1v1h-1zM50 33h1v1h-1zM53 33h3v1h-3zM57 33h2v1h-2zM62 33h5v1h-5zM2 34h3v1h-3zM6 34h1v1h-1zM8 34h1v1h-1zM10 34h1v1h-1zM12 34h1v1h-1zM14 34h1v1h-1zM16 34h3v1h-3zM23 34h3v1h-3zM27 34h1v1h-1zM30 34h3v1h-3zM34 34h1v1h-1zM36 34h1v1h-1zM40 34h3v1h-3zM46 34h1v1h-1zM49 34h1v1h-1zM51 34h2v1h-2zM55 34h2v1h-2zM58 34h1v1h-1zM60 34h1v1h-1zM62 34h1v1h-1zM3 35h2v1h-2zM6 35h1v1h-1zM10 35h1v1h-1zM13 35h1v1h-1zM15 35h1v1h-1zM20 35h2v1h-2zM23 35h2v1h-2zM26 35h1v1h-1zM28 35h1v1h-1zM32 35h1v1h-1zM36 35h1v1h-1zM39 35h1v1h-1zM41 35h4v1h-4zM48 35h1v1h-1zM54 35h1v1h-1zM56 35h1v1h-1zM58 35h1v1h-1zM62 35h5v1h-5zM2 36h1v1h-1zM4 36h1v1h-1zM6 36h5v1h-5zM14 36h1v1h-1zM16 36h4v1h-4zM23 36h4v1h-4zM28 36h3v1h-3zM32 36h7v1h-7zM42 36h1v1h-1zM46 36h1v1h-1zM48 36h2v1h-2zM51 36h3v1h-3zM56 36h9v1h-9zM2 37h1v1h-1zM5 37h1v1h-1zM14 37h1v1h-1zM16 37h2v1h-2zM19 37h1v1h-1zM22 37h1v1h-1zM25 37h1v1h-1zM29 37h1v1h-1zM34 37h6v1h-6zM44 37h2v1h-2zM48 37h1v1h-1zM50 37h2v1h-2zM53 37h3v1h-3zM57 37h2v1h-2zM60 37h4v1h-4zM66 37h1v1h-1zM3 38h1v1h-1zM6 38h1v1h-1zM8 38h2v1h-2zM11 38h1v1h-1zM17 38h1v1h-1zM20 38h3v1h-3zM26 38h6v1h-6zM33 38h1v1h-1zM35 38h3v1h-3zM40 38h3v1h-3zM46 38h1v1h-1zM48 38h1v1h-1zM50 38h3v1h-3zM54 38h2v1h-2zM57 38h3v1h-3zM61 38h5v1h-5zM2 39h1v1h-1zM10 39h4v1h-4zM16 39h1v1h-1zM19 39h2v1h-2zM24 39h3v1h-3zM29 39h5v1h-5zM35 39h1v1h-1zM38 39h2v1h-2zM41 39h1v1h-1zM43 39h2v1h-2zM46 39h1v1h-1zM49 39h3v1h-3zM53 39h2v1h-2zM56 39h1v1h-1zM61 39h4v1h-4zM2 40h1v1h-1zM4 40h1v1h-1zM6 40h3v1h-3zM11 40h2v1h-2zM17 40h1v1h-1zM22 40h1v1h-1zM25 40h6v1h-6zM32 40h1v1h-1zM34 40h1v1h-1zM42 40h1v1h-1zM44 40h1v1h-1zM46 40h5v1h-5zM54 40h2v1h-2zM57 40h1v1h-1zM59 40h1v1h-1zM62 40h1v1h-1zM64 40h1v1h-1zM5 41h1v1h-1zM7 41h1v1h-1zM10 41h3v1h-3zM15 41h1v1h-1zM17 41h2v1h-2zM20 41h3v1h-3zM25 41h2v1h-2zM28 41h1v1h-1zM31 41h3v1h-3zM37 41h2v1h-2zM40 41h3v1h-3zM44 41h3v1h-3zM52 41h2v1h-2zM56 41h1v1h-1zM59 41h1v1h-1zM61 41h1v1h-1zM64 41h3v1h-3zM2 42h2v1h-2zM6 42h1v1h-1zM8 42h2v1h-2zM13 42h2v1h-2zM19 42h1v1h-1zM21 42h3v1h-3zM26 42h2v1h-2zM29 42h1v1h-1zM32 42h1v1h-1zM34 42h4v1h-4zM39 42h1v1h-1zM41 42h4v1h-4zM48 42h1v1h-1zM50 42h1v1h-1zM53 42h1v1h-1zM55 42h1v1h-1zM58 42h1v1h-1zM62 42h5v1h-5zM2 43h1v1h-1zM4 43h1v1h-1zM7 43h1v1h-1zM12 43h1v1h-1zM17 43h1v1h-1zM20 43h2v1h-2zM24 43h2v1h-2zM27 43h1v1h-1zM29 43h2v1h-2zM34 43h1v1h-1zM36 43h1v1h-1zM38 43h2v1h-2zM41 43h1v1h-1zM44 43h2v1h-2zM49 43h1v1h-1zM53 43h2v1h-2zM59 43h1v1h-1zM62 43h1v1h-1zM64 43h1v1h-1zM2 44h2v1h-2zM6 44h1v1h-1zM8 44h2v1h-2zM11 44h2v1h-2zM15 44h2v1h-2zM18 44h2v1h-2zM23 44h1v1h-1zM25 44h1v1h-1zM27 44h2v1h-2zM30 44h4v1h-4zM36 44h1v1h-1zM39 44h2v1h-2zM44 44h3v1h-3zM53 44h2v1h-2zM60 44h1v1h-1zM66 44h1v1h-1zM4 45h1v1h-1zM9 45h1v1h-1zM12 45h2v1h-2zM16 45h1v1h-1zM19 45h2v1h-2zM23 45h3v1h-3zM27 45h1v1h-1zM31 45h1v1h-1zM36 45h6v1h-6zM43 45h3v1h-3zM47 45h1v1h-1zM49 45h1v1h-1zM55 45h1v1h-1zM57 45h1v1h-1zM59 45h2v1h-2zM3 46h1v1h-1zM7 46h2v1h-2zM10 46h3v1h-3zM18 46h2v1h-2zM22 46h3v1h-3zM26 46h1v1h-1zM28 46h3v1h-3zM33 46h1v1h-1zM36 46h4v1h-4zM43 46h3v1h-3zM47 46h1v1h-1zM49 46h3v1h-3zM53 46h1v1h-1zM55 46h2v1h-2zM59 46h3v1h-3zM63 46h2v1h-2zM66 46h1v1h-1zM2 47h1v1h-1zM4 47h2v1h-2zM7 47h1v1h-1zM9 47h1v1h-1zM11 47h1v1h-1zM13 47h1v1h-1zM18 47h1v1h-1zM22 47h1v1h-1zM26 47h3v1h-3zM30 47h2v1h-2zM34 47h2v1h-2zM38 47h1v1h-1zM40 47h1v1h-1zM43 47h2v1h-2zM48 47h1v1h-1zM50 47h5v1h-5zM56 47h3v1h-3zM62 47h3v1h-3zM4 48h3v1h-3zM8 48h4v1h-4zM13 48h3v1h-3zM17 48h1v1h-1zM20 48h3v1h-3zM24 48h7v1h-7zM36 48h3v1h-3zM41 48h1v1h-1zM43 48h2v1h-2zM46 48h1v1h-1zM48 48h2v1h-2zM52 48h1v1h-1zM54 48h1v1h-1zM56 48h1v1h-1zM65 48h1v1h-1zM2 49h3v1h-3zM6 49h2v1h-2zM14 49h1v1h-1zM19 49h2v1h-2zM24 49h1v1h-1zM29 49h1v1h-1zM31 49h5v1h-5zM37 49h1v1h-1zM39 49h2v1h-2zM44 49h1v1h-1zM46 49h4v1h-4zM52 49h1v1h-1zM54 49h1v1h-1zM56 49h1v1h-1zM60 49h1v1h-1zM63 49h1v1h-1zM2 50h2v1h-2zM8 50h1v1h-1zM10 50h1v1h-1zM12 50h1v1h-1zM14 50h1v1h-1zM16 50h1v1h-1zM19 50h3v1h-3zM26 50h1v1h-1zM28 50h3v1h-3zM33 50h2v1h-2zM38 50h2v1h-2zM43 50h2v1h-2zM46 50h2v1h-2zM49 50h3v1h-3zM55 50h2v1h-2zM58 50h1v1h-1zM60 50h7v1h-7zM2 51h5v1h-5zM9 51h5v1h-5zM15 51h1v1h-1zM18 51h1v1h-1zM20 51h1v1h-1zM24 51h1v1h-1zM28 51h1v1h-1zM34 51h2v1h-2zM38 51h2v1h-2zM42 51h2v1h-2zM46 51h3v1h-3zM53 51h1v1h-1zM56 51h1v1h-1zM58 51h2v1h-2zM61 51h2v1h-2zM64 51h1v1h-1zM6 52h3v1h-3zM10 52h1v1h-1zM12 52h1v1h-1zM15 52h2v1h-2zM22 52h1v1h-1zM25 52h1v1h-1zM28 52h1v1h-1zM32 52h3v1h-3zM36 52h2v1h-2zM40 52h1v1h-1zM42 52h1v1h-1zM47 52h1v1h-1zM49 52h2v1h-2zM52 52h1v1h-1zM55 52h1v1h-1zM57 52h1v1h-1zM63 52h2v1h-2zM3 53h1v1h-1zM6 53h2v1h-2zM9 53h1v1h-1zM11 53h5v1h-5zM18 53h6v1h-6zM26 53h1v1h-1zM28 53h3v1h-3zM32 53h2v1h-2zM37 53h1v1h-1zM39 53h1v1h-1zM41 53h2v1h-2zM47 53h1v1h-1zM50 53h1v1h-1zM55 53h1v1h-1zM57 53h1v1h-1zM62 53h1v1h-1zM66 53h1v1h-1zM3 54h3v1h-3zM7 54h3v1h-3zM11 54h1v1h-1zM18 54h1v1h-1zM21 54h2v1h-2zM24 54h1v1h-1zM26 54h2v1h-2zM29 54h4v1h-4zM35 54h2v1h-2zM38 54h2v1h-2zM43 54h3v1h-3zM49 54h2v1h-2zM52 54h1v1h-1zM54 54h1v1h-1zM56 54h2v1h-2zM59 54h1v1h-1zM61 54h4v1h-4zM2 55h2v1h-2zM5 55h1v1h-1zM7 55h1v1h-1zM9 55h3v1h-3zM13 55h3v1h-3zM17 55h2v1h-2zM23 55h1v1h-1zM25 55h6v1h-6zM33 55h3v1h-3zM38 55h1v1h-1zM41 55h1v1h-1zM44 55h1v1h-1zM46 55h1v1h-1zM49 55h3v1h-3zM54 55h4v1h-4zM59 55h1v1h-1zM62 55h1v1h-1zM64 55h3v1h-3zM4 56h2v1h-2zM7 56h2v1h-2zM11 56h4v1h-4zM16 56h1v1h-1zM18 56h3v1h-3zM23 56h1v1h-1zM26 56h6v1h-6zM35 56h1v1h-1zM39 56h6v1h-6zM47 56h2v1h-2zM50 56h4v1h-4zM55 56h1v1h-1zM58 56h3v1h-3zM62 56h2v1h-2zM65 56h2v1h-2zM2 57h1v1h-1zM5 57h1v1h-1zM9 57h4v1h-4zM15 57h2v1h-2zM18 57h3v1h-3zM24 57h1v1h-1zM26 57h1v1h-1zM31 57h1v1h-1zM36 57h1v1h-1zM38 57h1v1h-1zM42 57h5v1h-5zM48 57h1v1h-1zM55 57h2v1h-2zM58 57h2v1h-2zM62 57h1v1h-1zM65 57h1v1h-1zM3 58h2v1h-2zM6 58h1v1h-1zM8 58h3v1h-3zM16 58h1v1h-1zM19 58h3v1h-3zM28 58h3v1h-3zM32 58h6v1h-6zM39 58h1v1h-1zM44 58h1v1h-1zM48 58h2v1h-2zM51 58h1v1h-1zM56 58h1v1h-1zM58 58h5v1h-5zM64 58h3v1h-3zM10 59h4v1h-4zM16 59h1v1h-1zM18 59h2v1h-2zM21 59h3v1h-3zM25 59h1v1h-1zM29 59h4v1h-4zM36 59h3v1h-3zM40 59h2v1h-2zM43 59h1v1h-1zM46 59h2v1h-2zM49 59h2v1h-2zM52 59h1v1h-1zM55 59h2v1h-2zM58 59h1v1h-1zM62 59h1v1h-1zM66 59h1v1h-1zM2 60h7v1h-7zM10 60h2v1h-2zM14 60h3v1h-3zM18 60h1v1h-1zM20 60h1v1h-1zM23 60h1v1h-1zM26 60h1v1h-1zM29 60h4v1h-4zM34 60h1v1h-1zM36 60h1v1h-1zM39 60h1v1h-1zM42 60h1v1h-1zM45 60h1v1h-1zM47 60h5v1h-5zM53 60h3v1h-3zM57 60h2v1h-2zM60 60h1v1h-1zM62 60h1v1h-1zM64 60h1v1h-1zM2 61h1v1h-1zM8 61h1v1h-1zM12 61h1v1h-1zM14 61h2v1h-2zM17 61h6v1h-6zM24 61h3v1h-3zM31 61h2v1h-2zM36 61h1v1h-1zM38 61h2v1h-2zM42 61h4v1h-4zM53 61h1v1h-1zM58 61h1v1h-1zM62 61h2v1h-2zM65 61h1v1h-1zM2 62h1v1h-1zM4 62h3v1h-3zM8 62h1v1h-1zM14 62h2v1h-2zM18 62h3v1h-3zM22 62h7v1h-7zM30 62h8v1h-8zM42 62h1v1h-1zM44 62h1v1h-1zM46 62h3v1h-3zM52 62h1v1h-1zM54 62h1v1h-1zM56 62h1v1h-1zM58 62h6v1h-6zM65 62h1v1h-1zM2 63h1v1h-1zM4 63h3v1h-3zM8 63h1v1h-1zM12 63h2v1h-2zM16 63h2v1h-2zM19 63h1v1h-1zM21 63h2v1h-2zM25 63h3v1h-3zM29 63h1v1h-1zM32 63h1v1h-1zM39 63h1v1h-1zM42 63h1v1h-1zM44 63h1v1h-1zM47 63h2v1h-2zM50 63h2v1h-2zM54 63h6v1h-6zM2 64h1v1h-1zM4 64h3v1h-3zM8 64h1v1h-1zM16 64h3v1h-3zM21 64h2v1h-2zM24 64h2v1h-2zM28 64h1v1h-1zM35 64h1v1h-1zM38 64h1v1h-1zM42 64h2v1h-2zM45 64h1v1h-1zM47 64h2v1h-2zM50 64h2v1h-2zM53 64h2v1h-2zM60 64h3v1h-3zM64 64h2v1h-2zM2 65h1v1h-1zM8 65h1v1h-1zM10 65h1v1h-1zM12 65h1v1h-1zM15 65h4v1h-4zM22 65h1v1h-1zM24 65h1v1h-1zM27 65h1v1h-1zM29 65h1v1h-1zM31 65h1v1h-1zM34 65h2v1h-2zM40 65h1v1h-1zM42 65h1v1h-1zM48 65h1v1h-1zM51 65h1v1h-1zM54 65h2v1h-2zM59 65h2v1h-2zM62 65h3v1h-3zM66 65h1v1h-1zM2 66h7v1h-7zM11 66h2v1h-2zM14 66h1v1h-1zM16 66h1v1h-1zM19 66h1v1h-1zM21 66h3v1h-3zM25 66h2v1h-2zM30 66h2v1h-2zM34 66h2v1h-2zM38 66h1v1h-1zM45 66h3v1h-3zM54 66h1v1h-1zM57 66h3v1h-3zM61 66h2v1h-2z"/></svg></div>
+    <p class="qr-hint">카메라를 대면 연락처가 저장됩니다</p>
+  </div>
+</main>
 
-    <div class="award">
-      <span class="medal" aria-hidden="true">🏅</span>
-      <div>
-        <p class="award-label">수상</p>
-        <p class="award-title">「시군구 건강격차의 사회적 결정요인 분석」</p>
-        <p class="award-meta">2026년 지역사회건강조사 결과 활용 우수논문 공모전 · 장려상</p>
-      </div>
+<!-- ══════════ 소개 ══════════ -->
+<div id="intro">
+<section><div class="wrap">
+  <p class="sec-label">About</p>
+  <h2>무엇을 하는 사람인가</h2>
+  <p class="sec-intro">전국 시군구·읍면동 단위의 <strong>공공데이터를 지방정부가 실제로 쓸 수 있는 판단 근거</strong>로 바꾸는 일을 합니다. 인구·건강·가족·재정·주거 영역의 분석 설계와, 담당자가 열어보는 대시보드까지.</p>
+  <div class="award">
+    <span class="medal" aria-hidden="true">🏅</span>
+    <div>
+      <p class="award-label">수상</p>
+      <p class="award-title">「시군구 건강격차의 사회적 결정요인 분석」</p>
+      <p class="award-meta">2026년 지역사회건강조사 결과 활용 우수논문 공모전 · 장려상</p>
     </div>
   </div>
-</header>
+</div></section>
 
-<section>
-  <div class="wrap">
-    <p class="sec-label">Projects</p>
-    <h2>최근에 한 일</h2>
-    <p class="sec-intro">세 가지를 골랐습니다. 다루는 자료도 방법도 다르지만, 하는 일은 같습니다 — <strong>흩어진 공공데이터를 묶어서, 담당자가 다음에 무엇을 할지 정할 수 있는 형태로 만드는 것</strong>입니다.</p>
-
-    <!-- 1. CHS -->
-    <article class="proj">
-      <span class="proj-tag tag-health">건강 · 측정 신뢰성</span>
-      <h3>지역 건강지표는 어디까지 비교할 수 있는가</h3>
-
-      <p>지역사회건강조사 결과표에는 시군구 순위가 붙어 나옵니다. 담당자는 그 순위로 사업을 설명해야 합니다. 그런데 그 순위를 믿어도 되는지는 아무도 확인해 준 적이 없습니다.</p>
-
-      <div class="quote">
-        <p>○○시 보건소 김 주무관이 월요일 아침에 표를 받습니다. <em>우울감 경험률 6.2% — 250개 시군구 중 193위(작년 205위).</em> 과장님이 묻습니다. "작년보다 나아진 거네? 뭐가 효과가 있었나?"</p>
-      </div>
-
-      <p>이 질문에 답하려고 시작한 연구입니다. 4개년 자료의 250개 시군구 × 9개 지표를 복합표본 설계대로 다시 추정하고, 일반화가능도이론으로 <strong>지역 간 진짜 차이와 조사 오차를 분리</strong>했습니다.</p>
-
-      <div class="finding">
-        <p class="finding-h">예상 밖의 결과</p>
-        <p>신뢰도가 높은 지표라도 <strong>순위는 확정되지 않았습니다.</strong> 가운데 순위 지역의 95% 구간이 250개 중 100개 넘게 걸쳤습니다. 세운 가설 어디에도 없던 발견이라, 결론과 권고를 다시 썼습니다.</p>
-      </div>
-
-      <p>그래서 <strong>기준점을 바꿨습니다.</strong> "다른 249개 지역과 견주어 몇 등인가" 대신 "전국 평균과 다른가"를 묻자, 같은 자료·같은 오차인데도 판정 가능한 지역이 크게 늘었습니다. 달라진 것은 질문의 형태뿐입니다.</p>
-
-      <a class="more" href="story/">이 연구가 어떻게 진행됐는지 읽기 →</a>
-    </article>
-
-    <!-- 2. 인구 이동 -->
-    <article class="proj">
-      <span class="proj-tag tag-pop">인구 · 이동</span>
-      <h3>인구가 줄었다는 말로는 아무것도 못 정한다</h3>
-
-      <p>인구 감소 대책을 세울 때 가장 먼저 갈라야 할 것은 <strong>사람이 어디로 갔는가</strong>입니다. 멀리 떠난 것과 옆 동네로 옮긴 것은 완전히 다른 문제이고, 써야 할 처방도 다릅니다.</p>
-
-      <p>주민등록 전출입 자료로 전국 252개 시군구의 2018~2024년 순이동을 누적해 봤습니다.</p>
-
-      <div class="chart-frame">
-        <div class="legend">
-          <span><i style="background:#38bdf8"></i>순유입 (들어온 사람이 더 많음)</span>
-          <span><i style="background:#f97316"></i>순유출 (나간 사람이 더 많음)</span>
-        </div>
-        <div class="chart-scroll"><svg id="migChart" role="img" aria-label="2018~2024년 누적 순이동 상위·하위 시군구"></svg></div>
-        <details class="tbl">
-          <summary>표로 보기</summary>
-          <table><thead><tr><th>시군구</th><th>누적 순이동(명)</th></tr></thead><tbody id="migTable"></tbody></table>
-        </details>
-      </div>
-      <p style="font-size:12.5px;color:var(--ink3);margin-top:10px">자료: 통계청 국내인구이동통계(주민등록 기준) 2018.01~2024.12 · 시군구 252곳</p>
-
-      <div class="finding">
-        <p class="finding-h">눈에 띄는 것</p>
-        <p>양쪽 끝이 <strong>같은 경기도</strong>입니다. 가장 많이 들어온 8곳 중 6곳, 가장 많이 빠져나간 8곳 중 4곳이 경기도 시군입니다. 부천·안산·광명·성남에서 빠진 사람이 화성·평택·하남·김포로 갔습니다. <strong>지방소멸이 아니라 같은 생활권 안의 자리바꿈</strong>이고, 그렇다면 필요한 것은 인구 유치 홍보가 아니라 주택·교통·정주여건 쪽 대응입니다.</p>
-      </div>
-
-      <p>같은 방식으로 읍면동까지 내려가면, 시군구 평균에 가려진 동네별 차이가 드러납니다. 5세 단위 연령 구조를 붙이면 "누가 떠났는가"까지 볼 수 있습니다.</p>
-    </article>
-
-    <!-- 3. 스마트홈 -->
-    <article class="proj">
-      <span class="proj-tag tag-home">주거 · 스마트홈</span>
-      <h3>전국 아파트 2만 1천 단지의 홈네트워크 지도</h3>
-
-      <p>공동주택관리정보·주민등록인구·행정구역경계·도로명주소 건물DB를 하나로 묶어, 전국 아파트의 홈네트워크 보급 실태를 <strong>읍면동 단위</strong>까지 내렸습니다. 단지 위치는 도로명주소 건물DB 1,072만 건에 조인해 얻은 실제 좌표입니다.</p>
-
-      <div class="stats">
-        <div class="stat"><div class="stat-v">21,687</div><div class="stat-l">전국 아파트 단지</div></div>
-        <div class="stat"><div class="stat-v">1,236만</div><div class="stat-l">대상 세대수</div></div>
-        <div class="stat"><div class="stat-v">45.9%</div><div class="stat-l">홈네트워크 도입 가구 비중</div></div>
-        <div class="stat"><div class="stat-v">3,559</div><div class="stat-l">집계한 읍면동</div></div>
-      </div>
-
-      <figure>
-        <div class="fig-frame"><img src="smarthome-eupmyeondong.png" alt="전국 읍면동별 홈네트워크 도입 가구비중 지도. 수도권과 광역시 주변에 도입률이 높은 읍면동이 몰려 있다." loading="lazy"></div>
-        <figcaption>읍면동별 홈네트워크 도입 가구비중. 진할수록 높음 · 회색은 아파트가 없는 읍면동. 시군구 평균으로 보면 안 보이던 <strong>같은 시 안의 격차</strong>가 드러납니다.</figcaption>
-      </figure>
-
-      <div class="finding">
-        <p class="finding-h">이 지도로 답이 되는 질문</p>
-        <p>도입률이 낮으면서 고령가구 비중이 높은 읍면동은 어디인가 — 돌봄·안전 서비스를 얹을 때 <strong>우선순위가 가장 높은 곳</strong>입니다. 두 지표를 곱해 우선순위 지수를 만들고 읍면동별로 정렬했습니다. 사업 대상지를 감으로 고르지 않아도 됩니다.</p>
-      </div>
-
-      <p style="font-size:12.5px;color:var(--ink3)">자료: 공동주택관리정보, 주민등록인구(읍면동 5세단위), 행정구역경계(시군구·행정동), 도로명주소 건물DB · 2026년 5월 기준 · 모두 공개된 공공데이터</p>
-    </article>
+<section><div class="wrap">
+  <p class="sec-label">Domains, Projects recent</p>
+  <h2>다루는 영역</h2>
+  <p class="sec-intro">공통점은 <strong>시군구·읍면동 단위</strong>라는 것입니다. 전국 평균으로는 보이지 않는 것을 봅니다. <strong>눌러보시면 해당 사례로 바로 갑니다.</strong></p>
+  <div class="tags">
+    <a class="tag t1" href="#projects">시군구단위 데이터분석<span class="go" aria-hidden="true">↓</span></a>
+    <a class="tag t2" href="#proj-pop">인구·이동 분석<span class="go" aria-hidden="true">↓</span></a>
+    <a class="tag t3" href="#proj-chs">건강·정신건강<span class="go" aria-hidden="true">↓</span></a>
+    <a class="tag t4" href="#proj-chs">가족·이주여성<span class="go" aria-hidden="true">↓</span></a>
+    <a class="tag t5" href="#projects">세입세출·가용재원<span class="go" aria-hidden="true">↓</span></a>
+    <a class="tag t6" href="#proj-home">스마트홈 분석<span class="go" aria-hidden="true">↓</span></a>
+    <a class="tag t7" href="#proj-home">정책정보 대시보드<span class="go" aria-hidden="true">↓</span></a>
+    <a class="tag t8" href="#projects">컨설팅 + 자문 (프로젝트 기획 및 분석설계)<span class="go" aria-hidden="true">↓</span></a>
   </div>
-</section>
+</div></section>
 
-<section>
-  <div class="wrap">
-    <p class="sec-label">Domains</p>
-    <h2>다루는 영역</h2>
-    <p class="sec-intro">공통점은 <strong>시군구·읍면동 단위</strong>라는 것입니다. 전국 평균으로는 보이지 않는 것을 봅니다.</p>
-    <div class="tags">
-      <span class="tag t1">시군구단위 데이터분석</span>
-      <span class="tag t2">인구·이동 분석</span>
-      <span class="tag t3">건강·정신건강</span>
-      <span class="tag t4">가족·이주여성</span>
-      <span class="tag t5">세입세출·가용재원</span>
-      <span class="tag t6">스마트홈 분석</span>
-      <span class="tag t7">정책정보 대시보드</span>
-      <span class="tag t8">컨설팅 + 자문 (프로젝트 기획 및 분석설계)</span>
+<section id="projects"><div class="wrap">
+  <p class="sec-label">Projects</p>
+  <h2>최근에 한 일</h2>
+  <p class="sec-intro">세 가지를 골랐습니다. 다루는 자료도 방법도 다르지만, 하는 일은 같습니다 — <strong>흩어진 공공데이터를 묶어서, 담당자가 다음에 무엇을 할지 정할 수 있는 형태로 만드는 것</strong>입니다.</p>
+
+  <article class="proj" id="proj-chs">
+    <span class="proj-tag tag-health">건강 · 측정 신뢰성</span>
+    <h3>지역 건강지표는 어디까지 비교할 수 있는가</h3>
+    <p>지역사회건강조사 결과표에는 시군구 순위가 붙어 나옵니다. 담당자는 그 순위로 사업을 설명해야 합니다. 그런데 그 순위를 믿어도 되는지는 아무도 확인해 준 적이 없습니다.</p>
+    <div class="quote">
+      <p>○○시 보건소 김 주무관이 월요일 아침에 표를 받습니다. <em>우울감 경험률 6.2% — 250개 시군구 중 193위(작년 205위).</em> 과장님이 묻습니다. "작년보다 나아진 거네? 뭐가 효과가 있었나?"</p>
     </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="sec-label">Contact</p>
-    <h2>연락</h2>
-    <p class="sec-intro">분석 설계나 대시보드가 필요한 일이 있으시면 편하게 연락 주세요.</p>
-    <div class="contact">
-      <a class="cbtn" href="mailto:key@loyalty.co.kr">
-        <div><span class="k">Email</span><span class="v">key@loyalty.co.kr</span></div>
-      </a>
-      <a class="cbtn" href="card/">
-        <div><span class="k">디지털 명함</span><span class="v">연락처 QR 보기</span></div>
-      </a>
-      <a class="cbtn" href="https://github.com/K2obong" target="_blank" rel="noopener noreferrer">
-        <div><span class="k">GitHub</span><span class="v">github.com/K2obong</span></div>
-      </a>
+    <p>이 질문에 답하려고 시작한 연구입니다. 4개년 자료의 250개 시군구 × 9개 지표를 복합표본 설계대로 다시 추정하고, 일반화가능도이론으로 <strong>지역 간 진짜 차이와 조사 오차를 분리</strong>했습니다.</p>
+    <div class="finding">
+      <p class="finding-h">예상 밖의 결과</p>
+      <p>신뢰도가 높은 지표라도 <strong>순위는 확정되지 않았습니다.</strong> 가운데 순위 지역의 95% 구간이 250개 중 100개 넘게 걸쳤습니다. 세운 가설 어디에도 없던 발견이라, 결론과 권고를 다시 썼습니다.</p>
     </div>
+    <p>그래서 <strong>기준점을 바꿨습니다.</strong> "다른 249개 지역과 견주어 몇 등인가" 대신 "전국 평균과 다른가"를 묻자, 같은 자료·같은 오차인데도 판정 가능한 지역이 크게 늘었습니다. 달라진 것은 질문의 형태뿐입니다.</p>
+    <a class="more" href="story/">이 연구가 어떻게 진행됐는지 읽기 →</a>
+  </article>
+
+  <article class="proj" id="proj-pop">
+    <span class="proj-tag tag-pop">인구 · 이동</span>
+    <h3>인구가 줄었다는 말로는 아무것도 못 정한다</h3>
+    <p>인구 감소 대책을 세울 때 가장 먼저 갈라야 할 것은 <strong>사람이 어디로 갔는가</strong>입니다. 멀리 떠난 것과 옆 동네로 옮긴 것은 완전히 다른 문제이고, 써야 할 처방도 다릅니다.</p>
+    <p>주민등록 전출입 자료로 전국 252개 시군구의 2018~2024년 순이동을 누적해 봤습니다.</p>
+    <div class="chart-frame">
+      <div class="legend">
+        <span><i style="background:#38bdf8"></i>순유입 (들어온 사람이 더 많음)</span>
+        <span><i style="background:#f97316"></i>순유출 (나간 사람이 더 많음)</span>
+      </div>
+      <div class="chart-scroll"><svg id="migChart" role="img" aria-label="2018~2024년 누적 순이동 상위·하위 시군구"></svg></div>
+      <details class="tbl">
+        <summary>표로 보기</summary>
+        <table><thead><tr><th>시군구</th><th>누적 순이동(명)</th></tr></thead><tbody id="migTable"></tbody></table>
+      </details>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink3);margin-top:10px">자료: 통계청 국내인구이동통계(주민등록 기준) 2018.01~2024.12 · 시군구 252곳</p>
+    <div class="finding">
+      <p class="finding-h">눈에 띄는 것</p>
+      <p>양쪽 끝이 <strong>같은 경기도</strong>입니다. 가장 많이 들어온 8곳 중 6곳, 가장 많이 빠져나간 8곳 중 4곳이 경기도 시군입니다. 부천·안산·광명·성남에서 빠진 사람이 화성·평택·하남·김포로 갔습니다. <strong>지방소멸이 아니라 같은 생활권 안의 자리바꿈</strong>이고, 그렇다면 필요한 것은 인구 유치 홍보가 아니라 주택·교통·정주여건 쪽 대응입니다.</p>
+    </div>
+    <p>같은 방식으로 읍면동까지 내려가면, 시군구 평균에 가려진 동네별 차이가 드러납니다. 5세 단위 연령 구조를 붙이면 "누가 떠났는가"까지 볼 수 있습니다.</p>
+  </article>
+
+  <article class="proj" id="proj-home">
+    <span class="proj-tag tag-home">주거 · 스마트홈</span>
+    <h3>전국 아파트 2만 1천 단지의 홈네트워크 지도</h3>
+    <p>공동주택관리정보·주민등록인구·행정구역경계·도로명주소 건물DB를 하나로 묶어, 전국 아파트의 홈네트워크 보급 실태를 <strong>읍면동 단위</strong>까지 내렸습니다. 단지 위치는 도로명주소 건물DB 1,072만 건에 조인해 얻은 실제 좌표입니다.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-v">21,687</div><div class="stat-l">전국 아파트 단지</div></div>
+      <div class="stat"><div class="stat-v">1,236만</div><div class="stat-l">대상 세대수</div></div>
+      <div class="stat"><div class="stat-v">45.9%</div><div class="stat-l">홈네트워크 도입 가구 비중</div></div>
+      <div class="stat"><div class="stat-v">3,559</div><div class="stat-l">집계한 읍면동</div></div>
+    </div>
+    <figure>
+      <div class="fig-frame"><img src="smarthome-eupmyeondong.png" alt="전국 읍면동별 홈네트워크 도입 가구비중 지도. 수도권과 광역시 주변에 도입률이 높은 읍면동이 몰려 있다." loading="lazy"></div>
+      <figcaption>읍면동별 홈네트워크 도입 가구비중. 진할수록 높음 · 회색은 아파트가 없는 읍면동. 시군구 평균으로 보면 안 보이던 <strong>같은 시 안의 격차</strong>가 드러납니다.</figcaption>
+    </figure>
+    <div class="finding">
+      <p class="finding-h">이 지도로 답이 되는 질문</p>
+      <p>도입률이 낮으면서 고령가구 비중이 높은 읍면동은 어디인가 — 돌봄·안전 서비스를 얹을 때 <strong>우선순위가 가장 높은 곳</strong>입니다. 두 지표를 곱해 우선순위 지수를 만들고 읍면동별로 정렬했습니다. 사업 대상지를 감으로 고르지 않아도 됩니다.</p>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink3)">자료: 공동주택관리정보, 주민등록인구(읍면동 5세단위), 행정구역경계(시군구·행정동), 도로명주소 건물DB · 2026년 5월 기준 · 모두 공개된 공공데이터</p>
+  </article>
+</div></section>
+
+<section><div class="wrap">
+  <p class="sec-label">Contact</p>
+  <h2>연락</h2>
+  <p class="sec-intro">분석 설계나 대시보드가 필요한 일이 있으시면 편하게 연락 주세요.</p>
+  <div class="contact">
+    <a class="cbtn" href="mailto:key@loyalty.co.kr">
+      <div><span class="k">Email</span><span class="v">key@loyalty.co.kr</span></div>
+    </a>
+    <a class="cbtn" href="https://github.com/K2obong" target="_blank" rel="noopener noreferrer">
+      <div><span class="k">GitHub</span><span class="v">github.com/K2obong</span></div>
+    </a>
+    <a class="cbtn" href="#card">
+      <div><span class="k">명함</span><span class="v">↑ 맨 위로</span></div>
+    </a>
   </div>
-</section>
+</div></section>
 
 <footer><div class="wrap">© 2026 조기행 · 이 페이지의 모든 수치는 공개된 공공데이터에서 산출했습니다.</div></footer>
+</div>
 
 <div id="tip" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
   'use strict';
-  var DATA = {
+
+  var PROFILE = {
+    family:'조', given:'기행', full:'조기행',
+    title:'공공데이터 분석 · 정책정보 도출 · 대시보드 서비스',
+    tel:     atob('KzgyMTAzNzA2Nzk0NQ=='),   // 수집 봇 차단용 인코딩
+    telShow: atob('MDEwLTM3MDYtNzk0NQ=='),
+    email:'key@loyalty.co.kr',
+    site:'https://k2obong.github.io',
+    github:'https://github.com/K2obong',
+    note:'전국 시군구단위 데이터분석(인구·건강·가족·세입세출·스마트홈), '
+       + '정책정보 대시보드(가용재원, 인구이동, 정신건강, 이주여성, 스마트홈), '
+       + '컨설팅 + 자문(프로젝트 기획 및 분석설계)'
+  };
+
+  /* ── vCard (CRLF · 이스케이프 · 75옥텟 폴딩) ── */
+  function esc(s){return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n');}
+  function fold(line){
+    var enc=new TextEncoder(),dec=new TextDecoder(),b=enc.encode(line);
+    if(b.length<=75) return line;
+    var out=[],i=0,limit=75;
+    while(i<b.length){
+      var end=Math.min(i+limit,b.length);
+      while(end>i&&end<b.length&&(b[end]&0xC0)===0x80) end--;
+      out.push(dec.decode(b.slice(i,end))); i=end; limit=74;
+    }
+    return out.join('\r\n ');
+  }
+  function buildVCard(){
+    var p=PROFILE;
+    return ['BEGIN:VCARD','VERSION:3.0',
+      'N:'+esc(p.family)+';'+esc(p.given)+';;;','FN:'+esc(p.full),
+      'TITLE:'+esc(p.title),
+      'TEL;TYPE=CELL,VOICE:'+p.tel,
+      'EMAIL;TYPE=WORK,INTERNET:'+p.email,
+      'URL;TYPE=WORK:'+p.site,'URL:'+p.github,
+      'NOTE:'+esc(p.note),
+      'REV:'+new Date().toISOString().replace(/\.\d{3}Z$/,'Z'),
+      'END:VCARD'].map(fold).join('\r\n')+'\r\n';
+  }
+
+  var toastEl=document.getElementById('toast'),toastT;
+  function toast(m){toastEl.textContent=m;toastEl.classList.add('on');
+    clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('on');},2200);}
+
+  /* ── 전화번호는 탭했을 때만 ── */
+  document.getElementById('telReveal').addEventListener('click',function(){
+    var slot=document.getElementById('telSlot');
+    var a=document.createElement('a');
+    a.className='c-tel'; a.href='tel:'+PROFILE.tel; a.textContent=PROFILE.telShow;
+    slot.innerHTML=''; slot.appendChild(a);
+  });
+
+  /* ── 연락처 저장 ── */
+  var isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  document.getElementById('vcardBtn').addEventListener('click',function(){
+    var url=URL.createObjectURL(new Blob([buildVCard()],{type:'text/vcard;charset=utf-8'}));
+    var a=document.createElement('a');
+    a.href=url; a.download='KiHaing_Cho.vcf'; a.rel='noopener';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){URL.revokeObjectURL(url);},2000);
+    if(isIOS) toast('저장이 안 되면 아래 QR을 쓰세요');
+  });
+
+  /* ── 공유 / 복사 ── */
+  var shareBtn=document.getElementById('shareBtn'), shareLabel=document.getElementById('shareLabel');
+  if(!navigator.share) shareLabel.textContent='주소 복사';
+  shareBtn.addEventListener('click',function(){
+    if(navigator.share){
+      navigator.share({title:PROFILE.full,text:PROFILE.full+' (디지털명함)',url:PROFILE.site}).catch(function(){});
+      return;
+    }
+    var t=PROFILE.site;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){toast('주소를 복사했습니다');},function(){toast('복사하지 못했습니다');});
+    }else{
+      var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');toast('주소를 복사했습니다');}catch(e){toast('복사하지 못했습니다');}
+      document.body.removeChild(ta);
+    }
+  });
+
+  /* ── 인구이동 차트 ── */
+  var DATA={
     top:[{r:"경기 화성시",v:250738},{r:"경기 평택시",v:113161},{r:"인천 서구",v:109176},{r:"경기 하남시",v:91360},
          {r:"경기 시흥시",v:89161},{r:"경기 김포시",v:86886},{r:"경기 양주시",v:78818},{r:"경기 용인시",v:76465}],
     bottom:[{r:"경기 부천시",v:-79510},{r:"경기 안산시",v:-59051},{r:"서울 노원구",v:-56504},{r:"경기 광명시",v:-55074},
             {r:"경기 성남시",v:-54583},{r:"경남 창원시",v:-51578},{r:"대구 달서구",v:-50834},{r:"인천 남동구",v:-48104}]
   };
-  var IN='#38bdf8', OUT='#f97316';
-  var rows = DATA.top.concat(DATA.bottom.slice().reverse());
-  var fmt = function(n){ return (n>0?'+':'') + n.toLocaleString('ko-KR'); };
-
-  var svg = document.getElementById('migChart');
-  var W=760, padL=104, padR=76, rowH=26, gap=6, padT=8, padB=26;
-  var H = padT + rows.length*(rowH+gap) - gap + padB;
-  var plotW = W - padL - padR;
-  var max = Math.max.apply(null, rows.map(function(d){return Math.abs(d.v)}));
-  var zero = padL + plotW * (max / (max*2));           // 발산 축 중앙
-  var scale = function(v){ return (Math.abs(v)/max) * (plotW/2); };
-
+  var IN='#38bdf8',OUT='#f97316';
+  var rows=DATA.top.concat(DATA.bottom.slice().reverse());
+  var fmt=function(n){return (n>0?'+':'')+n.toLocaleString('ko-KR');};
+  var svg=document.getElementById('migChart');
+  var W=760,padL=104,padR=76,rowH=26,gap=6,padT=8,padB=26;
+  var H=padT+rows.length*(rowH+gap)-gap+padB, plotW=W-padL-padR;
+  var max=Math.max.apply(null,rows.map(function(d){return Math.abs(d.v)}));
+  var zero=padL+plotW/2;
   var NS='http://www.w3.org/2000/svg';
-  function el(n,a){ var e=document.createElementNS(NS,n); for(var k in a) e.setAttribute(k,a[k]); return e; }
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
   svg.setAttribute('viewBox','0 0 '+W+' '+H);
-
-  // 0 기준선 (중립 회색)
   svg.appendChild(el('line',{x1:zero,x2:zero,y1:padT-2,y2:H-padB+4,stroke:'rgba(255,255,255,.28)','stroke-width':1}));
-  var zl = el('text',{x:zero,y:H-padB+18,fill:'#94a3b8','font-size':11,'text-anchor':'middle'});
-  zl.textContent='0'; svg.appendChild(zl);
-
-  var tip = document.getElementById('tip');
+  var zl=el('text',{x:zero,y:H-padB+18,fill:'#94a3b8','font-size':11,'text-anchor':'middle'});zl.textContent='0';svg.appendChild(zl);
+  var tip=document.getElementById('tip');
   rows.forEach(function(d,i){
-    var y = padT + i*(rowH+gap);
-    var w = Math.max(scale(d.v), 2);
-    var x = d.v>0 ? zero : zero - w;
-    var g = el('g',{class:'bar',tabindex:0,role:'listitem'});
+    var y=padT+i*(rowH+gap), w=Math.max((Math.abs(d.v)/max)*(plotW/2),2), x=d.v>0?zero:zero-w;
+    var g=el('g',{class:'bar',tabindex:0});
     g.appendChild(el('rect',{x:x,y:y,width:w,height:rowH,rx:4,fill:d.v>0?IN:OUT}));
-    var lab = el('text',{x:padL-12,y:y+rowH/2+4,fill:'#cbd5e1','font-size':12.5,'text-anchor':'end'});
-    lab.textContent=d.r; g.appendChild(lab);
-    var val = el('text',{x:(d.v>0? x+w+8 : x-8), y:y+rowH/2+4, fill:'#94a3b8','font-size':12,
-                         'text-anchor': d.v>0?'start':'end'});
-    val.textContent=fmt(d.v); g.appendChild(val);
+    var lab=el('text',{x:padL-12,y:y+rowH/2+4,fill:'#cbd5e1','font-size':12.5,'text-anchor':'end'});lab.textContent=d.r;g.appendChild(lab);
+    var val=el('text',{x:(d.v>0?x+w+8:x-8),y:y+rowH/2+4,fill:'#94a3b8','font-size':12,'text-anchor':d.v>0?'start':'end'});val.textContent=fmt(d.v);g.appendChild(val);
     function show(ev){
-      tip.innerHTML = d.r + '<br><b>' + fmt(d.v) + '명</b> · 2018~2024 누적';
+      tip.innerHTML=d.r+'<br><b>'+fmt(d.v)+'명</b> · 2018~2024 누적';
       tip.style.opacity=1;
-      var px = (ev.clientX||W/2)+14, py=(ev.clientY||0)-12;
-      tip.style.left = Math.min(px, innerWidth-tip.offsetWidth-12)+'px';
-      tip.style.top = py+'px';
+      var px=(ev.clientX||W/2)+14,py=(ev.clientY||0)-12;
+      tip.style.left=Math.min(px,innerWidth-tip.offsetWidth-12)+'px'; tip.style.top=py+'px';
     }
     g.addEventListener('mousemove',show);
-    g.addEventListener('focus',function(){ var b=g.getBoundingClientRect(); show({clientX:b.right,clientY:b.top}); });
+    g.addEventListener('focus',function(){var b=g.getBoundingClientRect();show({clientX:b.right,clientY:b.top});});
     g.addEventListener('mouseleave',function(){tip.style.opacity=0});
     g.addEventListener('blur',function(){tip.style.opacity=0});
     svg.appendChild(g);
   });
-
   var tb=document.getElementById('migTable');
-  rows.forEach(function(d){
-    var tr=document.createElement('tr');
-    tr.innerHTML='<td>'+d.r+'</td><td>'+fmt(d.v)+'</td>';
-    tb.appendChild(tr);
-  });
+  rows.forEach(function(d){var tr=document.createElement('tr');tr.innerHTML='<td>'+d.r+'</td><td>'+fmt(d.v)+'</td>';tb.appendChild(tr);});
 })();
 </script>
 </body>
