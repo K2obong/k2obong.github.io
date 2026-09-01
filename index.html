@@ -126,6 +126,17 @@
   .award-title{font-size:15.5px;font-weight:700;line-height:1.5;margin-bottom:4px}
   .award-meta{font-size:13px;color:var(--ink3)}
 
+  /* 최근 참여 공공프로젝트 */
+  .pubs{margin-top:14px;padding:18px 20px;border:1px solid var(--line);
+        border-radius:14px;background:rgba(148,163,184,.06)}
+  .pubs-label{font-size:11.5px;font-weight:700;letter-spacing:.6px;color:var(--sky);
+              text-transform:uppercase;margin-bottom:12px}
+  .pub-list{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .pub-list li{padding-left:14px;border-left:2px solid rgba(56,189,248,.35)}
+  .pub-name{display:block;font-size:14.5px;font-weight:700;line-height:1.45;color:var(--ink)}
+  .pub-desc{display:block;margin-top:3px;font-size:13px;line-height:1.6;color:var(--ink2)}
+  .pub-desc strong{color:var(--ink)}
+
   /* 도메인 태그 — 눌러서 해당 사례로 */
   .tags{display:flex;flex-wrap:wrap;gap:10px}
   .tag{
@@ -245,12 +256,22 @@
       <p class="award-meta">2026년 지역사회건강조사 결과 활용 우수논문 공모전 · 장려상</p>
     </div>
   </div>
+
+  <div class="pubs">
+    <p class="pubs-label">최근 참여 공공프로젝트</p>
+    <ul class="pub-list">
+      <li><span class="pub-name">「세종시 스마트 홈타운 서비스」</span><span class="pub-desc">스마트홈타운이 제공할 서비스 컨설팅</span></li>
+      <li><span class="pub-name">「지방재정 정책지원 시스템」</span><span class="pub-desc">지자체의 세입세출 데이터 분석</span></li>
+      <li><span class="pub-name">「시군구별 가족 현황분석」</span><span class="pub-desc">인구현황 · 가족현황 · 이주여성 · 공동육아 분석</span></li>
+      <li><span class="pub-name">「부산광역시 빅데이터 분석시스템 구축」</span><span class="pub-desc">도시현황 · 인구 · 교통 · 보건 · 관광 · 의료 · 소방 · 소득 · 교육 · 보육 등의 데이터를 <strong>읍면동 단위까지 구조화</strong>하여 분석체계를 구축 (정책 대시보드 포함)</span></li>
+    </ul>
+  </div>
 </div></section>
 
 <section><div class="wrap">
   <p class="sec-label">Domains, Projects recent</p>
   <h2>다루는 영역</h2>
-  <p class="slogan">“국가 평균이 수입분포의 중요한 지역간 격차를 가린다”<span class="en">“National averages may hide significant within-country differences in the distribution of incomes.”</span><span class="cite">Piacentini, M. (2014). <i>Measuring Income Inequality and Poverty at the Regional Level in OECD Countries.</i> OECD Statistics Working Papers 2014/03, p.8</span></p>
+  <p class="slogan">“소득분포에 있어서 국가 단위의 평균은 지역간 격차를 덮어버린다”<span class="en">“National averages may hide significant within-country differences in the distribution of incomes.”</span><span class="cite">Piacentini, M. (2014). <i>Measuring Income Inequality and Poverty at the Regional Level in OECD Countries.</i> OECD Statistics Working Papers 2014/03, p.8</span></p>
   <p class="sec-intro">인구·보건·의료·교통·주택·교육·보육·지방재정·노인·건강·지역사랑·소비 등 다양한 관점의 지표를 <strong>시군구·읍면동 단위까지</strong> 비교 분석합니다.<br>눌러보시면 해당 사례로 바로 갑니다.</p>
   <div class="tags">
     <a class="tag t1" href="#projects">시군구단위 데이터분석<span class="go" aria-hidden="true">↓</span></a>
