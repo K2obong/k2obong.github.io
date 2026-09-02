@@ -4,7 +4,7 @@
  *   (v1 → v2 → v3 …) 그래야 폰에 남아 있던 옛 화면이 새 것으로 교체됩니다.
  *   버전을 안 올리면 "고쳤는데 폰에서는 그대로"인 상황이 생깁니다.
  */
-const VERSION = 'card-v4';
+const VERSION = 'card-v5';
 
 const ASSETS = [
   './',
